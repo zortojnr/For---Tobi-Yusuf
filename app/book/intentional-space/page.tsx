@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IntentionalSpaceBookingForm } from "@/components/booking/IntentionalSpaceBookingForm";
 import { loadIntentionalSpaceBookingConfig } from "@/lib/booking/loadBookingConfig";
+import { SCHEDULING_URL } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteImage } from "@/components/site/SiteImage";
 
@@ -29,6 +30,16 @@ export default function BookIntentionalSpacePage() {
               {config.eventLocation}
             </p>
           )}
+          <p style={{ marginTop: "1.25rem" }}>
+            <a
+              href={SCHEDULING_URL}
+              className="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book your place (calendar) →
+            </a>
+          </p>
         </div>
       </header>
 
@@ -38,7 +49,7 @@ export default function BookIntentionalSpacePage() {
           src={SITE_IMAGES.img1}
           alt=""
           ratio="21/9"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 1164px"
         />
       </div>
 
@@ -56,14 +67,14 @@ export default function BookIntentionalSpacePage() {
             src={SITE_IMAGES.img4}
             alt="Tobi Yusuf"
             ratio="3/4"
-            sizes="(max-width: 900px) 100vw, 360px"
+            sizes="(max-width: 900px) 100vw, 340px"
           />
           {/* SITE_IMAGES.img3 — use #2: booking aside lower (use #1: home audio section) */}
           <SiteImage
             src={SITE_IMAGES.img3}
             alt=""
             ratio="4/3"
-            sizes="(max-width: 900px) 100vw, 360px"
+            sizes="(max-width: 900px) 100vw, 340px"
             className="booking-aside-second"
           />
         </aside>

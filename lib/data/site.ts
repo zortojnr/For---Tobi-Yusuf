@@ -6,9 +6,20 @@
 /** Places remaining for Intentional Space — easy to change */
 export const INTENTIONAL_SPACE_REMAINING_PLACES = 10;
 
-/** UPDATE: Ticket Candy booking URL for Intentional Space */
+const DEFAULT_SCHEDULING_URL = "https://therelatablewife.as.me/";
+
+/** Acuity scheduling (primary “Book” CTA). Override via env without code changes. */
+export const SCHEDULING_URL =
+  process.env.NEXT_PUBLIC_SCHEDULING_URL?.trim() || DEFAULT_SCHEDULING_URL;
+
+/**
+ * Legacy name — falls back to `SCHEDULING_URL` when `NEXT_PUBLIC_TICKET_CANDY_URL` is unset.
+ */
 export const TICKET_CANDY_INTENTIONAL_SPACE_URL =
-  process.env.NEXT_PUBLIC_TICKET_CANDY_URL || "#intentional-space";
+  process.env.NEXT_PUBLIC_TICKET_CANDY_URL?.trim() || SCHEDULING_URL;
+
+/** Contact form notifications (Resend `to` address) */
+export const CONTACT_NOTIFICATION_EMAIL = "tobi@tobiyusuf.com";
 
 /** UPDATE: Substack publication subscribe URL */
 export const SUBSTACK_SUBSCRIBE_URL =

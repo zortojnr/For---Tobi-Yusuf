@@ -27,6 +27,13 @@ const INTENT_TAG_NAMES: Record<ConvertKitIntent, string> = {
   newsletter: "Newsletter",
 };
 
+/**
+ * Custom field slug in Kit (Settings → Subscriber data). Used in emails as a merge tag
+ * so messages can reference what the subscriber opted into. Intent always sets this
+ * value on form subscribe (client cannot override).
+ */
+const SUBSCRIPTION_SUBJECT_CK_FIELD = "subscription_subject";
+
 function getFormId(intent: ConvertKitIntent): string | undefined {
   const key = INTENT_TO_FORM_ENV[intent];
   const specific = key ? process.env[key] : undefined;
@@ -160,13 +167,10 @@ export async function POST(request: Request) {
   }
 
   const extra = sanitizeFields(json.fields);
-  const ckFields: Record<string, string> | undefined = extra
-    ? { ...extra }
-    : undefined;
-  if (ckFields) {
-    delete ckFields.email;
-    delete ckFields.first_name;
-  }
+  const ckFields: Record<string, string> = extra ? { ...extra } : {};
+  delete ckFields.email;
+  delete ckFields.first_name;
+  ckFields[SUBSCRIPTION_SUBJECT_CK_FIELD] = INTENT_TAG_NAMES[intent];
 
   const formId = getFormId(intent);
   const tagId = getTagIdForIntent(intent);

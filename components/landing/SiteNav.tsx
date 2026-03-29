@@ -1,7 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+function useBodyScrollLock(locked: boolean) {
+  useEffect(() => {
+    if (!locked) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [locked]);
+}
 
 const LINKS: [string, string][] = [
   ["About", "#about"],
@@ -24,17 +36,19 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useBodyScrollLock(navOpen);
+
   return (
     <nav id="mainNav" className={scrolled ? "scrolled" : ""}>
       <div className="nav-inner">
-        <a href="/" className="nav-logo" onClick={() => setNavOpen(false)}>
+        <Link href="/" className="nav-logo" onClick={() => setNavOpen(false)}>
           Tobi Yusuf
-        </a>
+        </Link>
         <button
           type="button"
           className="nav-toggle"
           id="navToggle"
-          aria-label="Open menu"
+          aria-label={navOpen ? "Close menu" : "Open menu"}
           aria-expanded={navOpen}
           onClick={() => setNavOpen((o) => !o)}
         >

@@ -24,11 +24,11 @@ export function ReflectionsPageClient() {
               alt="Tobi Yusuf"
               ratio="16/9"
               priority
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, min(100vw, 1100px)"
             />
             <div className="reflections-page-hero-scrim" />
           </div>
-          <div className="reflections-page-hero-copy section--narrow">
+          <div className="reflections-page-hero-copy section--narrow reflections-page-hero-copy-inner">
             <p className="section-label" style={{ color: "var(--signature)" }}>
               Reflections
             </p>
@@ -46,11 +46,6 @@ export function ReflectionsPageClient() {
             </Link>
           </div>
         </section>
-
-        {/* SITE_IMAGES.img2 — use #2: reflections divider (use #1: home speaking) */}
-        <div className="reflections-page-strip section--narrow">
-          <SiteImage src={SITE_IMAGES.img2} alt="" ratio="21/6" sizes="100vw" />
-        </div>
 
         <section className="section reflections-section">
           <div className="section--narrow">
@@ -73,19 +68,14 @@ export function ReflectionsPageClient() {
             </div>
           </div>
 
-          {/* SITE_IMAGES.img5 — use #2: reflections mid strip (use #1: home testimonials) */}
-          <div className="reflections-page-strip section--narrow">
-            <SiteImage src={SITE_IMAGES.img5} alt="" ratio="21/7" sizes="100vw" />
-          </div>
-
           <div className="reflections-cta-block animate-in">
             <p className="reflections-cta-quote">
               If these words landed — there&apos;s a room waiting for you.
             </p>
             <div className="reflections-cta-btns">
-              <a href="/#experiences" className="btn btn-terracotta">
+              <Link href="/#experiences" className="btn btn-terracotta">
                 Join an Upcoming Experience
-              </a>
+              </Link>
               <a href={SUBSTACK_SUBSCRIBE_URL} className="btn btn-ghost-light">
                 Subscribe for Weekly Reflections
               </a>
@@ -95,7 +85,15 @@ export function ReflectionsPageClient() {
 
         {/* SITE_IMAGES.img6 — use #2: reflections footer band (use #1: home hero bg) */}
         <div className="reflections-page-footer-band" aria-hidden>
-          <div className="reflections-page-footer-band-bg" />
+          <div className="reflections-page-footer-band-media">
+            <Image
+              src={SITE_IMAGES.img6}
+              alt=""
+              fill
+              sizes="100vw"
+              className="reflections-page-footer-band-img"
+            />
+          </div>
         </div>
       </main>
       <SiteFooter />

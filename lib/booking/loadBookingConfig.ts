@@ -47,7 +47,7 @@ function mdToSimpleHtml(md: string): string {
 }
 
 function formatInline(s: string): string {
-  let x = s
+  const x = s
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>");
   return x;

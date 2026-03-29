@@ -121,8 +121,9 @@ export function IntentionalSpaceBookingForm({ fields }: Props) {
         <p className={`form-msg ${status === "ok" ? "form-msg--ok" : "form-msg--err"}`}>{msg}</p>
       ) : null}
       <p className="body-text" style={{ fontSize: "0.8rem", marginTop: "1.25rem" }}>
-        Submissions go to ConvertKit. Set subscriber notifications in Kit to{" "}
-        <strong>bookings@tobiyusuf.com</strong> for this form.
+        Use the &ldquo;Book your place (calendar)&rdquo; button on this page to reserve a
+        spot. This form sends an express-interest request via ConvertKit; configure subscriber
+        notifications in the Kit dashboard as needed.
       </p>
     </form>
   );

@@ -1,13 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { PRICES } from "@/lib/data/prices";
 import {
   INTENTIONAL_SPACE_REMAINING_PLACES,
-  SUBSTACK_SUBSCRIBE_URL,
+  SCHEDULING_URL,
 } from "@/lib/data/site";
-import { reflections } from "@/lib/data/reflections";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteImage } from "@/components/site/SiteImage";
 import type { ConvertKitIntent } from "@/lib/convertkit-intents";
@@ -15,6 +14,7 @@ import { ConvertKitModal } from "./ConvertKitModal";
 import { useAnimateIn } from "./useAnimateIn";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
+import { FeaturedPublications } from "./FeaturedPublications";
 
 const COUNTDOWN_TARGET = new Date("2026-04-25T00:00:00+01:00");
 
@@ -97,21 +97,15 @@ export function LandingView() {
               {countdownText || "…"}
             </span>{" "}
             {"· "}
-            <a className="book-link" href="/book/intentional-space">
+            <a
+              className="book-link"
+              href={SCHEDULING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Book Your Place →
             </a>
           </p>
-        </div>
-
-        {/* SITE_IMAGES.img1 — used twice: urgent/proof strip (home) and booking strip (booking page) */}
-        <div className="home-mid-strip" aria-hidden>
-          <SiteImage
-            src={SITE_IMAGES.img1}
-            alt=""
-            ratio="21/9"
-            sizes="100vw"
-            className="image-dim"
-          />
         </div>
 
         <section className="proof-strip" aria-label="Impact">
@@ -130,6 +124,8 @@ export function LandingView() {
           </div>
         </section>
 
+        <FeaturedPublications />
+
         <section id="about" className="section about-section">
           <div className="about-grid">
             <div className="about-quote-col animate-in">
@@ -142,7 +138,7 @@ export function LandingView() {
                   src={SITE_IMAGES.img4}
                   alt="Tobi Yusuf"
                   ratio="4/3"
-                  sizes="(max-width: 900px) 100vw, 360px"
+                  sizes="(max-width: 900px) 100vw, min(520px, 50vw)"
                   className="image-dim"
                 />
               </div>
@@ -224,9 +220,11 @@ export function LandingView() {
               </div>
 
               <a
-                href="/book/intentional-space"
+                href={SCHEDULING_URL}
                 className="btn btn-primary"
                 style={{ marginTop: "0" }}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Book Your Place →
               </a>
@@ -384,80 +382,29 @@ export function LandingView() {
           </div>
         </section>
 
-        {/* Reflections teaser on home (full page is /reflections) */}
-        <section className="section reflections-teaser-section" aria-label="Reflections teaser">
-          <div className="reflections-teaser-grid">
-            <div className="animate-in">
-              <p className="section-label" style={{ color: "var(--signature)" }}>
-                Reflections
-              </p>
+        <section className="section testimonials-section">
+          <div className="section--narrow">
+            <div className="animate-in" style={{ marginBottom: "2rem" }}>
+              <p className="section-label">Testimonials</p>
               <div className="terracotta-rule" />
               <h2 className="display-md" style={{ color: "var(--anchor)" }}>
-                Reflections
+                Words from the room
               </h2>
-              <p className="reflections-intro" style={{ marginBottom: "1.75rem" }}>
-                Over the years, I've had many conversations with couples, women, and friends navigating different
-                seasons of marriage. These reflections are observations and lessons drawn from real conversations and lived experiences.
-              </p>
-              <div className="reflections-cta-btns" style={{ justifyContent: "flex-start" }}>
-                <a href="/reflections" className="btn btn-secondary">
-                  Read Reflections →
-                </a>
-                <a href={SUBSTACK_SUBSCRIBE_URL} className="btn btn-ghost-light">
-                  Subscribe for Weekly Reflections
-                </a>
-              </div>
             </div>
 
-            <div className="animate-in">
-              {/* SITE_IMAGES.gson8453 — used twice: reflections hero on /reflections and teaser image on home */}
-              <SiteImage
-                src={SITE_IMAGES.gson8453}
-                alt="Reflections"
-                ratio="16/10"
-                sizes="(max-width: 900px) 100vw, 420px"
-                className="image-dim"
-                priority={false}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="section testimonials-section">
-          <div className="testimonials-layout">
-            <div className="testimonials-image animate-in">
-              {/* SITE_IMAGES.img5 — used twice: reflections mid strip and testimonials image */}
-              <SiteImage
-                src={SITE_IMAGES.img5}
-                alt="Testimonials"
-                ratio="4/3"
-                sizes="(max-width: 900px) 100vw, 320px"
-                className="image-dim"
-              />
-            </div>
-
-            <div className="animate-in">
-              <div className="section--narrow" style={{ marginBottom: "2rem" }}>
-                <p className="section-label">Testimonials</p>
-                <div className="terracotta-rule" />
-                <h2 className="display-md" style={{ color: "var(--anchor)" }}>
-                  Words from the room
-                </h2>
-              </div>
-
-              <div className="testimonial-grid section--narrow">
+            <div className="testimonial-grid">
                 {[
                   {
-                    q: "I walked into Intentional Space not knowing what to expect. I walked out feeling seen in a way I hadn't felt in years.",
-                    a: "Intentional Space Attendee — London",
+                    q: "One of the most valuable rooms I've been in for a long time. Healing began for so many of us.",
+                    a: "Valerie",
                   },
                   {
-                    q: "Tobi has a way of asking the question you've been avoiding. And then sitting with you in the answer.",
-                    a: "Anonymous — DM",
+                    q: "Don't give up on the assignment. The women came to heal and healing has begun.",
+                    a: "Tosin",
                   },
                   {
-                    q: "This isn't coaching. It's something rarer — a space where you can be completely honest about your marriage.",
-                    a: "Intentional Space Attendee",
+                    q: "You are a powerful communicator. You deliver your message with clarity, conviction and heart.",
+                    a: "Alley",
                   },
                 ].map((t) => (
                   <blockquote key={t.a} className="animate-in testimonial">
@@ -467,10 +414,9 @@ export function LandingView() {
                 ))}
               </div>
 
-              <div className="animate-in ct-credibility">
-                A special collaboration with Charlotte Tilbury is in development — an intimate evening designed for a very small group of women,
-                blending beauty, presence, and honest conversation about love and identity.
-              </div>
+            <div className="animate-in ct-credibility">
+              A special collaboration with Charlotte Tilbury is in development — an intimate evening designed for a very small group of women,
+              blending beauty, presence, and honest conversation about love and identity.
             </div>
           </div>
         </section>
@@ -478,7 +424,7 @@ export function LandingView() {
         <LoveResetSection />
 
         <section id="audio" className="audio-section">
-          <div className="audio-split">
+          <div className="audio-split audio-split--single">
             <div className="audio-placeholder animate-in">
               <span className="audio-phase">Coming May 2026</span>
               <h2 className="audio-title">Inside The Mind Series</h2>
@@ -488,17 +434,6 @@ export function LandingView() {
               <a href="#contact" className="btn btn-secondary">
                 Notify Me When Available
               </a>
-            </div>
-
-            <div className="audio-split-image animate-in">
-              {/* SITE_IMAGES.img3 — used twice: booking aside (booking page) and audio image (home) */}
-              <SiteImage
-                src={SITE_IMAGES.img3}
-                alt=""
-                ratio="4/3"
-                sizes="(max-width: 900px) 100vw, 260px"
-                className="image-dim"
-              />
             </div>
           </div>
         </section>
@@ -522,7 +457,7 @@ export function LandingView() {
                 src={SITE_IMAGES.img2}
                 alt=""
                 ratio="3/4"
-                sizes="(max-width: 900px) 100vw, 280px"
+                sizes="(max-width: 900px) 100vw, 380px"
                 className="image-dim"
               />
             </div>
@@ -654,6 +589,7 @@ function SpeakingForm() {
     setStatus("loading");
     setMsg("");
     try {
+      const trimmed = message.trim();
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -661,8 +597,7 @@ function SpeakingForm() {
           intent: "speaking",
           email,
           firstName,
-          // Optional `message` is not mapped to ConvertKit custom fields in this version.
-          // If you need it, add an `md_key` + pass it through as `fields`.
+          fields: trimmed ? { event_details: trimmed } : undefined,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
@@ -735,13 +670,12 @@ function ContactForm() {
     e.preventDefault();
     setStatus("loading");
     setMsg("");
-    const intent = enquiry === "forever-day" ? "forever-day" : "general";
     try {
-      const res = await fetch("/api/subscribe", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          intent,
+          enquiry,
           email,
           firstName,
         }),

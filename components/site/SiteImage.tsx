@@ -16,7 +16,7 @@ export function SiteImage({
   className = "",
   ratio = "4/3",
   priority = false,
-  sizes = "(max-width: 768px) 100vw, 50vw",
+  sizes = "(max-width: 768px) 100vw, min(720px, 55vw)",
 }: Props) {
   return (
     <div

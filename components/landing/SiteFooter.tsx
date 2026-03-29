@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { INSTAGRAM_URL, SUBSTACK_SUBSCRIBE_URL } from "@/lib/data/site";
 
 export function SiteFooter() {
@@ -7,9 +8,9 @@ export function SiteFooter() {
     <footer className="site-footer" id="footer">
       <div className="footer-top">
         <div>
-          <a href="/" className="footer-brand-logo">
+          <Link href="/" className="footer-brand-logo">
             Tobi Yusuf
-          </a>
+          </Link>
           <p className="footer-tagline">From the bedroom to the boardroom.</p>
         </div>
         <div className="footer-columns">
@@ -17,19 +18,19 @@ export function SiteFooter() {
             <h4>Navigate</h4>
             <ul>
               <li>
-                <a href="/#about">About</a>
+                <Link href="/#about">About</Link>
               </li>
               <li>
-                <a href="/#experiences">Experiences</a>
+                <Link href="/#experiences">Experiences</Link>
               </li>
               <li>
-                <a href="/#offers">Work With Tobi</a>
+                <Link href="/#offers">Work With Tobi</Link>
               </li>
               <li>
-                <a href="/reflections">Reflections</a>
+                <Link href="/reflections">Reflections</Link>
               </li>
               <li>
-                <a href="/#contact">Contact</a>
+                <Link href="/#contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -37,16 +38,16 @@ export function SiteFooter() {
             <h4>Experiences</h4>
             <ul>
               <li>
-                <a href="/book/intentional-space">Intentional Space</a>
+                <Link href="/book/intentional-space">Intentional Space</Link>
               </li>
               <li>
-                <a href="/#experiences">Charlotte Tilbury Evening</a>
+                <Link href="/#experiences">Charlotte Tilbury Evening</Link>
               </li>
               <li>
-                <a href="/#experiences">Forever &amp; A Day</a>
+                <Link href="/#experiences">Forever &amp; A Day</Link>
               </li>
               <li>
-                <a href="/#experiences">Forever Table</a>
+                <Link href="/#experiences">Forever Table</Link>
               </li>
             </ul>
           </div>
@@ -64,7 +65,7 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href="/#contact">Get in Touch</a>
+                <Link href="/#contact">Get in Touch</Link>
               </li>
             </ul>
           </div>
