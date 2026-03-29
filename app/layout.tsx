@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import { getSiteUrl, getSocialSameAs } from "@/lib/data/site";
+import { SITE_IMAGES } from "@/lib/data/site-images";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -17,10 +19,38 @@ const jost = Jost({
   display: "swap",
 });
 
+const SITE_DESCRIPTION =
+  "Real conversations for real marriages. Marriage and relationships mentor, speaker, and experience curator based in London.";
+
+const SITE_TITLE_DEFAULT = "Tobi Yusuf — Marriage, Relationships & Identity";
+
 export const metadata: Metadata = {
-  title: "Tobi Yusuf — Marriage, Relationships & Identity",
-  description:
-    "Real conversations for real marriages. Marriage and relationships mentor, speaker, and experience curator based in London.",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: SITE_TITLE_DEFAULT,
+    template: "%s | Tobi Yusuf",
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "Tobi Yusuf",
+    title: SITE_TITLE_DEFAULT,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    images: [
+      {
+        url: SITE_IMAGES.img1,
+        alt: "Tobi Yusuf — marriage and relationships",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE_DEFAULT,
+    description: SITE_DESCRIPTION,
+    images: [SITE_IMAGES.img1],
+  },
 };
 
 export const viewport: Viewport = {
@@ -33,9 +63,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = getSiteUrl();
+  const sameAs = getSocialSameAs();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        name: "Tobi Yusuf",
+        url: siteUrl,
+        description: SITE_DESCRIPTION,
+      },
+      {
+        "@type": "Person",
+        name: "Tobi Yusuf",
+        url: siteUrl,
+        jobTitle:
+          "Marriage and relationships mentor, speaker, and experience curator",
+        ...(sameAs.length > 0 ? { sameAs } : {}),
+      },
+    ],
+  };
+
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

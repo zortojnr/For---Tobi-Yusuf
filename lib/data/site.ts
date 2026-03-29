@@ -3,6 +3,26 @@
  * UPDATE: Replace placeholders before go-live (Ticket Candy, Substack, Instagram, etc.)
  */
 
+/**
+ * Canonical site origin for sitemap, robots, and metadata (no trailing slash).
+ * Set `NEXT_PUBLIC_SITE_URL` in production (e.g. https://www.tobiyusuf.com).
+ */
+export function getSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (fromEnv) {
+    return fromEnv.replace(/\/$/, "");
+  }
+  const vercel = process.env.VERCEL_URL?.trim();
+  if (vercel) {
+    const origin = vercel.startsWith("http") ? vercel : `https://${vercel}`;
+    return origin.replace(/\/$/, "");
+  }
+  if (process.env.NODE_ENV === "production") {
+    return "https://www.tobiyusuf.com";
+  }
+  return "http://localhost:3000";
+}
+
 /** Places remaining for Intentional Space — easy to change */
 export const INTENTIONAL_SPACE_REMAINING_PLACES = 10;
 
@@ -28,6 +48,18 @@ export const SUBSTACK_SUBSCRIBE_URL =
 /** UPDATE: Instagram profile */
 export const INSTAGRAM_URL =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL || "#footer";
+
+/** Public http(s) profile URLs for JSON-LD `sameAs` when env vars are set. */
+export function getSocialSameAs(): string[] {
+  const urls: string[] = [];
+  if (SUBSTACK_SUBSCRIBE_URL.startsWith("http")) {
+    urls.push(SUBSTACK_SUBSCRIBE_URL);
+  }
+  if (INSTAGRAM_URL.startsWith("http")) {
+    urls.push(INSTAGRAM_URL);
+  }
+  return urls;
+}
 
 export function substackPostUrl(pathOrFull: string): string {
   if (!pathOrFull) return SUBSTACK_SUBSCRIBE_URL;

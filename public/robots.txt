@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /plugins/
+
+# Host
+Host: https://www.tobiyusuf.com
+
+# Sitemaps
+Sitemap: https://www.tobiyusuf.com/sitemap.xml

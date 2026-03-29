@@ -6,7 +6,7 @@ import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteImage } from "@/components/site/SiteImage";
 
 export const metadata = {
-  title: "Book Intentional Space — Tobi Yusuf",
+  title: "Book Intentional Space",
   description: "Request a place at Intentional Space, London.",
 };
 
