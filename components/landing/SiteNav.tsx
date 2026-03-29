@@ -27,6 +27,9 @@ export function SiteNav() {
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  /** Light heroes: solid bar + dark text from first paint (see #mainNav.nav-on-light). */
+  const path = (pathname ?? "").replace(/\/$/, "") || "/";
+  const solidNav = path === "/reflections" || path.startsWith("/book");
   const prefix = pathname === "/" ? "" : "/";
 
   useEffect(() => {
@@ -39,7 +42,15 @@ export function SiteNav() {
   useBodyScrollLock(navOpen);
 
   return (
-    <nav id="mainNav" className={scrolled ? "scrolled" : ""}>
+    <nav
+      id="mainNav"
+      className={[
+        scrolled || solidNav ? "scrolled" : "",
+        solidNav ? "nav-on-light" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="nav-inner">
         <Link href="/" className="nav-logo" onClick={() => setNavOpen(false)}>
           Tobi Yusuf

@@ -341,6 +341,30 @@ img {
   background: var(--anchor);
 }
 
+/* /reflections, /book/* — light hero under fixed nav; enforce dark text on cream (see SiteNav nav-on-light) */
+#mainNav.nav-on-light {
+  background: var(--background);
+  border-bottom-color: rgba(122, 79, 90, 0.15);
+}
+
+#mainNav.nav-on-light .nav-logo {
+  color: var(--anchor);
+}
+
+#mainNav.nav-on-light .nav-links a {
+  color: var(--anchor);
+  opacity: 0.92;
+}
+
+#mainNav.nav-on-light .nav-toggle span {
+  background: var(--anchor);
+}
+
+#mainNav.nav-on-light .nav-links a:hover {
+  color: var(--signature) !important;
+  opacity: 1;
+}
+
 /* —— Hero —— */
 .hero {
   position: relative;
