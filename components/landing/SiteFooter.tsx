@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { INSTAGRAM_URL, SUBSTACK_SUBSCRIBE_URL } from "@/lib/data/site";
+import {
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  SUBSTACK_SUBSCRIBE_URL,
+} from "@/lib/data/site";
 
 export function SiteFooter() {
   return (
@@ -62,6 +66,11 @@ export function SiteFooter() {
               <li>
                 <a href={SUBSTACK_SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">
                   Substack
+                </a>
+              </li>
+              <li>
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                  LinkedIn
                 </a>
               </li>
               <li>

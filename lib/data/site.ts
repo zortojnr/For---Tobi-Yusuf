@@ -41,15 +41,39 @@ export const TICKET_CANDY_INTENTIONAL_SPACE_URL =
 /** Contact form notifications (Resend `to` address) */
 export const CONTACT_NOTIFICATION_EMAIL = "tobi@tobiyusuf.com";
 
-/** UPDATE: Substack publication subscribe URL */
+const DEFAULT_SUBSTACK_URL =
+  "https://substack.com/@mrstobiyusuf?r=72pimk&utm_medium=ios&utm_source=stories&shareImageVariant=light";
+
+const DEFAULT_INSTAGRAM_URL =
+  "https://www.instagram.com/mrstobiyusuf?igsh=NXU5N3p0Z2RyY2U3&utm_source=qr";
+
+const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/in/tobi-yusuf-68813812b";
+
+/** Substack publication / subscribe URL — override with `NEXT_PUBLIC_SUBSTACK_URL`. */
 export const SUBSTACK_SUBSCRIBE_URL =
-  process.env.NEXT_PUBLIC_SUBSTACK_URL || "#reflections";
+  process.env.NEXT_PUBLIC_SUBSTACK_URL?.trim() || DEFAULT_SUBSTACK_URL;
 
-/** UPDATE: Instagram profile */
+/** Instagram profile — override with `NEXT_PUBLIC_INSTAGRAM_URL`. */
 export const INSTAGRAM_URL =
-  process.env.NEXT_PUBLIC_INSTAGRAM_URL || "#footer";
+  process.env.NEXT_PUBLIC_INSTAGRAM_URL?.trim() || DEFAULT_INSTAGRAM_URL;
 
-/** Public http(s) profile URLs for JSON-LD `sameAs` when env vars are set. */
+/** LinkedIn profile — override with `NEXT_PUBLIC_LINKEDIN_URL`. */
+export const LINKEDIN_URL =
+  process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || DEFAULT_LINKEDIN_URL;
+
+function substackJoinBase(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SUBSTACK_URL?.trim().replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+  if (!SUBSTACK_SUBSCRIBE_URL.startsWith("http")) return "";
+  try {
+    const u = new URL(SUBSTACK_SUBSCRIBE_URL);
+    return `${u.origin}${u.pathname}`.replace(/\/$/, "");
+  } catch {
+    return "";
+  }
+}
+
+/** Public http(s) profile URLs for JSON-LD `sameAs`. */
 export function getSocialSameAs(): string[] {
   const urls: string[] = [];
   if (SUBSTACK_SUBSCRIBE_URL.startsWith("http")) {
@@ -58,13 +82,16 @@ export function getSocialSameAs(): string[] {
   if (INSTAGRAM_URL.startsWith("http")) {
     urls.push(INSTAGRAM_URL);
   }
+  if (LINKEDIN_URL.startsWith("http")) {
+    urls.push(LINKEDIN_URL);
+  }
   return urls;
 }
 
 export function substackPostUrl(pathOrFull: string): string {
   if (!pathOrFull) return SUBSTACK_SUBSCRIBE_URL;
   if (pathOrFull.startsWith("http")) return pathOrFull;
-  const base = process.env.NEXT_PUBLIC_SUBSTACK_URL?.replace(/\/$/, "") || "";
-  if (!base) return "#reflections";
+  const base = substackJoinBase();
+  if (!base) return SUBSTACK_SUBSCRIBE_URL;
   return `${base}${pathOrFull.startsWith("/") ? "" : "/"}${pathOrFull}`;
 }
