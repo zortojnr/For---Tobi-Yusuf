@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { reflections } from "@/lib/data/reflections";
 import { SUBSTACK_SUBSCRIBE_URL, substackPostUrl } from "@/lib/data/site";

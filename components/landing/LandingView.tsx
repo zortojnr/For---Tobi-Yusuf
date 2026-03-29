@@ -60,7 +60,16 @@ export function LandingView() {
       <SiteNav />
       <main>
         <section className="hero" aria-label="Introduction">
-          <div className="hero-photo" aria-hidden />
+          <div className="hero-photo" aria-hidden>
+            <Image
+              src={SITE_IMAGES.img6}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="hero-photo-img"
+            />
+          </div>
 
           <div className="hero-content">
             <p className="hero-eyebrow hero-anim-1">
