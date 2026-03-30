@@ -17,6 +17,7 @@ export function FeaturedPublications() {
               <>
                 {pub.logoSrc ? (
                   <span className="press-logo-frame">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing for varied logo assets */}
                     <img
                       src={pub.logoSrc}
                       alt={pub.name}
