@@ -5,7 +5,6 @@ import Link from "next/link";
 import { reflections } from "@/lib/data/reflections";
 import { SUBSTACK_SUBSCRIBE_URL, substackPostUrl } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
-import { SiteImage } from "@/components/site/SiteImage";
 import { SiteNav } from "@/components/landing/SiteNav";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { useAnimateIn } from "@/components/landing/useAnimateIn";
@@ -18,18 +17,16 @@ export function ReflectionsPageClient() {
       <SiteNav />
       <main>
         <section className="reflections-page-hero">
-          {/* SITE_IMAGES.gson8453 — use #1: reflections hero (use #2: home teaser) */}
           <div className="reflections-page-hero-image">
-            <SiteImage
-              src={SITE_IMAGES.gson8453}
-              alt="Tobi Yusuf"
-              ratio="16/9"
-              priority
-              sizes="(max-width: 768px) 100vw, min(100vw, 1100px)"
+            <div
+              className="reflections-page-hero-bg"
+              style={{ backgroundImage: `url(${SITE_IMAGES.siteLogo})` }}
+              aria-hidden
             />
             <div className="reflections-page-hero-scrim" />
           </div>
           <div className="reflections-page-hero-copy section--narrow reflections-page-hero-copy-inner">
+            <p className="reflections-hero-brand">Tobi Yusuf</p>
             <p className="section-label" style={{ color: "var(--signature)" }}>
               Reflections
             </p>

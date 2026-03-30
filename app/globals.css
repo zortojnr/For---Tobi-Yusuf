@@ -261,18 +261,17 @@ img {
 }
 
 .nav-logo {
-  display: inline-flex;
-  align-items: center;
-  line-height: 0;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-on-dark);
+  transition: color 0.4s ease;
   text-decoration: none;
 }
 
-.nav-logo-image {
-  display: block;
-  height: 1.75rem;
-  width: auto;
-  max-width: min(200px, 48vw);
-  object-fit: contain;
+#mainNav.scrolled .nav-logo {
+  color: var(--anchor);
 }
 
 .nav-links {
@@ -347,6 +346,10 @@ img {
 #mainNav.nav-on-light {
   background: var(--background);
   border-bottom-color: rgba(122, 79, 90, 0.15);
+}
+
+#mainNav.nav-on-light .nav-logo {
+  color: var(--anchor);
 }
 
 #mainNav.nav-on-light .nav-links a {
@@ -1667,17 +1670,25 @@ img {
 /* —— Reflections standalone page —— */
 .reflections-page-hero {
   position: relative;
-  padding-top: 5rem;
+  padding-top: 0;
 }
 
 .reflections-page-hero-image {
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   max-height: min(70vh, 640px);
+  margin: 0 auto;
   overflow: hidden;
 }
 
-.reflections-page-hero-image .site-image-frame {
-  max-height: min(70vh, 640px);
+.reflections-page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--background);
 }
 
 .reflections-page-hero-scrim {
@@ -1686,8 +1697,10 @@ img {
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(61, 31, 43, 0.25) 0%,
-    rgba(250, 247, 244, 0.92) 100%
+    rgba(61, 31, 43, 0.38) 0%,
+    rgba(250, 247, 244, 0.55) 48%,
+    rgba(250, 247, 244, 0.96) 82%,
+    rgba(250, 247, 244, 1) 100%
   );
   pointer-events: none;
 }
@@ -1700,9 +1713,19 @@ img {
 }
 
 .reflections-page-hero-copy-inner {
-  padding-left: clamp(1.25rem, 5vw, 2.75rem);
-  padding-right: clamp(1.25rem, 5vw, 2.75rem);
+  padding: 1.5rem clamp(1.25rem, 5vw, 2.75rem) 1.75rem;
   box-sizing: border-box;
+  background: rgba(250, 247, 244, 0.94);
+  border-radius: 2px;
+}
+
+.reflections-hero-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--anchor);
+  margin: 0 0 0.85rem;
 }
 
 .reflections-page-strip {
@@ -1873,10 +1896,6 @@ img {
     max-height: min(52vh, 440px);
   }
 
-  .reflections-page-hero-image .site-image-frame {
-    max-height: min(52vh, 440px);
-  }
-
   .reflections-page-hero-copy {
     margin-top: -2rem;
   }
@@ -1919,9 +1938,8 @@ img {
     padding: 0.75rem max(1rem, env(safe-area-inset-left)) 0.75rem max(1rem, env(safe-area-inset-right));
   }
 
-  .nav-logo-image {
-    height: 1.5rem;
-    max-width: min(180px, 44vw);
+  .nav-logo {
+    font-size: 1.2rem;
   }
 
   .hero {
@@ -2004,14 +2022,6 @@ img {
 
   .reflections-page-hero-image {
     max-height: min(40vh, 340px);
-  }
-
-  .reflections-page-hero-image .site-image-frame {
-    max-height: min(40vh, 340px);
-  }
-
-  .reflections-page-hero {
-    padding-top: 4.25rem;
   }
 
   .reflection-card {
