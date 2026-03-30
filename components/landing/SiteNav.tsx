@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SITE_IMAGES } from "@/lib/data/site-images";
 
 function useBodyScrollLock(locked: boolean) {
   useEffect(() => {
@@ -53,7 +55,14 @@ export function SiteNav() {
     >
       <div className="nav-inner">
         <Link href="/" className="nav-logo" onClick={() => setNavOpen(false)}>
-          Tobi Yusuf
+          <Image
+            src={SITE_IMAGES.siteLogo}
+            alt="Tobi Yusuf"
+            width={320}
+            height={96}
+            className="nav-logo-image"
+            priority
+          />
         </Link>
         <button
           type="button"

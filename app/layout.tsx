@@ -26,6 +26,10 @@ const SITE_TITLE_DEFAULT = "Tobi Yusuf — Marriage, Relationships & Identity";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
+  icons: {
+    icon: SITE_IMAGES.siteLogo,
+    apple: SITE_IMAGES.siteLogo,
+  },
   title: {
     default: SITE_TITLE_DEFAULT,
     template: "%s | Tobi Yusuf",

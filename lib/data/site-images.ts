@@ -3,6 +3,8 @@
  * Second use is documented in component comments for easy audits.
  */
 export const SITE_IMAGES = {
+  /** Brand mark: SiteNav; SiteFooter; favicon (see app/layout.tsx metadata.icons) */
+  siteLogo: "/assets/images/logo.jpeg",
   img1: "/assets/images/1.jpg",
   img2: "/assets/images/2.jpg",
   img3: "/assets/images/3.jpg",

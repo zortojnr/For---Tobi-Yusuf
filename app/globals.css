@@ -261,16 +261,18 @@ img {
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--text-on-dark);
-  transition: color 0.4s ease;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  text-decoration: none;
 }
 
-#mainNav.scrolled .nav-logo {
-  color: var(--anchor);
+.nav-logo-image {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+  max-width: min(200px, 48vw);
+  object-fit: contain;
 }
 
 .nav-links {
@@ -345,10 +347,6 @@ img {
 #mainNav.nav-on-light {
   background: var(--background);
   border-bottom-color: rgba(122, 79, 90, 0.15);
-}
-
-#mainNav.nav-on-light .nav-logo {
-  color: var(--anchor);
 }
 
 #mainNav.nav-on-light .nav-links a {
@@ -1377,12 +1375,18 @@ img {
 }
 
 .footer-brand-logo {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 300;
-  color: var(--text-on-dark);
-  display: block;
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
   margin-bottom: 0.75rem;
+}
+
+.footer-logo-image {
+  display: block;
+  height: 2.5rem;
+  width: auto;
+  max-width: min(240px, 70vw);
+  object-fit: contain;
 }
 
 .footer-tagline {
@@ -1915,8 +1919,9 @@ img {
     padding: 0.75rem max(1rem, env(safe-area-inset-left)) 0.75rem max(1rem, env(safe-area-inset-right));
   }
 
-  .nav-logo {
-    font-size: 1.2rem;
+  .nav-logo-image {
+    height: 1.5rem;
+    max-width: min(180px, 44vw);
   }
 
   .hero {

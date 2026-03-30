@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import { SITE_IMAGES } from "@/lib/data/site-images";
 import {
   INSTAGRAM_URL,
   LINKEDIN_URL,
@@ -13,7 +15,13 @@ export function SiteFooter() {
       <div className="footer-top">
         <div>
           <Link href="/" className="footer-brand-logo">
-            Tobi Yusuf
+            <Image
+              src={SITE_IMAGES.siteLogo}
+              alt="Tobi Yusuf"
+              width={320}
+              height={96}
+              className="footer-logo-image"
+            />
           </Link>
           <p className="footer-tagline">From the bedroom to the boardroom.</p>
         </div>
