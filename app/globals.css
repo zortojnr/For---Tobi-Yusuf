@@ -612,7 +612,7 @@ img {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.25rem;
-  align-items: stretch;
+  align-items: center;
   justify-items: stretch;
   max-width: 1000px;
   margin-left: auto;
@@ -629,10 +629,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 4.75rem;
   padding: 1rem 0.85rem;
   width: 100%;
-  height: 100%;
   border: 1px solid rgba(61, 31, 43, 0.1);
   background: rgba(250, 247, 244, 0.75);
   box-shadow: 0 1px 0 rgba(250, 247, 244, 0.8) inset;
@@ -660,32 +658,19 @@ img {
 }
 
 .press-logo-frame {
-  position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 3rem;
 }
 
 .press-logo-img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   object-position: center;
-  filter: grayscale(1);
-  opacity: 0.75;
-  transition:
-    opacity 0.35s ease,
-    filter 0.35s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .press-logo-img {
-    transition: none;
-  }
-}
-
-.press-item-link:hover .press-logo-img,
-.press-item-link:focus-visible .press-logo-img {
-  opacity: 1;
-  filter: grayscale(0);
 }
 
 .press-name-fallback {
@@ -710,10 +695,6 @@ img {
   .press-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
-  }
-
-  .press-logo-frame {
-    height: 3.5rem;
   }
 
   .press-section {

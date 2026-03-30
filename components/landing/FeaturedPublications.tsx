@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { FEATURED_PUBLICATIONS } from "@/lib/data/publications";
 
 export function FeaturedPublications() {
@@ -18,12 +17,11 @@ export function FeaturedPublications() {
               <>
                 {pub.logoSrc ? (
                   <span className="press-logo-frame">
-                    <Image
+                    <img
                       src={pub.logoSrc}
                       alt={pub.name}
-                      fill
                       className="press-logo-img"
-                      sizes="(max-width: 768px) 40vw, 180px"
+                      loading="lazy"
                     />
                   </span>
                 ) : (
