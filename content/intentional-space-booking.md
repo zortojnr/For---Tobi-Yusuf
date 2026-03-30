@@ -50,6 +50,6 @@ fields:
     ck_key: anything_else
 ---
 
-You’re booking a place at **Intentional Space** — an intimate London gathering for a small circle of women. Complete the form below so we can hold your details and follow up with payment and venue information.
+You’re booking a place at **Intentional Space**, an intimate London gathering for a small circle of women. Complete the form below so we can hold your details and follow up with payment and venue information.
 
 **Please note:** Submitting this form does not guarantee a place until you receive confirmation from our team. Places are limited to **10 women**.

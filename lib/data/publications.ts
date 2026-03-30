@@ -19,4 +19,5 @@ export const FEATURED_PUBLICATIONS: FeaturedPublication[] = [
   { id: "the-times", name: "The TIMES", logoSrc: "/assets/images/logo3.png" },
   { id: "bellanaija", name: "Bellanaija", logoSrc: "/assets/images/logo4.png" },
   { id: "ipaper", name: "iPaper", logoSrc: "/assets/images/logo5.jpeg" },
+  { id: "logo6", name: "Press", logoSrc: "/assets/images/logo6.jpeg" },
 ];

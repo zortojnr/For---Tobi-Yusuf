@@ -22,7 +22,7 @@ const jost = Jost({
 const SITE_DESCRIPTION =
   "Real conversations for real marriages. Marriage and relationships mentor, speaker, and experience curator based in London.";
 
-const SITE_TITLE_DEFAULT = "Tobi Yusuf — Marriage, Relationships & Identity";
+const SITE_TITLE_DEFAULT = "Tobi Yusuf · Marriage, Relationships & Identity";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: SITE_IMAGES.img1,
-        alt: "Tobi Yusuf — marriage and relationships",
+        alt: "Tobi Yusuf, marriage and relationships",
       },
     ],
   },

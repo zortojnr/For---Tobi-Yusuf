@@ -81,7 +81,7 @@ img {
 
 .body-text {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.125rem);
   font-weight: 300;
   line-height: 1.75;
   color: var(--midtone);
@@ -101,6 +101,18 @@ img {
 .hero-headline em {
   font-style: italic;
   color: var(--signature);
+}
+
+.hero-positioning {
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: rgba(250, 247, 244, 0.55);
+  max-width: 36rem;
+  margin: 0 0 1.25rem;
 }
 
 /* —— Buttons —— */
@@ -431,7 +443,7 @@ img {
   max-width: 520px;
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 1rem;
+  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.125rem);
   line-height: 1.8;
   color: rgba(250, 247, 244, 0.65);
   margin-bottom: 3rem;
@@ -501,6 +513,13 @@ img {
 .hero-anim-2 {
   animation: heroFadeUp 0.9s ease forwards;
   animation-delay: 0.5s;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.hero-anim-2b {
+  animation: heroFadeUp 0.9s ease forwards;
+  animation-delay: 0.62s;
   opacity: 0;
   animation-fill-mode: both;
 }
@@ -611,11 +630,11 @@ img {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1.25rem;
   align-items: center;
   justify-items: stretch;
-  max-width: 1000px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -723,6 +742,203 @@ img {
 .terracotta-rule--center {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* —— If This Feels Familiar —— */
+.familiar-section {
+  background: var(--background);
+  padding: var(--section-pad);
+  border-top: 1px solid rgba(122, 79, 90, 0.08);
+}
+
+.familiar-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.familiar-inner .body-text {
+  margin: 0 0 1.25rem;
+}
+
+.familiar-emphasis {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.125rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--anchor);
+  margin: 2rem 0;
+}
+
+.familiar-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* —— The Work (pillars) —— */
+.work-pillars-section {
+  background: var(--background);
+}
+
+.work-pillars-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.work-pillar-card {
+  padding: 2rem 1.75rem 2.25rem;
+  border: 1px solid rgba(61, 31, 43, 0.1);
+  border-top: 2px solid var(--signature);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.work-pillar-card:hover {
+  border-color: var(--signature);
+  box-shadow: 0 4px 24px rgba(61, 31, 43, 0.06);
+}
+
+.work-pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--anchor);
+  margin: 0 0 0.75rem;
+  line-height: 1.25;
+}
+
+.work-pillar-body {
+  margin: 0 0 0.75rem;
+}
+
+.work-pillar-subnote {
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 0.2vw + 0.76rem, 0.88rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.work-pillar-link {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signature);
+  display: inline-block;
+  margin-top: 1rem;
+  border-bottom: 1px solid rgba(196, 149, 127, 0.35);
+  padding-bottom: 2px;
+}
+
+.work-pillar-link:hover {
+  color: var(--anchor);
+  border-bottom-color: var(--anchor);
+}
+
+/* —— Speaking topic cards —— */
+.speaking-topics {
+  margin-bottom: 2rem;
+}
+
+.speaking-intro {
+  margin-bottom: 1.75rem;
+}
+
+.speaking-topic-card {
+  padding: 1.5rem 0 1.75rem;
+  border-top: 1px solid rgba(61, 31, 43, 0.1);
+}
+
+.speaking-topic-card:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.speaking-topic-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--anchor);
+  margin: 0 0 0.65rem;
+  line-height: 1.25;
+}
+
+.speaking-topic-audience {
+  font-family: var(--font-body);
+  font-size: clamp(0.82rem, 0.2vw + 0.78rem, 0.9rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-subtle);
+  margin: 0.75rem 0 0;
+}
+
+.speaking-topic-audience strong {
+  font-weight: 500;
+  color: var(--midtone);
+}
+
+.pathways-section {
+  background: var(--background);
+}
+
+/* —— Footer closing invitation —— */
+.footer-closing {
+  background: var(--background);
+  color: var(--midtone);
+  padding: 3.5rem 2rem;
+  width: 100%;
+}
+
+.footer-closing-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-closing-inner .display-md {
+  color: var(--anchor);
+  margin: 0 0 1.25rem;
+}
+
+.footer-closing-body {
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+}
+
+.footer-closing-body p {
+  margin: 0 0 1rem;
+}
+
+.footer-closing-body p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-closing-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.footer-closing-privacy {
+  font-family: var(--font-body);
+  font-size: clamp(0.68rem, 0.15vw + 0.65rem, 0.75rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-subtle);
+  max-width: 36rem;
+  margin: 0 auto;
 }
 
 /* —— About —— */
@@ -977,7 +1193,7 @@ img {
 
 .offer-desc {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: clamp(0.9rem, 0.25vw + 0.85rem, 1rem);
   font-style: italic;
   color: var(--midtone);
   line-height: 1.6;
@@ -993,6 +1209,26 @@ img {
   margin-bottom: 1.25rem;
 }
 
+.offer-waitlist-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
+.offer-waitlist-cta .offer-waitlist-pointer {
+  flex-shrink: 0;
+  opacity: 0.9;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.offer-waitlist-cta:hover .offer-waitlist-pointer {
+  transform: translate(2px, -1px);
+  opacity: 1;
+}
+
 /* —— Reflections —— */
 .reflections-section {
   background: var(--soft);
@@ -1004,7 +1240,45 @@ img {
   font-style: italic;
   color: var(--midtone);
   max-width: 680px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.reflections-subscribe-only {
+  margin-top: 0.25rem;
+}
+
+.substack-native-subscribe {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  color: #1a1a1a;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.substack-native-subscribe:hover {
+  border-color: #ccc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.substack-native-subscribe-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  object-fit: contain;
 }
 
 .reflections-grid {
@@ -1066,6 +1340,65 @@ img {
   display: inline-block;
 }
 
+.reflection-card-tail {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(122, 79, 90, 0.15);
+}
+
+.reflection-card-cta-lead {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 0.25vw + 0.85rem, 0.98rem);
+  font-weight: 300;
+  color: var(--midtone);
+  margin: 0 0 0.85rem;
+}
+
+.reflection-card-cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reflection-card-cta-links a {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signature);
+  border-bottom: 1px solid rgba(196, 149, 127, 0.35);
+  padding-bottom: 2px;
+}
+
+.reflection-card-cta-links a:hover {
+  color: var(--anchor);
+  border-bottom-color: var(--anchor);
+}
+
+.reflection-card-bio-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--signature);
+  margin: 0 0 0.75rem;
+}
+
+.reflection-card-bio {
+  max-width: 36rem;
+}
+
+.reflection-card-bio p {
+  margin: 0 0 1rem;
+}
+
+.reflection-card-bio p:last-child {
+  margin-bottom: 0;
+}
+
 .reflections-cta-block {
   margin-top: 3rem;
   background: var(--anchor);
@@ -1085,6 +1418,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  align-items: center;
   justify-content: center;
 }
 
@@ -1108,7 +1442,7 @@ img {
 
 .testimonial-quote {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.2rem);
   font-style: italic;
   color: var(--anchor);
   line-height: 1.6;
@@ -1131,7 +1465,7 @@ img {
   border-left: 3px solid var(--signature);
   padding: 2rem;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 0.3vw + 0.92rem, 1.12rem);
   font-style: italic;
   color: var(--midtone);
   line-height: 1.6;
@@ -1155,7 +1489,7 @@ img {
 
 .capture-body {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: clamp(0.95rem, 0.3vw + 0.88rem, 1.05rem);
   font-weight: 300;
   color: rgba(250, 247, 244, 0.6);
   line-height: 1.8;

@@ -12,6 +12,35 @@ import {
 export function SiteFooter() {
   return (
     <footer className="site-footer" id="footer">
+      <div className="footer-closing">
+        <div className="footer-closing-inner">
+          <h2 className="display-md">Conversations Change Things</h2>
+          <div className="footer-closing-body">
+            <p className="body-text">
+              Sometimes what people need most is not advice, but a space where honest
+              conversations can happen.
+            </p>
+            <p className="body-text">
+              Through reflections, experiences, and speaking engagements, this work is
+              about helping people understand the patterns shaping their relationships,
+              and creating space for more intentional connection.
+            </p>
+          </div>
+          <div className="footer-closing-btns">
+            <Link href="/#experiences" className="btn btn-secondary">
+              Explore Experiences
+            </Link>
+            <Link href="/#speaking" className="btn btn-secondary">
+              Book Speaking Enquiry
+            </Link>
+          </div>
+          <p className="footer-closing-privacy">
+            Because many of these conversations are deeply personal, we protect the
+            privacy of those who attend. Images shared here reflect the atmosphere of
+            our gatherings while honoring the confidentiality of those present.
+          </p>
+        </div>
+      </div>
       <div className="footer-top">
         <div>
           <Link href="/" className="footer-brand-logo">
@@ -91,8 +120,8 @@ export function SiteFooter() {
       <div className="footer-bottom">
         <p className="footer-copy">&copy; {new Date().getFullYear()} Tobi Yusuf. All rights reserved.</p>
         <p className="footer-faith">
-          &ldquo;Commit your work to the Lord, and your plans will be established.&rdquo; — Proverbs
-          16:3
+          &ldquo;Commit your work to the Lord, and your plans will be established.&rdquo;{" "}
+          (Proverbs 16:3)
         </p>
       </div>
     </footer>

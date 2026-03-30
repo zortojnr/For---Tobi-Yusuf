@@ -38,6 +38,14 @@ export const SCHEDULING_URL =
 export const TICKET_CANDY_INTENTIONAL_SPACE_URL =
   process.env.NEXT_PUBLIC_TICKET_CANDY_URL?.trim() || SCHEDULING_URL;
 
+const DEFAULT_TALLY_INTENTIONAL_SPACE_WAITLIST =
+  "https://tally.so/r/J9DKpK";
+
+/** Intentional Space waitlist (Tally). Override with `NEXT_PUBLIC_TALLY_INTENTIONAL_SPACE_WAITLIST_URL`. */
+export const INTENTIONAL_SPACE_WAITLIST_TALLY_URL =
+  process.env.NEXT_PUBLIC_TALLY_INTENTIONAL_SPACE_WAITLIST_URL?.trim() ||
+  DEFAULT_TALLY_INTENTIONAL_SPACE_WAITLIST;
+
 /** Contact form notifications (Resend `to` address) */
 export const CONTACT_NOTIFICATION_EMAIL = "tobi@tobiyusuf.com";
 
@@ -52,6 +60,14 @@ const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/in/tobi-yusuf-68813812b";
 /** Substack publication / subscribe URL — override with `NEXT_PUBLIC_SUBSTACK_URL`. */
 export const SUBSTACK_SUBSCRIBE_URL =
   process.env.NEXT_PUBLIC_SUBSTACK_URL?.trim() || DEFAULT_SUBSTACK_URL;
+
+/** Official publication subscribe URL (native Substack subscribe button / pill). */
+const DEFAULT_SUBSTACK_PUBLICATION_SUBSCRIBE =
+  "https://mrstobiyusuf.substack.com/subscribe";
+
+export const SUBSTACK_PUBLICATION_SUBSCRIBE_URL =
+  process.env.NEXT_PUBLIC_SUBSTACK_PUBLICATION_SUBSCRIBE?.trim() ||
+  DEFAULT_SUBSTACK_PUBLICATION_SUBSCRIBE;
 
 /** Instagram profile — override with `NEXT_PUBLIC_INSTAGRAM_URL`. */
 export const INSTAGRAM_URL =

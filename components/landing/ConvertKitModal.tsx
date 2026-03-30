@@ -38,7 +38,7 @@ export function ConvertKitModal({ title, intent, isOpen, onClose }: Props) {
         return;
       }
       setStatus("ok");
-      setMsg("Thank you — check your inbox.");
+      setMsg("Thank you. Check your inbox.");
       setEmail("");
       setFirstName("");
     } catch {

@@ -11,7 +11,7 @@ export const reflections: Reflection[] = [
     title: "Why Some Women Stop Talking in Marriage",
     date: "Sunday Reflection",
     excerpt:
-      "There comes a point where the silence isn't avoidance — it's exhaustion...",
+      "There comes a point where the silence is not avoidance. It is exhaustion...",
     substackUrl: "",
   },
   {
@@ -22,7 +22,7 @@ export const reflections: Reflection[] = [
     substackUrl: "",
   },
   {
-    title: "Married But Lonely — And Why It's Not Your Fault",
+    title: "Married But Lonely, and Why It Is Not Your Fault",
     date: "Sunday Reflection",
     excerpt:
       "The loneliness inside a marriage is one of the most isolating experiences...",

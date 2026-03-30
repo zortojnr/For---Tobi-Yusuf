@@ -1,16 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { PRICES } from "@/lib/data/prices";
 import {
   INTENTIONAL_SPACE_REMAINING_PLACES,
+  INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
   SCHEDULING_URL,
 } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteImage } from "@/components/site/SiteImage";
-import type { ConvertKitIntent } from "@/lib/convertkit-intents";
-import { ConvertKitModal } from "./ConvertKitModal";
 import { useAnimateIn } from "./useAnimateIn";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
@@ -22,20 +22,6 @@ export function LandingView() {
   useAnimateIn();
 
   const [countdownText, setCountdownText] = useState("");
-
-  const [modal, setModal] = useState<{
-    open: boolean;
-    intent: ConvertKitIntent;
-    title: string;
-  }>({ open: false, intent: "general", title: "" });
-
-  const openModal = useCallback((intent: ConvertKitIntent, title: string) => {
-    setModal({ open: true, intent, title });
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setModal((m) => ({ ...m, open: false }));
-  }, []);
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -78,10 +64,14 @@ export function LandingView() {
             <h1 className="hero-headline hero-anim-2">
               Real conversations for real <em>marriages.</em>
             </h1>
+            <p className="hero-positioning hero-anim-2b">
+              Relational &amp; Cultural Intelligence Advisor | Speaker | Facilitator |
+              Conversation Host
+            </p>
             <p className="hero-sub hero-anim-3">
               A luxury editorial space for professional women who want honest,
               grounded conversation about marriage, identity, and the life you&apos;re
-              building — without the noise.
+              building, without the noise.
             </p>
             <div className="hero-ctas hero-anim-3">
               <a href="#experiences" className="btn btn-terracotta">
@@ -101,7 +91,7 @@ export function LandingView() {
 
         <div className="urgent-banner">
           <p className="urgent-banner-inner">
-            Intentional Space — 25th April 2026, London · Only 10 places available ·{" "}
+            Intentional Space · 25th April 2026, London · Only 10 places available ·{" "}
             <span className="countdown-pill" id="countdown">
               {countdownText || "…"}
             </span>{" "}
@@ -122,8 +112,8 @@ export function LandingView() {
             {[
               { n: "2M+", l: "Instagram views on marriage content" },
               { n: "10", l: "Intimate places per Intentional Space" },
-              { n: "4+", l: "Years of real marriage conversations" },
-              { n: "1", l: "Guiding principle — truth" },
+              { n: "10+", l: "Years of real marriage conversations" },
+              { n: "1", l: "Guiding principle: truth" },
             ].map((item) => (
               <div key={item.l} className="animate-in proof-item">
                 <span className="proof-num">{item.n}</span>
@@ -134,6 +124,48 @@ export function LandingView() {
         </section>
 
         <FeaturedPublications />
+
+        <section className="familiar-section" aria-label="If this feels familiar">
+          <div className="familiar-inner">
+            <p className="body-text">
+              You love your spouse, but conversations often turn into misunderstandings.
+            </p>
+            <p className="body-text">
+              You find yourself repeating the same concerns, yet nothing seems to change.
+            </p>
+            <p className="body-text">
+              Sometimes you wonder if you are asking for too much, or if you have simply
+              stopped saying certain things altogether.
+            </p>
+            <p className="body-text">
+              You may still care deeply about your marriage, but the emotional connection
+              feels different from how it once was.
+            </p>
+            <p className="familiar-emphasis">
+              If any of this feels familiar, you are not alone.
+            </p>
+            <p className="body-text">
+              My work creates space to understand the patterns behind these moments, and
+              to begin more intentional conversations about them.
+            </p>
+            <p className="body-text">
+              You can begin by exploring reflections, joining a conversation, or
+              attending one of the experiences designed to create space for honest
+              dialogue.
+            </p>
+            <div className="familiar-cta-row">
+              <Link href="/reflections" className="btn btn-secondary">
+                Read Reflections
+              </Link>
+              <a href="#experiences" className="btn btn-secondary">
+                Explore Experiences
+              </a>
+              <a href="#speaking" className="btn btn-secondary">
+                Book Tobi to Speak
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section id="about" className="section about-section">
           <div className="about-grid">
@@ -153,7 +185,7 @@ export function LandingView() {
               </div>
 
               <blockquote className="about-quote">
-                From the bedroom to the boardroom — I help people build the life that holds everything
+                From the bedroom to the boardroom. I help people build the life that holds everything
                 else together.
               </blockquote>
               <p className="about-faith">
@@ -163,26 +195,89 @@ export function LandingView() {
 
             <div className="animate-in about-body">
               <p className="body-text">
-                I&apos;m Tobi Yusuf — a marriage and relationships mentor, speaker, and
+                I&apos;m Tobi Yusuf, a marriage and relationships mentor, speaker, and
                 experience curator based in London. My work sits at the intersection
                 of emotional honesty, cultural intelligence, and the quiet courage it
                 takes to keep showing up in love.
               </p>
               <p className="body-text">
                 Through intimate gatherings, curated conversations, and practical
-                frameworks, I help couples and women name what&apos;s true — and build
+                frameworks, I help couples and women name what&apos;s true, and build
                 from there. Nothing performative. Nothing generic. Just real language
                 for real life.
               </p>
               <p className="body-text">
+                I&apos;m also the founder of RIAH, a luxury wedding planning experience
+                for culturally rich couples, and Luxury Meets Culture, where I train
+                venues, planners, and organisations in the cultural intelligence that
+                turns good intentions into genuine inclusion.
+              </p>
+              <p className="body-text">
                 Whether you join an experience, read the Sunday reflections, or work
-                with me privately, the invitation is the same: tell the truth, kindly
-                — and let the right next step emerge.
+                with me privately, the invitation is the same: tell the truth, kindly,
+                and let the right next step emerge.
               </p>
               <a href="#offers" className="btn btn-secondary" style={{ marginTop: "1.5rem" }}>
                 See How We Can Work Together
               </a>
             </div>
+          </div>
+        </section>
+
+        <section className="section work-pillars-section" aria-labelledby="work-pillars-heading">
+          <div className="section--narrow" style={{ marginBottom: "2.5rem" }}>
+            <p className="section-label">The Work</p>
+            <div className="terracotta-rule" />
+            <h2 id="work-pillars-heading" className="display-md" style={{ color: "var(--anchor)" }}>
+              The Work
+            </h2>
+          </div>
+          <div className="work-pillars-grid section--narrow">
+            <article className="work-pillar-card animate-in">
+              <h3 className="work-pillar-title">Relational Intelligence</h3>
+              <p className="body-text work-pillar-body">
+                Helping individuals and couples recognise the communication patterns
+                shaping their relationships.
+              </p>
+              <p className="work-pillar-subnote">
+                Marriage advocacy · Couples work · Intentional Space · Reflections ·
+                Podcast
+              </p>
+            </article>
+            <article className="work-pillar-card animate-in">
+              <h3 className="work-pillar-title">Cultural Intelligence</h3>
+              <p className="body-text work-pillar-body">
+                Supporting organisations in navigating cultural nuance and building
+                stronger communication across diverse teams.
+              </p>
+              <p className="work-pillar-subnote">
+                Delivered through{" "}
+                <a
+                  href="https://www.instagram.com/luxurymeetscultureofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "inherit", textDecoration: "underline" }}
+                >
+                  Luxury Meets Culture
+                </a>
+                , cultural intelligence training for organisations that want to move
+                beyond diversity statements.
+              </p>
+            </article>
+            <article className="work-pillar-card animate-in">
+              <h3 className="work-pillar-title">Intentional Experiences</h3>
+              <p className="body-text work-pillar-body">
+                Curated gatherings designed to create space for honest conversations,
+                reflection, and connection.
+              </p>
+              <p className="work-pillar-subnote">
+                Intentional Space · Forever Table · Forever &amp; A Day · Curated
+                Collaborations
+              </p>
+              <a href="#experiences" className="work-pillar-link">
+                Explore experiences
+              </a>
+            </article>
           </div>
         </section>
 
@@ -198,14 +293,14 @@ export function LandingView() {
               <div className="badge-row" style={{ marginBottom: "1rem" }}>
                 <span className="badge badge-open">Booking Open</span>
                 <span className="section-label section-label--on-dark-muted" style={{ letterSpacing: "0.2em" }}>
-                  Most Time-Sensitive — 25 April 2026
+                  Most time sensitive · 25 April 2026
                 </span>
               </div>
 
               <h2 className="display-md">Intentional Space</h2>
               <p className="body-text" style={{ maxWidth: "640px", marginTop: "1rem" }}>
                 An intimate London gathering for a small circle of women who want
-                depth, discretion, and conversation that actually moves something — hosted
+                depth, discretion, and conversation that actually moves something, hosted
                 with care and clear intention.
               </p>
 
@@ -241,89 +336,6 @@ export function LandingView() {
               <div className="event-featured-footer" />
             </div>
           </div>
-
-          <div className="events-grid section--narrow" style={{ marginTop: "1.5px" }}>
-            {/* CT Collaboration card */}
-            <article className="event-card animate-in">
-              <div className="event-card-body">
-                <div className="badge-row">
-                  <span className="badge badge-interest">Register Interest</span>
-                  <span className="badge badge-collab">Special Collaboration</span>
-                </div>
-                <h3 className="event-card-title">An Evening with Tobi Yusuf × Charlotte Tilbury</h3>
-                <div className="event-card-meta">
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Date</strong> TBC — London
-                  </div>
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Capacity</strong> 6 women only
-                  </div>
-                </div>
-              </div>
-
-              <div className="event-card-footer">
-                <button
-                  type="button"
-                  className="btn btn-ghost-light btn--sm"
-                  onClick={() => openModal("ct-collab", "Charlotte Tilbury collaboration")}
-                >
-                  Register your interest
-                </button>
-              </div>
-            </article>
-
-            {/* Forever & A Day card */}
-            <article className="event-card animate-in">
-              <div className="event-card-body">
-                <div className="badge-row">
-                  <span className="badge badge-enquire">Enquire Now</span>
-                </div>
-                <h3 className="event-card-title">Forever &amp; A Day Experience</h3>
-                <div className="event-card-meta">
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Format</strong> 4 × 90-min or 1-day intensive
-                  </div>
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Price</strong> From £1,500 per couple
-                  </div>
-                </div>
-              </div>
-
-              <div className="event-card-footer">
-                <a href="#contact" className="btn btn-ghost-light btn--sm">
-                  Enquire
-                </a>
-              </div>
-            </article>
-
-            {/* Forever Table card */}
-            <article className="event-card animate-in">
-              <div className="event-card-body">
-                <div className="badge-row">
-                  <span className="badge badge-coming">Join Waitlist</span>
-                </div>
-                <h3 className="event-card-title">Forever Table</h3>
-                <div className="event-card-meta">
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Frequency</strong> 4–6 times per year
-                  </div>
-                  <div>
-                    <strong style={{ color: "var(--signature)" }}>Price</strong> £200–£250 per couple
-                  </div>
-                </div>
-              </div>
-
-              <div className="event-card-footer">
-                <button
-                  type="button"
-                  className="btn btn-ghost-light btn--sm"
-                  onClick={() => openModal("forever-table", "Forever Table waitlist")}
-                >
-                  Join the waitlist
-                </button>
-              </div>
-            </article>
-          </div>
         </section>
 
         <section id="offers" className="section offers-section">
@@ -342,32 +354,24 @@ export function LandingView() {
                 title: "Marriage Reflection Call",
                 desc: "One honest conversation that helps you see what's underneath the argument.",
                 price: PRICES.reflectionCall,
-                cta: "Book A Reflection Call",
-                intent: "general" as ConvertKitIntent,
               },
               {
                 num: "02",
                 title: "Forever In A Day",
                 desc: "Marriage preparation mentorship for couples who want to start right.",
                 price: `From ${PRICES.foreverInADay.group} (group) | ${PRICES.foreverInADay.private} (private)`,
-                cta: "Find Out More",
-                intent: "forever-day" as ConvertKitIntent,
               },
               {
                 num: "03",
                 title: "Forever Table",
                 desc: "The dinner where marriages get real and grow stronger for it.",
                 price: PRICES.foreverTable,
-                cta: "Join the Waitlist",
-                intent: "forever-table" as ConvertKitIntent,
               },
               {
                 num: "04",
                 title: "Real Marriages Circle",
                 desc: "Monthly community for couples who are tired of suffering in silence.",
                 price: `${PRICES.circle.monthly} | ${PRICES.circle.annual}`,
-                cta: "Join the Community",
-                intent: "circle" as ConvertKitIntent,
               },
             ].map((o) => (
               <article key={o.num} className="offer-card animate-in">
@@ -378,16 +382,86 @@ export function LandingView() {
                   <p className="offer-price">{o.price}</p>
                 </div>
                 <div className="offer-card-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary btn--sm"
-                    onClick={() => openModal(o.intent, o.title)}
+                  <a
+                    href={INTENTIONAL_SPACE_WAITLIST_TALLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary btn--sm offer-waitlist-cta"
                   >
-                    {o.cta}
-                  </button>
+                    Join the waitlist
+                    <OfferWaitlistPointerIcon />
+                  </a>
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section
+          className="section pathways-section"
+          aria-labelledby="pathways-heading"
+        >
+          <div className="section--narrow" style={{ marginBottom: "2.5rem" }}>
+            <p className="section-label">Where Would You Like to Begin?</p>
+            <div className="terracotta-rule" />
+            <h2 id="pathways-heading" className="display-md" style={{ color: "var(--anchor)" }}>
+              Where Would You Like to Begin?
+            </h2>
+          </div>
+          <p
+            className="body-text section--narrow"
+            style={{ marginBottom: "2rem", maxWidth: "42rem" }}
+          >
+            Many people arrive here at different stages of their journey. Some are simply
+            curious; others are looking for deeper conversations about their
+            relationships. If you are not sure where to begin, here are a few ways to
+            explore.
+          </p>
+          <div className="offers-grid section--narrow">
+            <article className="offer-card animate-in">
+              <div className="offer-card-body">
+                <h3 className="offer-title">Start with a Reflection</h3>
+                <p className="offer-desc">
+                  Read weekly reflections exploring the real patterns couples experience in
+                  marriage, the moments many people recognise but rarely talk about openly.
+                </p>
+              </div>
+              <div className="offer-card-footer">
+                <Link href="/reflections" className="btn btn-secondary btn--sm">
+                  Read Reflections
+                </Link>
+              </div>
+            </article>
+            <article className="offer-card animate-in">
+              <div className="offer-card-body">
+                <h3 className="offer-title">Join an Experience</h3>
+                <p className="offer-desc">
+                  Attend one of the intentional gatherings designed to create space for
+                  honest conversations about relationships and emotional patterns.
+                  Includes Intentional Space, Forever &amp; A Day, and Forever Table.
+                </p>
+              </div>
+              <div className="offer-card-footer">
+                <a href="#experiences" className="btn btn-secondary btn--sm">
+                  Explore Experiences
+                </a>
+              </div>
+            </article>
+            <article className="offer-card animate-in">
+              <div className="offer-card-body">
+                <h3 className="offer-title">Invite Tobi to Speak</h3>
+                <p className="offer-desc">
+                  For organisations, conferences, and communities looking to explore
+                  relational intelligence, cultural understanding, and communication
+                  patterns.
+                </p>
+              </div>
+              <div className="offer-card-footer">
+                <a href="#speaking" className="btn btn-secondary btn--sm">
+                  Book Tobi to Speak
+                </a>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -424,7 +498,7 @@ export function LandingView() {
               </div>
 
             <div className="animate-in ct-credibility">
-              A special collaboration with Charlotte Tilbury is in development — an intimate evening designed for a very small group of women,
+              A special collaboration with Charlotte Tilbury is in development: an intimate evening designed for a very small group of women,
               blending beauty, presence, and honest conversation about love and identity.
             </div>
           </div>
@@ -438,7 +512,7 @@ export function LandingView() {
               <span className="audio-phase">Coming May 2026</span>
               <h2 className="audio-title">Inside The Mind Series</h2>
               <p className="body-text" style={{ maxWidth: "520px", margin: "0 auto 1.5rem" }}>
-                A new audio series for couples and individuals who want thoughtful, grounded perspective — without the noise. Details, pricing, and purchase links will land here when the series launches.
+                A new audio series for couples and individuals who want thoughtful, grounded perspective, without the noise. Details, pricing, and purchase links will land here when the series launches.
               </p>
               <a href="#contact" className="btn btn-secondary">
                 Notify Me When Available
@@ -458,6 +532,52 @@ export function LandingView() {
               <p className="body-text" style={{ maxWidth: "560px", marginBottom: "1.5rem" }}>
                 Keynotes, panels, and curated conversations for brands, communities, and teams who care about relationships done well.
               </p>
+              <div className="speaking-topics">
+                <p className="body-text speaking-intro" style={{ maxWidth: "560px" }}>
+                  Tobi speaks at conferences, corporate events, faith based gatherings,
+                  universities, and leadership programmes. Her talks sit at the
+                  intersection of relational intelligence, cultural understanding, and the
+                  honest conversations most rooms are too polished to have.
+                </p>
+                <article className="speaking-topic-card">
+                  <h3 className="speaking-topic-title">From the Bedroom to the Boardroom</h3>
+                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
+                    Why the patterns that shape our most personal relationships show up in
+                    the spaces where we work, lead, and collaborate. The hidden cost of
+                    relational stress on workplace performance. Why organisations that
+                    care about productivity should care about the whole person.
+                  </p>
+                  <p className="speaking-topic-audience">
+                    <strong>For:</strong> HR leaders · L&amp;D teams · Corporate leadership
+                    summits · Employee wellbeing conferences
+                  </p>
+                </article>
+                <article className="speaking-topic-card">
+                  <h3 className="speaking-topic-title">Cultural Intelligence in Practice</h3>
+                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
+                    Moving beyond diversity statements to operational cultural competence.
+                    What happens when your organisation, your venue, or your team actually
+                    encounters a culture it does not understand. Practical insight rooted in
+                    real world experience.
+                  </p>
+                  <p className="speaking-topic-audience">
+                    <strong>For:</strong> Corporate organisations · Hospitality and events
+                    businesses · DEI events · Universities
+                  </p>
+                </article>
+                <article className="speaking-topic-card">
+                  <h3 className="speaking-topic-title">Relational Intelligence for the Next Generation</h3>
+                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
+                    Understanding communication patterns, emotional maturity, and healthy
+                    relationships before marriage. What nobody teaches you about love,
+                    conflict, and partnership before you are in one.
+                  </p>
+                  <p className="speaking-topic-audience">
+                    <strong>For:</strong> Universities · Student unions · Young professionals
+                    networks · Faith based communities
+                  </p>
+                </article>
+              </div>
               <SpeakingForm />
             </div>
             <div className="speaking-split-image animate-in">
@@ -489,14 +609,22 @@ export function LandingView() {
       </main>
 
       <SiteFooter />
-
-      <ConvertKitModal
-        title={modal.title}
-        intent={modal.intent}
-        isOpen={modal.open}
-        onClose={closeModal}
-      />
     </>
+  );
+}
+
+function OfferWaitlistPointerIcon() {
+  return (
+    <svg
+      className="offer-waitlist-pointer"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      aria-hidden
+      fill="currentColor"
+    >
+      <path d="M4 4l10.2 6.56L9.8 12 20 18.56 4 20l3.2-7.2L4 4z" />
+    </svg>
   );
 }
 
@@ -543,7 +671,7 @@ function LoveResetSection() {
           Not ready to book yet? Start here.
         </h2>
         <p className="capture-body">
-          The Love Reset Audio is a gentle 5-day audio experience — no cost, no fluff — designed to help you breathe, refocus, and return to yourself (and your marriage) with a little more clarity.
+          The Love Reset Audio is a gentle 5 day audio experience. No cost, no fluff. It is designed to help you breathe, refocus, and return to yourself (and your marriage) with a little more clarity.
         </p>
         <form className="capture-form" onSubmit={onSubmit}>
           <div className="capture-fields">
@@ -616,7 +744,7 @@ function SpeakingForm() {
         return;
       }
       setStatus("ok");
-      setMsg("Thank you — we’ll be in touch.");
+      setMsg("Thank you. We will be in touch.");
       setEmail("");
       setFirstName("");
       setMessage("");
@@ -696,7 +824,7 @@ function ContactForm() {
         return;
       }
       setStatus("ok");
-      setMsg("Thank you — we’ll be in touch.");
+      setMsg("Thank you. We will be in touch.");
       setEmail("");
       setFirstName("");
     } catch {

@@ -60,7 +60,7 @@ export function IntentionalSpaceBookingForm({ fields }: Props) {
         return;
       }
       setStatus("ok");
-      setMsg("Thank you — we’ve received your details. Check your inbox for next steps.");
+      setMsg("Thank you. We have received your details. Check your inbox for next steps.");
       setValues(initial);
     } catch {
       setStatus("err");

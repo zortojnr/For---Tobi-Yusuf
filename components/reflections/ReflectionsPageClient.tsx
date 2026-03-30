@@ -3,7 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { reflections } from "@/lib/data/reflections";
-import { SUBSTACK_SUBSCRIBE_URL, substackPostUrl } from "@/lib/data/site";
+import {
+  SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
+  substackPostUrl,
+} from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteNav } from "@/components/landing/SiteNav";
 import { SiteFooter } from "@/components/landing/SiteFooter";
@@ -39,9 +42,9 @@ export function ReflectionsPageClient() {
               navigating different seasons of marriage. These reflections are observations and lessons
               drawn from real conversations and lived experiences.
             </p>
-            <Link href={SUBSTACK_SUBSCRIBE_URL} className="btn btn-secondary">
-              Get these reflections every Sunday →
-            </Link>
+            <div className="reflections-subscribe-only">
+              <SubstackNativeSubscribe />
+            </div>
           </div>
         </section>
 
@@ -61,6 +64,7 @@ export function ReflectionsPageClient() {
                   >
                     Read on Substack →
                   </a>
+                  <ReflectionCardTail />
                 </article>
               ))}
             </div>
@@ -68,15 +72,13 @@ export function ReflectionsPageClient() {
 
           <div className="reflections-cta-block animate-in">
             <p className="reflections-cta-quote">
-              If these words landed — there&apos;s a room waiting for you.
+              If these words landed, there is a room waiting for you.
             </p>
             <div className="reflections-cta-btns">
               <Link href="/#experiences" className="btn btn-terracotta">
                 Join an Upcoming Experience
               </Link>
-              <a href={SUBSTACK_SUBSCRIBE_URL} className="btn btn-ghost-light">
-                Subscribe for Weekly Reflections
-              </a>
+              <SubstackNativeSubscribe />
             </div>
           </div>
         </section>
@@ -96,5 +98,73 @@ export function ReflectionsPageClient() {
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+const SUBSTACK_ICON_SRC =
+  "https://substackcdn.com/image/fetch/w_96,c_limit,f_auto,q_auto:good/https%3A%2F%2Fsubstack.com%2Fimg%2Fsubstack-app-icon.png";
+
+function SubstackNativeSubscribe() {
+  return (
+    <a
+      href={SUBSTACK_PUBLICATION_SUBSCRIBE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="substack-native-subscribe"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- Substack-hosted icon URL */}
+      <img
+        src={SUBSTACK_ICON_SRC}
+        width={18}
+        height={18}
+        alt=""
+        className="substack-native-subscribe-icon"
+      />
+      Subscribe
+    </a>
+  );
+}
+
+function ReflectionCardTail() {
+  return (
+    <div className="reflection-card-tail">
+      <p className="reflection-card-cta-lead">If this reflection resonates with you:</p>
+      <div className="reflection-card-cta-links">
+        <Link href="/#experiences">Join an upcoming experience</Link>
+        <Link href="/book/intentional-space">Attend Intentional Space</Link>
+        <a href={SUBSTACK_PUBLICATION_SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">
+          Subscribe for weekly reflections
+        </a>
+      </div>
+      <p className="reflection-card-bio-label">About Tobi Yusuf</p>
+      <div className="reflection-card-bio body-text">
+        <p>
+          Tobi Yusuf is a Relational and Cultural Intelligence Advisor who helps
+          individuals, couples, and organisations understand the patterns that shape how
+          we communicate, connect, and navigate conflict.
+        </p>
+        <p>
+          Through speaking engagements, curated experiences, and intentional
+          conversations, she explores the intersection between emotional intelligence,
+          relational dynamics, and cultural understanding.
+        </p>
+        <p>
+          Her work spans both personal and professional environments, from helping couples
+          recognise the communication patterns influencing their marriages to supporting
+          organisations in developing greater cultural awareness and relational
+          intelligence within diverse teams.
+        </p>
+        <p>
+          Tobi is also the host of intimate gatherings and experiences that create space
+          for honest reflection and meaningful dialogue around relationships, identity, and
+          connection.
+        </p>
+        <p>
+          Her work is grounded in a simple belief: the patterns that shape our most
+          personal relationships often appear in the spaces where we work, lead, and
+          collaborate.
+        </p>
+      </div>
+    </div>
   );
 }
