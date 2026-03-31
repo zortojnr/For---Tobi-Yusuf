@@ -17,7 +17,7 @@ function useBodyScrollLock(locked: boolean) {
 
 const LINKS: [string, string][] = [
   ["About", "#about"],
-  ["Speaking", "#speaking"],
+  ["Speaking", "/speaking"],
   ["Experiences", "#experiences"],
   ["Reflections", "/reflections"],
   ["Contact", "#contact"],
@@ -29,7 +29,8 @@ export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   /** Light heroes: solid bar + dark text from first paint (see #mainNav.nav-on-light). */
   const path = (pathname ?? "").replace(/\/$/, "") || "/";
-  const solidNav = path === "/reflections" || path.startsWith("/book");
+  const solidNav =
+    path === "/reflections" || path.startsWith("/book") || path.startsWith("/speaking");
   const prefix = pathname === "/" ? "" : "/";
 
   useEffect(() => {

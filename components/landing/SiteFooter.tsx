@@ -3,44 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE_IMAGES } from "@/lib/data/site-images";
-import {
-  INSTAGRAM_URL,
-  LINKEDIN_URL,
-  SUBSTACK_SUBSCRIBE_URL,
-} from "@/lib/data/site";
+import { FooterSocialIcons } from "@/components/landing/FooterSocialIcons";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer" id="footer">
-      <div className="footer-closing">
-        <div className="footer-closing-inner">
-          <h2 className="display-md">Conversations Change Things</h2>
-          <div className="footer-closing-body">
-            <p className="body-text">
-              Sometimes what people need most is not advice, but a space where honest
-              conversations can happen.
-            </p>
-            <p className="body-text">
-              Through reflections, experiences, and speaking engagements, this work is
-              about helping people understand the patterns shaping their relationships,
-              and creating space for more intentional connection.
-            </p>
-          </div>
-          <div className="footer-closing-btns">
-            <Link href="/#experiences" className="btn btn-secondary">
-              Explore Experiences
-            </Link>
-            <Link href="/#speaking" className="btn btn-secondary">
-              Book Speaking Enquiry
-            </Link>
-          </div>
-          <p className="footer-closing-privacy">
-            Because many of these conversations are deeply personal, we protect the
-            privacy of those who attend. Images shared here reflect the atmosphere of
-            our gatherings while honoring the confidentiality of those present.
-          </p>
-        </div>
-      </div>
       <div className="footer-top">
         <div>
           <Link href="/" className="footer-brand-logo">
@@ -60,6 +27,9 @@ export function SiteFooter() {
             <ul>
               <li>
                 <Link href="/#about">About</Link>
+              </li>
+              <li>
+                <Link href="/speaking">Speaking</Link>
               </li>
               <li>
                 <Link href="/#experiences">Experiences</Link>
@@ -92,24 +62,10 @@ export function SiteFooter() {
               </li>
             </ul>
           </div>
-          <div className="footer-col">
+          <div className="footer-col footer-col-connect">
             <h4>Connect</h4>
-            <ul>
-              <li>
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href={SUBSTACK_SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">
-                  Substack
-                </a>
-              </li>
-              <li>
-                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-                  LinkedIn
-                </a>
-              </li>
+            <FooterSocialIcons />
+            <ul className="footer-connect-text-links">
               <li>
                 <Link href="/#contact">Get in Touch</Link>
               </li>

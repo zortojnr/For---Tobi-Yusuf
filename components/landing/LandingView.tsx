@@ -125,44 +125,54 @@ export function LandingView() {
 
         <FeaturedPublications />
 
-        <section className="familiar-section" aria-label="If this feels familiar">
-          <div className="familiar-inner">
-            <p className="body-text">
-              You love your spouse, but conversations often turn into misunderstandings.
-            </p>
-            <p className="body-text">
-              You find yourself repeating the same concerns, yet nothing seems to change.
-            </p>
-            <p className="body-text">
-              Sometimes you wonder if you are asking for too much, or if you have simply
-              stopped saying certain things altogether.
-            </p>
-            <p className="body-text">
-              You may still care deeply about your marriage, but the emotional connection
-              feels different from how it once was.
-            </p>
-            <p className="familiar-emphasis">
+        <section className="familiar-section" aria-labelledby="familiar-heading">
+          <div className="familiar-shell section--narrow">
+            <header className="familiar-header animate-in">
+              <p className="section-label familiar-kicker" id="familiar-heading">
+                If this feels familiar
+              </p>
+              <div className="terracotta-rule familiar-rule" />
+            </header>
+            <div className="familiar-scenarios animate-in">
+              <p className="familiar-line">
+                You love your spouse, but conversations often turn into misunderstandings.
+              </p>
+              <p className="familiar-line">
+                You find yourself repeating the same concerns, yet nothing seems to change.
+              </p>
+              <p className="familiar-line">
+                Sometimes you wonder if you are asking for too much, or if you have simply
+                stopped saying certain things altogether.
+              </p>
+              <p className="familiar-line">
+                You may still care deeply about your marriage, but the emotional connection
+                feels different from how it once was.
+              </p>
+            </div>
+            <p className="familiar-emphasis animate-in">
               If any of this feels familiar, you are not alone.
             </p>
-            <p className="body-text">
-              My work creates space to understand the patterns behind these moments, and
-              to begin more intentional conversations about them.
-            </p>
-            <p className="body-text">
-              You can begin by exploring reflections, joining a conversation, or
-              attending one of the experiences designed to create space for honest
-              dialogue.
-            </p>
-            <div className="familiar-cta-row">
+            <div className="familiar-outro animate-in">
+              <p className="familiar-outro-text">
+                My work creates space to understand the patterns behind these moments, and
+                to begin more intentional conversations about them.
+              </p>
+              <p className="familiar-outro-text">
+                You can begin by exploring reflections, joining a conversation, or
+                attending one of the experiences designed to create space for honest
+                dialogue.
+              </p>
+            </div>
+            <div className="familiar-cta-row animate-in">
               <Link href="/reflections" className="btn btn-secondary">
                 Read Reflections
               </Link>
               <a href="#experiences" className="btn btn-secondary">
                 Explore Experiences
               </a>
-              <a href="#speaking" className="btn btn-secondary">
+              <Link href="/speaking" className="btn btn-secondary">
                 Book Tobi to Speak
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -457,9 +467,9 @@ export function LandingView() {
                 </p>
               </div>
               <div className="offer-card-footer">
-                <a href="#speaking" className="btn btn-secondary btn--sm">
+                <Link href="/speaking" className="btn btn-secondary btn--sm">
                   Book Tobi to Speak
-                </a>
+                </Link>
               </div>
             </article>
           </div>
@@ -521,79 +531,7 @@ export function LandingView() {
           </div>
         </section>
 
-        <section id="speaking" className="section form-section">
-          <div className="speaking-split">
-            <div className="speaking-split-copy animate-in">
-              <p className="section-label">Speaking</p>
-              <div className="terracotta-rule" />
-              <h2 className="display-md" style={{ color: "var(--anchor)" }}>
-                Invite Tobi to speak
-              </h2>
-              <p className="body-text" style={{ maxWidth: "560px", marginBottom: "1.5rem" }}>
-                Keynotes, panels, and curated conversations for brands, communities, and teams who care about relationships done well.
-              </p>
-              <div className="speaking-topics">
-                <p className="body-text speaking-intro" style={{ maxWidth: "560px" }}>
-                  Tobi speaks at conferences, corporate events, faith based gatherings,
-                  universities, and leadership programmes. Her talks sit at the
-                  intersection of relational intelligence, cultural understanding, and the
-                  honest conversations most rooms are too polished to have.
-                </p>
-                <article className="speaking-topic-card">
-                  <h3 className="speaking-topic-title">From the Bedroom to the Boardroom</h3>
-                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
-                    Why the patterns that shape our most personal relationships show up in
-                    the spaces where we work, lead, and collaborate. The hidden cost of
-                    relational stress on workplace performance. Why organisations that
-                    care about productivity should care about the whole person.
-                  </p>
-                  <p className="speaking-topic-audience">
-                    <strong>For:</strong> HR leaders · L&amp;D teams · Corporate leadership
-                    summits · Employee wellbeing conferences
-                  </p>
-                </article>
-                <article className="speaking-topic-card">
-                  <h3 className="speaking-topic-title">Cultural Intelligence in Practice</h3>
-                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
-                    Moving beyond diversity statements to operational cultural competence.
-                    What happens when your organisation, your venue, or your team actually
-                    encounters a culture it does not understand. Practical insight rooted in
-                    real world experience.
-                  </p>
-                  <p className="speaking-topic-audience">
-                    <strong>For:</strong> Corporate organisations · Hospitality and events
-                    businesses · DEI events · Universities
-                  </p>
-                </article>
-                <article className="speaking-topic-card">
-                  <h3 className="speaking-topic-title">Relational Intelligence for the Next Generation</h3>
-                  <p className="body-text" style={{ margin: 0, maxWidth: "560px" }}>
-                    Understanding communication patterns, emotional maturity, and healthy
-                    relationships before marriage. What nobody teaches you about love,
-                    conflict, and partnership before you are in one.
-                  </p>
-                  <p className="speaking-topic-audience">
-                    <strong>For:</strong> Universities · Student unions · Young professionals
-                    networks · Faith based communities
-                  </p>
-                </article>
-              </div>
-              <SpeakingForm />
-            </div>
-            <div className="speaking-split-image animate-in">
-              {/* SITE_IMAGES.img2 — used twice: reflections divider (reflections page) and speaking image (home) */}
-              <SiteImage
-                src={SITE_IMAGES.img2}
-                alt=""
-                ratio="3/4"
-                sizes="(max-width: 900px) 100vw, 380px"
-                className="image-dim"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section form-section" style={{ paddingTop: 0 }}>
+        <section id="contact" className="section form-section contact-section" style={{ paddingTop: 0 }}>
           <div className="section--narrow">
             <p className="section-label">Contact</p>
             <div className="terracotta-rule" />
@@ -711,88 +649,6 @@ function LoveResetSection() {
         <p className="capture-note">Your details are safe. Unsubscribe anytime.</p>
       </div>
     </section>
-  );
-}
-
-function SpeakingForm() {
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
-  const [msg, setMsg] = useState("");
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-    setMsg("");
-    try {
-      const trimmed = message.trim();
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          intent: "speaking",
-          email,
-          firstName,
-          fields: trimmed ? { event_details: trimmed } : undefined,
-        }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
-      if (!res.ok) {
-        setStatus("err");
-        setMsg(data.error || "Something went wrong.");
-        return;
-      }
-      setStatus("ok");
-      setMsg("Thank you. We will be in touch.");
-      setEmail("");
-      setFirstName("");
-      setMessage("");
-    } catch {
-      setStatus("err");
-      setMsg("Network error.");
-    }
-  }
-
-  return (
-    <form className="form-panel animate-in" onSubmit={onSubmit}>
-      <div className="form-grid-2">
-        <div className="form-field">
-          <label htmlFor="sp-first">First name</label>
-          <input
-            id="sp-first"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="sp-email">Email</label>
-          <input
-            id="sp-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-      </div>
-      <div className="form-field">
-        <label htmlFor="sp-msg">Event details (optional)</label>
-        <textarea
-          id="sp-msg"
-          rows={4}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-      </div>
-      <button type="submit" className="btn btn-secondary" disabled={status === "loading"}>
-        {status === "loading" ? "Sending…" : "Submit speaking enquiry"}
-      </button>
-      {msg ? (
-        <p className={`form-msg ${status === "ok" ? "form-msg--ok" : "form-msg--err"}`}>{msg}</p>
-      ) : null}
-    </form>
   );
 }
 

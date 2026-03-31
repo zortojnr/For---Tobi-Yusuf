@@ -64,10 +64,25 @@ export function ReflectionsPageClient() {
                   >
                     Read on Substack →
                   </a>
-                  <ReflectionCardTail />
                 </article>
               ))}
             </div>
+
+            <aside className="reflections-about-strip animate-in" aria-label="About the author">
+              <p className="reflections-about-strip-label">About Tobi Yusuf</p>
+              <div className="reflections-about-strip-body body-text">
+                <p>
+                  Tobi Yusuf is a Relational and Cultural Intelligence Advisor who helps
+                  individuals, couples, and organisations understand the patterns that shape how
+                  we communicate, connect, and navigate conflict.
+                </p>
+                <p>
+                  Her work is grounded in a simple belief: the patterns that shape our most
+                  personal relationships often appear in the spaces where we work, lead, and
+                  collaborate.
+                </p>
+              </div>
+            </aside>
           </div>
 
           <div className="reflections-cta-block animate-in">
@@ -125,46 +140,3 @@ function SubstackNativeSubscribe() {
   );
 }
 
-function ReflectionCardTail() {
-  return (
-    <div className="reflection-card-tail">
-      <p className="reflection-card-cta-lead">If this reflection resonates with you:</p>
-      <div className="reflection-card-cta-links">
-        <Link href="/#experiences">Join an upcoming experience</Link>
-        <Link href="/book/intentional-space">Attend Intentional Space</Link>
-        <a href={SUBSTACK_PUBLICATION_SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">
-          Subscribe for weekly reflections
-        </a>
-      </div>
-      <p className="reflection-card-bio-label">About Tobi Yusuf</p>
-      <div className="reflection-card-bio body-text">
-        <p>
-          Tobi Yusuf is a Relational and Cultural Intelligence Advisor who helps
-          individuals, couples, and organisations understand the patterns that shape how
-          we communicate, connect, and navigate conflict.
-        </p>
-        <p>
-          Through speaking engagements, curated experiences, and intentional
-          conversations, she explores the intersection between emotional intelligence,
-          relational dynamics, and cultural understanding.
-        </p>
-        <p>
-          Her work spans both personal and professional environments, from helping couples
-          recognise the communication patterns influencing their marriages to supporting
-          organisations in developing greater cultural awareness and relational
-          intelligence within diverse teams.
-        </p>
-        <p>
-          Tobi is also the host of intimate gatherings and experiences that create space
-          for honest reflection and meaningful dialogue around relationships, identity, and
-          connection.
-        </p>
-        <p>
-          Her work is grounded in a simple belief: the patterns that shape our most
-          personal relationships often appear in the spaces where we work, lead, and
-          collaborate.
-        </p>
-      </div>
-    </div>
-  );
-}
