@@ -2625,6 +2625,11 @@ img {
     text-align: center;
   }
 
+  .reflections-cta-btns .substack-native-subscribe {
+    width: 100%;
+    justify-content: center;
+  }
+
   .capture-section {
     padding: var(--section-pad);
   }
