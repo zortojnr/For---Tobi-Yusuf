@@ -347,7 +347,11 @@ img {
   width: 22px;
   height: 1px;
   background: var(--text-on-dark);
-  transition: background 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.25s ease,
+    opacity 0.2s ease;
+  transform-origin: center;
 }
 
 #mainNav.scrolled .nav-toggle span {
@@ -2403,6 +2407,24 @@ img {
 
   .nav-toggle {
     display: flex;
+  }
+
+  /* Full-screen menu uses --anchor; scrolled / nav-on-light bars are also --anchor — force contrast for close icon */
+  .nav-toggle.is-open span {
+    background: rgba(250, 247, 244, 0.95) !important;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   .nav-links.open {

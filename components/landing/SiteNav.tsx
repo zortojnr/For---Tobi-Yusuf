@@ -58,7 +58,7 @@ export function SiteNav() {
         </Link>
         <button
           type="button"
-          className="nav-toggle"
+          className={`nav-toggle${navOpen ? " is-open" : ""}`}
           id="navToggle"
           aria-label={navOpen ? "Close menu" : "Open menu"}
           aria-expanded={navOpen}
