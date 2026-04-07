@@ -52,9 +52,6 @@ export function SiteFooter() {
                 <Link href="/book/intentional-space">Intentional Space</Link>
               </li>
               <li>
-                <Link href="/#experiences">Charlotte Tilbury Evening</Link>
-              </li>
-              <li>
                 <Link href="/#experiences">Forever &amp; A Day</Link>
               </li>
               <li>

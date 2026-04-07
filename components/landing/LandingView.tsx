@@ -202,30 +202,17 @@ export function LandingView() {
 
             <div className="animate-in about-body">
               <p className="body-text">
-                I&apos;m Tobi Yusuf, a marriage and relationships mentor, speaker, and
-                experience curator based in London. My work sits at the intersection
-                of emotional honesty, cultural intelligence, and the quiet courage it
-                takes to keep showing up in love.
+                I’m Tobi Yusuf, wife of 14 years, mother of three daughters, speaker, and the woman your DMs already know.
+                I talk about marriage the way most people only think about it. The silence. The patterns. The love that’s still there but buried underneath everything you haven’t said. I don’t give advice. I create rooms: intimate, safe, honest rooms where couples and women can finally say the thing they’ve been carrying.
               </p>
               <p className="body-text">
-                Through intimate gatherings, curated conversations, and practical
-                frameworks, I help couples and women name what&apos;s true, and build
-                from there. Nothing performative. Nothing generic. Just real language
-                for real life.
+                I’m also the founder of RIAH, luxury wedding planning for culturally rich couples, and Luxury Meets Culture, where I train venues, planners, and organisations in the cultural intelligence that turns good intentions into genuine inclusion.
               </p>
               <p className="body-text">
-                I&apos;m also the founder of RIAH, a luxury wedding planning experience
-                for culturally rich couples, and Luxury Meets Culture, where I train
-                venues, planners, and organisations in the cultural intelligence that
-                turns good intentions into genuine inclusion.
-              </p>
-              <p className="body-text">
-                Whether you join an experience, read the Sunday reflections, or work
-                with me privately, the invitation is the same: tell the truth, kindly,
-                and let the right next step emerge.
+                Whether you join an experience, read the Sunday reflections, or sit with me privately, the invitation always the same: be honest. And let’s go from there.
               </p>
               <a href="#offers" className="btn btn-secondary" style={{ marginTop: "1.5rem" }}>
-                See How We Can Work Together
+                explore what I’m building
               </a>
             </div>
           </div>
@@ -347,10 +334,10 @@ export function LandingView() {
 
         <section id="offers" className="section offers-section">
           <div className="section--narrow" style={{ marginBottom: "2.5rem" }}>
-            <p className="section-label">How We Can Work Together</p>
+            <p className="section-label">There’s a Room for You</p>
             <div className="terracotta-rule" />
             <h2 className="display-md" style={{ color: "var(--anchor)" }}>
-              How We Can Work Together
+              There’s a Room for You
             </h2>
           </div>
 
@@ -364,8 +351,8 @@ export function LandingView() {
               },
               {
                 num: "02",
-                title: "Forever In A Day",
-                desc: "Marriage preparation mentorship for couples who want to start right.",
+                title: "Forever & A Day",
+                desc: "Marriage preparation mentorship for couples who want to start right and stay right.",
                 price: `From ${PRICES.foreverInADay.group} (group) | ${PRICES.foreverInADay.private} (private)`,
               },
               {
@@ -503,11 +490,6 @@ export function LandingView() {
                   </blockquote>
                 ))}
               </div>
-
-            <div className="animate-in ct-credibility">
-              A special collaboration with Charlotte Tilbury is in development: an intimate evening designed for a very small group of women,
-              blending beauty, presence, and honest conversation about love and identity.
-            </div>
           </div>
         </section>
 
@@ -536,7 +518,7 @@ export function LandingView() {
               Get in touch
             </h2>
             <p className="body-text" style={{ maxWidth: "560px", marginBottom: "1.5rem" }}>
-              General enquiries, partnerships, and questions about working together.
+              Whether it’s a question, an idea, or the beginning of something I’d love to hear from you.
             </p>
             <ContactForm />
           </div>
@@ -564,86 +546,20 @@ function OfferWaitlistPointerIcon() {
 }
 
 function LoveResetSection() {
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-  const [err, setErr] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setErr("");
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          intent: "love-reset",
-          email,
-          firstName,
-        }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
-      if (!res.ok) {
-        setErr(data.error || "Could not subscribe.");
-        setLoading(false);
-        return;
-      }
-      setDone(true);
-    } catch {
-      setErr("Network error.");
-    }
-    setLoading(false);
-  }
-
   return (
     <section className="capture-section" aria-labelledby="capture-heading">
       <div className="capture-inner animate-in">
         <p className="section-label">Free Resource</p>
         <div className="terracotta-rule terracotta-rule--center" />
         <h2 id="capture-heading" className="display-md" style={{ color: "var(--text-on-dark)" }}>
-          Not ready to book yet? Start here.
+          Let this be your first step.
         </h2>
         <p className="capture-body">
           The Love Reset Audio is a gentle 5 day audio experience. No cost, no fluff. It is designed to help you breathe, refocus, and return to yourself (and your marriage) with a little more clarity.
         </p>
-        <form className="capture-form" onSubmit={onSubmit}>
-          <div className="capture-fields">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First name"
-              aria-label="First name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              disabled={done}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email address"
-              aria-label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={done}
-            />
-          </div>
-          <button
-            type="submit"
-            className="btn-capture-submit"
-            disabled={done || loading}
-            style={
-              done ? { background: "var(--anchor)", borderColor: "var(--anchor)" } : undefined
-            }
-          >
-            {done ? "✓ Check your inbox" : loading ? "…" : "Send"}
-          </button>
-        </form>
-        {err ? <p className="form-msg form-msg--err">{err}</p> : null}
-        <p className="capture-note">Your details are safe. Unsubscribe anytime.</p>
+        <a href="https://lctobiyusuf.systeme.io/935600f7" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          Sign Up for Free Resource
+        </a>
       </div>
     </section>
   );
@@ -652,7 +568,7 @@ function LoveResetSection() {
 function ContactForm() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [enquiry, setEnquiry] = useState<"general" | "forever-day">("general");
+  const [enquiry, setEnquiry] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
 
@@ -693,7 +609,7 @@ function ContactForm() {
         <select
           id="ct-enquiry"
           value={enquiry}
-          onChange={(e) => setEnquiry(e.target.value as "general" | "forever-day")}
+          onChange={(e) => setEnquiry(e.target.value)}
           style={{
             width: "100%",
             padding: "0.85rem 1rem",
@@ -704,8 +620,14 @@ function ContactForm() {
             color: "var(--anchor)",
           }}
         >
-          <option value="general">General enquiry</option>
-          <option value="forever-day">Forever &amp; A Day</option>
+          <option value="Forever & A Day Experience">Forever & A Day Experience</option>
+          <option value="Marriage Reflection Call">Marriage Reflection Call</option>
+          <option value="Intentional Space">Intentional Space</option>
+          <option value="Forever Table">Forever Table</option>
+          <option value="Speaking engagement">Speaking engagement</option>
+          <option value="Media & press">Media & press</option>
+          <option value="Partnership or collaboration">Partnership or collaboration</option>
+          <option value="Brand collaboration">Brand collaboration</option>
         </select>
       </div>
 
@@ -732,7 +654,7 @@ function ContactForm() {
       </div>
 
       <button type="submit" className="btn btn-secondary" disabled={status === "loading"}>
-        {status === "loading" ? "Sending…" : "Send enquiry"}
+        {status === "loading" ? "Sending…" : "SEND MESSAGE"}
       </button>
       {msg ? (
         <p className={`form-msg ${status === "ok" ? "form-msg--ok" : "form-msg--err"}`}>{msg}</p>
