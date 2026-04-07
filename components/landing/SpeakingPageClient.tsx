@@ -14,19 +14,19 @@ const TOPICS: { index: string; title: string; body: string; audience: string }[]
     title: "From the Bedroom to the Boardroom",
     body: "Why the patterns that shape our most personal relationships show up in the spaces where we work, lead, and collaborate. The hidden cost of relational stress on workplace performance. Why organisations that care about productivity should care about the whole person.",
     audience:
-      "HR leaders · L&D teams · Corporate leadership summits · Employee wellbeing conferences",
+      "Ideal for HR leaders, L&D teams, Corporate leadership summits and Employee wellbeing conferences",
   },
   {
     index: "02",
     title: "Cultural Intelligence in Practice",
     body: "Moving beyond diversity statements to operational cultural competence. What happens when your organisation, your venue, or your team actually encounters a culture it does not understand. Practical insight rooted in real world experience.",
-    audience: "Corporate organisations · Hospitality and events businesses · DEI events · Universities",
+    audience: "Ideal for Corporate organisations, Hospitality and events businesses, DEI events and Universities",
   },
   {
     index: "03",
     title: "Relational Intelligence for the Next Generation",
     body: "Understanding communication patterns, emotional maturity, and healthy relationships before marriage. What nobody teaches you about love, conflict, and partnership before you are in one.",
-    audience: "Universities · Student unions · Young professionals networks · Faith based communities",
+    audience: "Ideal for Universities, Student unions, Young professionals networks and Faith based communities",
   },
 ];
 
@@ -70,11 +70,11 @@ export function SpeakingPageClient() {
             <p className="section-label">Talks &amp; programmes</p>
             <div className="terracotta-rule terracotta-rule--center speaking-page-masthead-rule" />
             <h2 className="display-md speaking-page-masthead-title" style={{ color: "var(--anchor)" }}>
-              How Tobi shows up in the room
+              The Conversations I Bring Into the Room
             </h2>
             <p className="speaking-page-lead">
-              Tobi speaks at conferences, corporate events, faith based gatherings, universities, and
-              leadership programmes. Her talks sit at the intersection of relational intelligence,
+              I speak at conferences, corporate events, faith-based gatherings, universities, and
+              leadership programmes. My talks sit at the intersection of relational intelligence,
               cultural understanding, and the honest conversations most rooms are too polished to
               have.
             </p>
@@ -90,7 +90,7 @@ export function SpeakingPageClient() {
                     <h3 className="speaking-topic-title">{t.title}</h3>
                     <p className="body-text speaking-topic-body">{t.body}</p>
                     <p className="speaking-topic-audience">
-                      <strong>For:</strong> {t.audience}
+                      <strong>Ideal for:</strong> {t.audience}
                     </p>
                   </article>
                 ))}

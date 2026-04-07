@@ -44,6 +44,7 @@ export function SpeakingForm() {
 
   return (
     <form className="form-panel animate-in" onSubmit={onSubmit}>
+      <p className="form-category-label" style={{ fontSize: "0.9rem", marginBottom: "1.5rem", color: "var(--anchor)", fontWeight: "600" }}>Speaking Enquiry</p>
       <div className="form-grid-2">
         <div className="form-field">
           <label htmlFor="sp-first">First name</label>

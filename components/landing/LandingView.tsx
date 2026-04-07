@@ -58,15 +58,12 @@ export function LandingView() {
           </div>
 
           <div className="hero-content">
-            <p className="hero-eyebrow hero-anim-1">
-              Marriage · Relationships · Identity · Writing
-            </p>
             <h1 className="hero-headline hero-anim-2">
               Real conversations for real <em>marriages.</em>
             </h1>
             <p className="hero-positioning hero-anim-2b">
-              Relational &amp; Cultural Intelligence Advisor | Speaker | Facilitator |
-              Conversation Host
+              <strong>Relational &amp; Cultural Intelligence Advisor | Speaker | Facilitator |
+              Conversation Host</strong>
             </p>
             <p className="hero-sub hero-anim-3">
               A luxury editorial space for professional women who want honest,

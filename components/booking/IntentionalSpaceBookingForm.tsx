@@ -70,6 +70,7 @@ export function IntentionalSpaceBookingForm({ fields }: Props) {
 
   return (
     <form className="booking-form" onSubmit={onSubmit}>
+      <p className="form-category-label" style={{ fontSize: "0.9rem", marginBottom: "1.5rem", color: "var(--anchor)", fontWeight: "600" }}>Intentional Space</p>
       <div className="booking-form-grid">
         {fields.map((f) => (
           <div key={f.id} className="form-field">
