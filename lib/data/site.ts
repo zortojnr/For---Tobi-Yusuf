@@ -46,6 +46,22 @@ export const INTENTIONAL_SPACE_WAITLIST_TALLY_URL =
   process.env.NEXT_PUBLIC_TALLY_INTENTIONAL_SPACE_WAITLIST_URL?.trim() ||
   DEFAULT_TALLY_INTENTIONAL_SPACE_WAITLIST;
 
+const DEFAULT_TALLY_FOREVER_AND_A_DAY =
+  "https://tally.so/r/1Avedp";
+
+/** Forever & A Day form (Tally). Override with `NEXT_PUBLIC_TALLY_FOREVER_AND_A_DAY_URL`. */
+export const FOREVER_AND_A_DAY_TALLY_URL =
+  process.env.NEXT_PUBLIC_TALLY_FOREVER_AND_A_DAY_URL?.trim() ||
+  DEFAULT_TALLY_FOREVER_AND_A_DAY;
+
+const DEFAULT_TALLY_FOREVER_TABLE =
+  "https://tally.so/r/aQEM8Z";
+
+/** Forever Table form (Tally). Override with `NEXT_PUBLIC_TALLY_FOREVER_TABLE_URL`. */
+export const FOREVER_TABLE_TALLY_URL =
+  process.env.NEXT_PUBLIC_TALLY_FOREVER_TABLE_URL?.trim() ||
+  DEFAULT_TALLY_FOREVER_TABLE;
+
 /** Contact form notifications (Resend `to` address) */
 export const CONTACT_NOTIFICATION_EMAIL = "tobi@tobiyusuf.com";
 

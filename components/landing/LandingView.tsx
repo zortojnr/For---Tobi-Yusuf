@@ -7,6 +7,8 @@ import { PRICES } from "@/lib/data/prices";
 import {
   INTENTIONAL_SPACE_REMAINING_PLACES,
   INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
+  FOREVER_AND_A_DAY_TALLY_URL,
+  FOREVER_TABLE_TALLY_URL,
   SCHEDULING_URL,
 } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
@@ -318,7 +320,7 @@ export function LandingView() {
               </div>
 
               <a
-                href={SCHEDULING_URL}
+                href={INTENTIONAL_SPACE_WAITLIST_TALLY_URL}
                 className="btn btn-primary"
                 style={{ marginTop: "0" }}
                 target="_blank"
@@ -348,24 +350,28 @@ export function LandingView() {
                 title: "Marriage Reflection Call",
                 desc: "One honest conversation that helps you see what's underneath the argument.",
                 price: PRICES.reflectionCall,
+                url: INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
               },
               {
                 num: "02",
                 title: "Forever & A Day",
                 desc: "Marriage preparation mentorship for couples who want to start right and stay right.",
                 price: `From ${PRICES.foreverInADay.group} (group) | ${PRICES.foreverInADay.private} (private)`,
+                url: FOREVER_AND_A_DAY_TALLY_URL,
               },
               {
                 num: "03",
                 title: "Forever Table",
                 desc: "The dinner where marriages get real and grow stronger for it.",
                 price: PRICES.foreverTable,
+                url: FOREVER_TABLE_TALLY_URL,
               },
               {
                 num: "04",
                 title: "Real Marriages Circle",
                 desc: "Monthly community for couples who are tired of suffering in silence.",
                 price: `${PRICES.circle.monthly} | ${PRICES.circle.annual}`,
+                url: INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
               },
             ].map((o) => (
               <article key={o.num} className="offer-card animate-in">
@@ -377,7 +383,7 @@ export function LandingView() {
                 </div>
                 <div className="offer-card-footer">
                   <a
-                    href={INTENTIONAL_SPACE_WAITLIST_TALLY_URL}
+                    href={o.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-secondary btn--sm offer-waitlist-cta"
