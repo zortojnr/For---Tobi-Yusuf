@@ -170,6 +170,16 @@ img {
   border-color: var(--anchor);
 }
 
+.capture-section .btn-secondary {
+  color: var(--text-on-dark);
+  border-color: var(--text-on-dark);
+}
+
+.capture-section .btn-secondary:hover {
+  color: var(--anchor);
+  border-color: var(--text-on-dark);
+}
+
 .btn-ghost-light {
   background: transparent;
   color: var(--text-on-dark);
