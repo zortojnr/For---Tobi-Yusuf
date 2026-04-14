@@ -3,8 +3,14 @@ import { Resend } from "resend";
 import { CONTACT_NOTIFICATION_EMAIL } from "@/lib/data/site";
 
 const ENQUIRY_LABELS: Record<string, string> = {
-  general: "General enquiry",
+  "reflection-call": "Marriage Reflection Call",
+  "intentional-space": "Intentional Space",
   "forever-day": "Forever & A Day",
+  "forever-table": "Forever Table",
+  speaking: "Speaking engagement",
+  "media-press": "Media & press",
+  "partnership-collaboration": "Partnership or collaboration",
+  "brand-collaboration": "Brand collaboration",
 };
 
 export async function POST(request: Request) {
@@ -39,7 +45,7 @@ export async function POST(request: Request) {
   const firstName =
     typeof json.firstName === "string" ? json.firstName.trim() : "";
   const enquiryRaw =
-    typeof json.enquiry === "string" ? json.enquiry.trim() : "general";
+    typeof json.enquiry === "string" ? json.enquiry.trim() : "forever-day";
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 });

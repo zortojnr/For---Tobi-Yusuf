@@ -654,7 +654,7 @@ function LoveResetSection() {
 function ContactForm() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [enquiry, setEnquiry] = useState("");
+  const [enquiry, setEnquiry] = useState("forever-day");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
 
@@ -706,14 +706,14 @@ function ContactForm() {
             color: "var(--anchor)",
           }}
         >
-          <option value="Forever & A Day Experience">Forever & A Day Experience</option>
-          <option value="Marriage Reflection Call">Marriage Reflection Call</option>
-          <option value="Intentional Space">Intentional Space</option>
-          <option value="Forever Table">Forever Table</option>
-          <option value="Speaking engagement">Speaking engagement</option>
-          <option value="Media & press">Media & press</option>
-          <option value="Partnership or collaboration">Partnership or collaboration</option>
-          <option value="Brand collaboration">Brand collaboration</option>
+          <option value="forever-day">Forever & A Day Experience</option>
+          <option value="reflection-call">Marriage Reflection Call</option>
+          <option value="intentional-space">Intentional Space</option>
+          <option value="forever-table">Forever Table</option>
+          <option value="speaking">Speaking engagement</option>
+          <option value="media-press">Media & press</option>
+          <option value="partnership-collaboration">Partnership or collaboration</option>
+          <option value="brand-collaboration">Brand collaboration</option>
         </select>
       </div>
 
