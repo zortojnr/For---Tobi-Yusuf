@@ -191,7 +191,8 @@ img {
 }
 
 .capture-section .btn-secondary:hover {
-  color: var(--anchor);
+  /* Filled state uses --anchor from .btn-secondary gradient; keep light text for contrast */
+  color: var(--text-on-dark);
   border-color: var(--text-on-dark);
 }
 
