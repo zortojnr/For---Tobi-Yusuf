@@ -2,6 +2,12 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import {
+  INSTAGRAM_URL,
+  SCHEDULING_URL,
+  SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
+} from "@/lib/data/site";
+
 type TallyField = {
   key: string;
   label: string;
@@ -129,32 +135,27 @@ export async function POST(request: Request) {
   const text = [
     greeting,
     "",
-    "Thank you for joining the Forever Table waitlist. It means a lot that this is calling to you.",
+    "Thank you for joining the Forever Table waitlist. I'm genuinely glad this spoke to you.",
     "",
-    "Forever Table is an intimate dinner experience for couples who want to reclaim the joy of being together. Around the table, we'll create space for real conversation, laughter, and remembering why this relationship matters.",
+    "Forever Table is something I hold very close. It's an intimate dinner for 6–10 couples: real food, real conversation, and the kind of honesty that only happens when the room is small enough to feel safe. No panels. No presentations. Just couples sitting together and letting the walls come down.",
     "",
-    "Places are very limited and go quickly, so being on this list gives you first access when the next date is announced.",
+    "These dinners happen 4–6 times a year, and places are always limited. Being on this list means you'll receive a personal invitation before it goes public.",
     "",
-    "While you wait, here are a few ways to stay in the conversation:",
+    "While you wait, here are some ways to stay close:",
     "",
-    "→ Follow me on Instagram. I share marriage reflections, relatable moments, and behind-the-scenes of what I'm building.",
-    "@MrsTobiYusuf",
-    "https://www.instagram.com/mrstobiyusuf",
+    "→ Follow me on Instagram: honest marriage moments, reflections, and what I'm building. @MrsTobiYusuf",
+    INSTAGRAM_URL,
     "",
-    "→ Read the Sunday reflections, every week I write honestly about patterns I see in marriages. Subscribe on Substack.",
-    "https://substack.com/@mrstobiyusuf",
+    "→ Read the Sunday reflections: weekly writing about the patterns I see in real marriages. Subscribe on Substack.",
+    SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
     "",
-    "→ Book a Marriage Reflection Call if you feel like you need a conversation sooner, this is a private 60-minute session for you and your partner. It's not therapy. It's one honest conversation with someone who understands. £295/couple.",
-    "https://therelatablewife.as.me/",
+    "→ Book a Marriage Reflection Call: if you and your partner need a conversation now, not later. 60 minutes. Private. Honest. £295/couple.",
+    SCHEDULING_URL,
     "",
-    "→ Listen to the Love Reset Audio a free 5-day audio experience to help you breathe, refocus, and reconnect.",
+    "→ Listen to the Love Reset Audio: a free 5-day audio experience to help you both press pause and reconnect.",
     "https://www.tobiyusuf.com/",
     "",
-    "→ Explore Forever Table, an intimate dinner experience for couples having real conversations that matter.",
-    "https://tally.so/r/aQEM8Z",
-    "",
-    "",
-    `I'm glad you're here, ${firstName}. Looking forward to this moment with you.`,
+    "The next table is coming. I'll be in touch.",
     "",
     "With warmth,",
     "Tobi",
@@ -165,7 +166,7 @@ export async function POST(request: Request) {
     from,
     to: email,
     replyTo: "tobi@tobiyusuf.com",
-    subject: "You're in. Here's what happens next.",
+    subject: "Your seat is saved.",
     text,
   });
 

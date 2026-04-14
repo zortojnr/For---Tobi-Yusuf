@@ -2,6 +2,11 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import {
+  INSTAGRAM_URL,
+  SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
+} from "@/lib/data/site";
+
 type TallyField = {
   key: string;
   label: string;
@@ -126,35 +131,38 @@ export async function POST(request: Request) {
   }
 
   const greeting = firstName ? `Hi ${firstName},` : "Hi,";
+  const gladLine = firstName
+    ? `I'm glad you're taking this step, ${firstName}.`
+    : "I'm glad you're taking this step.";
   const text = [
     greeting,
     "",
-    "Thank you for joining the Forever & A Day waitlist. It means a lot that this is calling to you.",
+    "Thank you for registering your interest in Forever & A Day. The fact that you're here thinking about your marriage before (or just after) the wedding tells me something important about the kind of partnership you want to build.",
     "",
-    "Forever & A Day is an intimate experience for couples who want to reconnect and remember why they chose each other. Over a full day, we'll create space for the deeper conversations that sustain real love.",
+    "Forever & A Day is a guided experience for engaged and newly married couples. Over 4 sessions (or a 1-day intensive), we explore the things that most couples don't talk about until they become arguments: emotional patterns, cultural expectations, family dynamics, unspoken contracts, and the vision for the life you're building together.",
     "",
-    "Places are very limited and go quickly, so being on this list gives you first access when the next date is announced.",
+    "It's not therapy. It's not a course. It's honest, intentional preparation guided by someone who has been married for 14 years and has sat with couples at every stage.",
     "",
-    "While you wait, here are a few ways to stay in the conversation:",
+    "Available as:",
     "",
-    "→ Follow me on Instagram. I share marriage reflections, relatable moments, and behind-the-scenes of what I'm building.",
-    "@MrsTobiYusuf",
-    "https://www.instagram.com/mrstobiyusuf",
+    "→ Private couples experience — 4 × 90-minute sessions or 1-day intensive. From £997/couple.",
+    "→ Group cohort — 6 sessions with up to 8 couples. From £497/couple.",
     "",
-    "→ Read the Sunday reflections, every week I write honestly about patterns I see in marriages. Subscribe on Substack.",
-    "https://substack.com/@mrstobiyusuf",
+    "I'll be in touch to learn more about where you are and which format might be the right fit.",
     "",
-    "→ Book a Marriage Reflection Call if you feel like you need a conversation sooner, this is a private 60-minute session for you and your partner. It's not therapy. It's one honest conversation with someone who understands. £295/couple.",
-    "https://therelatablewife.as.me/",
+    "In the meantime:",
     "",
-    "→ Listen to the Love Reset Audio a free 5-day audio experience to help you breathe, refocus, and reconnect.",
+    "→ Follow me on Instagram: honest conversations about marriage, daily. @MrsTobiYusuf",
+    INSTAGRAM_URL,
+    "",
+    "→ Read the Sunday reflections: weekly writing about the real patterns inside marriage. Subscribe on Substack.",
+    SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
+    "",
+    "→ Listen to the Love Reset Audio: a free 5-day audio experience for you and your partner.",
     "https://www.tobiyusuf.com/",
     "",
-    "→ Explore Intentional Space, an intimate gathering for women to have honest conversations about marriage, relationships, and identity.",
-    "https://tally.so/r/J9DKpK",
-    "",
-    "",
-    `I'm glad you're here, ${firstName}. Looking forward to this journey with you.`,
+    gladLine,
+    "The marriage is what matters most and you're already investing in it.",
     "",
     "With warmth,",
     "Tobi",
@@ -165,7 +173,7 @@ export async function POST(request: Request) {
     from,
     to: email,
     replyTo: "tobi@tobiyusuf.com",
-    subject: "You're in. Here's what happens next.",
+    subject: "This is where it begins.",
     text,
   });
 
