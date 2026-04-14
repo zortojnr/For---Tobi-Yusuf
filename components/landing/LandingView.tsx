@@ -9,6 +9,7 @@ import {
   INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
   FOREVER_AND_A_DAY_TALLY_URL,
   FOREVER_TABLE_TALLY_URL,
+  INSTAGRAM_URL,
   SCHEDULING_URL,
 } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
@@ -24,6 +25,17 @@ export function LandingView() {
   useAnimateIn();
 
   const [countdownText, setCountdownText] = useState("");
+  const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [comingSoonOffer, setComingSoonOffer] = useState("");
+
+  function isComingSoonOffer(title: string) {
+    return title === "Marriage Reflection Call" || title === "Real Marriages Circle";
+  }
+
+  function openComingSoon(title: string) {
+    setComingSoonOffer(title);
+    setComingSoonOpen(true);
+  }
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -42,6 +54,15 @@ export function LandingView() {
     const id = setInterval(updateCountdown, 60000);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!comingSoonOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setComingSoonOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [comingSoonOpen]);
 
   return (
     <>
@@ -392,15 +413,26 @@ export function LandingView() {
                   <p className="offer-price">{o.price}</p>
                 </div>
                 <div className="offer-card-footer">
-                  <a
-                    href={o.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary btn--sm offer-waitlist-cta"
-                  >
-                    Join the waitlist
-                    <OfferWaitlistPointerIcon />
-                  </a>
+                  {isComingSoonOffer(o.title) ? (
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn--sm offer-waitlist-cta"
+                      onClick={() => openComingSoon(o.title)}
+                    >
+                      Join the waitlist
+                      <OfferWaitlistPointerIcon />
+                    </button>
+                  ) : (
+                    <a
+                      href={o.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary btn--sm offer-waitlist-cta"
+                    >
+                      Join the waitlist
+                      <OfferWaitlistPointerIcon />
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
@@ -540,6 +572,44 @@ export function LandingView() {
           </div>
         </section>
       </main>
+      {comingSoonOpen ? (
+        <div className="modal-backdrop" onClick={() => setComingSoonOpen(false)}>
+          <div
+            className="modal-panel coming-soon-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coming-soon-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close"
+              type="button"
+              aria-label="Close"
+              onClick={() => setComingSoonOpen(false)}
+            >
+              ×
+            </button>
+            <p className="section-label">There&apos;s a Room for You</p>
+            <h3 id="coming-soon-title" className="display-md">
+              Coming soon
+            </h3>
+            <p className="body-text coming-soon-offer">{comingSoonOffer}</p>
+            <p className="body-text coming-soon-note">
+              This room is being carefully prepared to support honest conversations and meaningful
+              growth. Updates will be shared here when available.
+            </p>
+            <p className="coming-soon-follow-text">You can follow me on Instagram to stay updated.</p>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary coming-soon-follow-btn"
+            >
+              Follow me
+            </a>
+          </div>
+        </div>
+      ) : null}
 
       <SiteFooter />
     </>
