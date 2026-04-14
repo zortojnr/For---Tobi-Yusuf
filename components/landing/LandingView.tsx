@@ -29,7 +29,7 @@ export function LandingView() {
   const [comingSoonOffer, setComingSoonOffer] = useState("");
 
   function isComingSoonOffer(title: string) {
-    return title === "Marriage Reflection Call" || title === "Real Marriages Circle";
+    return title === "Real Marriages Circle";
   }
 
   function openComingSoon(title: string) {
@@ -381,7 +381,8 @@ export function LandingView() {
                 title: "Marriage Reflection Call",
                 desc: "One honest conversation that helps you see what's underneath the argument.",
                 price: PRICES.reflectionCall,
-                url: INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
+                url: SCHEDULING_URL,
+                ctaLabel: "Join the Call",
               },
               {
                 num: "02",
@@ -429,7 +430,7 @@ export function LandingView() {
                       rel="noopener noreferrer"
                       className="btn btn-secondary btn--sm offer-waitlist-cta"
                     >
-                      Join the waitlist
+                      {"ctaLabel" in o && o.ctaLabel ? o.ctaLabel : "Join the waitlist"}
                       <OfferWaitlistPointerIcon />
                     </a>
                   )}
