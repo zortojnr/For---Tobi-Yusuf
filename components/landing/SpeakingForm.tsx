@@ -15,14 +15,13 @@ export function SpeakingForm() {
     setMsg("");
     try {
       const trimmed = message.trim();
-      const res = await fetch("/api/subscribe", {
+      const res = await fetch("/api/speaking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          intent: "speaking",
           email,
           firstName,
-          fields: trimmed ? { event_details: trimmed } : undefined,
+          message: trimmed,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };

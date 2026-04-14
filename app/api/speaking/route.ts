@@ -2,11 +2,6 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { CONTACT_NOTIFICATION_EMAIL } from "@/lib/data/site";
 
-const ENQUIRY_LABELS: Record<string, string> = {
-  general: "General enquiry",
-  "forever-day": "Forever & A Day",
-};
-
 export async function POST(request: Request) {
   const apiKey = process.env.MY_RESEND_API?.trim();
   if (!apiKey) {
@@ -27,7 +22,7 @@ export async function POST(request: Request) {
   let json: {
     firstName?: string;
     email?: string;
-    enquiry?: string;
+    message?: string;
   };
   try {
     json = await request.json();
@@ -38,8 +33,7 @@ export async function POST(request: Request) {
   const email = typeof json.email === "string" ? json.email.trim() : "";
   const firstName =
     typeof json.firstName === "string" ? json.firstName.trim() : "";
-  const enquiryRaw =
-    typeof json.enquiry === "string" ? json.enquiry.trim() : "general";
+  const message = typeof json.message === "string" ? json.message.trim() : "";
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 });
@@ -49,18 +43,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "First name required" }, { status: 400 });
   }
 
-  if (!Object.prototype.hasOwnProperty.call(ENQUIRY_LABELS, enquiryRaw)) {
-    return NextResponse.json({ error: "Invalid enquiry type" }, { status: 400 });
+  if (message.length > 5000) {
+    return NextResponse.json({ error: "Event details are too long" }, { status: 400 });
   }
 
-  const enquiryLabel = ENQUIRY_LABELS[enquiryRaw];
-  const subject = enquiryLabel;
+  const subject = "Speaking enquiry";
   const text = [
-    `New contact from the website.`,
-    ``,
-    `Enquiry: ${enquiryLabel}`,
+    "New speaking enquiry from the website.",
+    "",
     `Name: ${firstName}`,
     `Email: ${email}`,
+    "",
+    "Event details:",
+    message || "(Not provided)",
   ].join("\n");
 
   const resend = new Resend(apiKey);
@@ -69,6 +64,7 @@ export async function POST(request: Request) {
     to: CONTACT_NOTIFICATION_EMAIL,
     subject,
     text,
+    replyTo: email,
   });
 
   if (error) {

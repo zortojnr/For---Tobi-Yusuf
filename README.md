@@ -1,6 +1,6 @@
 # Tobi Yusuf — Premium landing (Next.js)
 
-Luxury editorial single-page site: marriage, relationships, and experiences. Built with **Next.js App Router**, brand tokens in [`app/globals.css`](app/globals.css), and **server-side ConvertKit** via [`app/api/subscribe/route.ts`](app/api/subscribe/route.ts).
+Luxury editorial single-page site: marriage, relationships, and experiences. Built with **Next.js App Router**, brand tokens in [`app/globals.css`](app/globals.css), **server-side ConvertKit** via [`app/api/subscribe/route.ts`](app/api/subscribe/route.ts), and **Resend** for direct contact/speaking notifications.
 
 ## Run locally
 
@@ -34,6 +34,13 @@ npm start
 - `POST /api/subscribe` with JSON: `{ "intent": "...", "email": "...", "firstName": "..." }` and optional `fields` for custom fields (used by the booking page).
 - Map each `intent` to a **form ID** in `.env.local` (or set `CONVERTKIT_DEFAULT_FORM_ID` for a single test form).
 - Optional: set `CONVERTKIT_TAG_ID_*` env vars to also call the [tag subscribe](https://developers.convertkit.com/#tag-a-subscriber) endpoint.
+
+## Resend (contact + speaking enquiries)
+
+- `POST /api/contact` sends the contact form to `tobi@tobiyusuf.com` (via `CONTACT_NOTIFICATION_EMAIL`).
+- Contact email subject equals the selected dropdown option (`General enquiry`, `Forever & A Day`, etc.).
+- `POST /api/speaking` sends speaking enquiries to `tobi@tobiyusuf.com`.
+- Required env vars in `.env.local`: `MY_RESEND_API`, `RESEND_FROM`.
 
 ### Intents → brief tags (configure in Kit)
 

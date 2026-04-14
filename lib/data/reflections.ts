@@ -8,31 +8,21 @@ export type Reflection = {
 
 export const reflections: Reflection[] = [
   {
-    title: "Why Some Women Stop Talking in Marriage",
+    title: "From Love to Resentment in Marriage",
     date: "Sunday Reflection",
-    excerpt:
-      "There comes a point where the silence is not avoidance. It is exhaustion...",
-    substackUrl: "",
+    excerpt: "A reflection on how emotional disconnection quietly builds over time.",
+    substackUrl: "https://substack.com/home/post/p-193203443",
   },
   {
-    title: "When Timing Matters More Than Being Right",
+    title: "15 Years Together. And This Was the First Time We Truly Heard Each Other",
     date: "Sunday Reflection",
-    excerpt:
-      "You had the right words. The wrong moment. And now you're wondering why nothing landed...",
-    substackUrl: "",
+    excerpt: "A moment of honest listening that shifted the direction of a marriage.",
+    substackUrl: "https://substack.com/home/post/p-192504872",
   },
   {
-    title: "Married But Lonely, and Why It Is Not Your Fault",
+    title: "March, Marriage & Motherhood Madness",
     date: "Sunday Reflection",
-    excerpt:
-      "The loneliness inside a marriage is one of the most isolating experiences...",
-    substackUrl: "",
-  },
-  {
-    title: "The Pattern Couples Don't Notice Until It's Too Late",
-    date: "Sunday Reflection",
-    excerpt:
-      "It usually starts small. A missed check-in. A conversation that doesn't happen...",
-    substackUrl: "",
+    excerpt: "Holding marriage, motherhood, and identity together in a demanding season.",
+    substackUrl: "https://substack.com/home/post/p-191738712",
   },
 ];

@@ -204,14 +204,24 @@ export function LandingView() {
 
             <div className="animate-in about-body">
               <p className="body-text">
-                I’m Tobi Yusuf, wife of 14 years, mother of three daughters, speaker, and the woman your DMs already know.
-                I talk about marriage the way most people only think about it. The silence. The patterns. The love that’s still there but buried underneath everything you haven’t said. I don’t give advice. I create rooms: intimate, safe, honest rooms where couples and women can finally say the thing they’ve been carrying.
+                I&apos;m Tobi Yusuf, wife of 14 years, mother of three daughters,
+                speaker, and the woman your DMs already know. I talk about marriage
+                the way most people only think about it. The silence. The patterns.
+                The love that&apos;s still there but buried underneath everything you
+                haven&apos;t said. I don&apos;t give advice. I create rooms: intimate, safe,
+                honest rooms where couples and women can finally say the thing
+                they&apos;ve been carrying.
               </p>
               <p className="body-text">
-                I’m also the founder of RIAH, luxury wedding planning for culturally rich couples, and Luxury Meets Culture, where I train venues, planners, and organisations in the cultural intelligence that turns good intentions into genuine inclusion.
+                I&apos;m also the founder of RIAH, luxury wedding planning for culturally
+                rich couples, and Luxury Meets Culture, where I train venues,
+                planners, and organisations in the cultural intelligence that turns
+                good intentions into genuine inclusion.
               </p>
               <p className="body-text">
-                Whether you join an experience, read the Sunday reflections, or sit with me privately, the invitation always the same: be honest. And let’s go from there.
+                Whether you join an experience, read the Sunday reflections, or sit
+                with me privately, the invitation is always the same: be honest. And
+                let&apos;s go from there.
               </p>
               <a href="#offers" className="btn btn-secondary" style={{ marginTop: "1.5rem" }}>
                 explore what I’m building
