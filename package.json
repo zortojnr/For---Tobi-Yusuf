@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start --port 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -23,6 +24,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.1.0",
     "next-sitemap": "^4.2.3",
+    "sharp": "^0.34.5",
     "typescript": "~5.8.2"
   }
 }

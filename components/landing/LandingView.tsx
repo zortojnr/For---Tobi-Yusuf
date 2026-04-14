@@ -81,6 +81,9 @@ export function LandingView() {
           </div>
 
           <div className="hero-content">
+            <p className="hero-eyebrow hero-anim-1">
+              Marriage · Relationship · Identity
+            </p>
             <h1 className="hero-headline hero-anim-2">
               Real conversations for real <em>marriages.</em>
             </h1>

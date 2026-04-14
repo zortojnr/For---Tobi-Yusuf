@@ -3,8 +3,11 @@
  * Second use is documented in component comments for easy audits.
  */
 export const SITE_IMAGES = {
-  /** Brand mark: SiteNav; SiteFooter; favicon (see app/layout.tsx metadata.icons) */
+  /** Brand mark: SiteFooter; Speaking / Reflections hero backgrounds */
   siteLogo: "/assets/images/logo.jpeg",
+  /** Circular favicon + Apple touch icon (see app/layout.tsx metadata.icons); regenerate via `node scripts/generate-favicons.mjs` */
+  favicon: "/assets/images/favicon.png",
+  appleTouchIcon: "/assets/images/apple-touch-icon.png",
   img1: "/assets/images/1.jpg",
   img2: "/assets/images/2.jpg",
   img3: "/assets/images/3.jpg",
