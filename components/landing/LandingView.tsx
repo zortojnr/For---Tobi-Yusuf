@@ -20,11 +20,13 @@ import { SiteFooter } from "./SiteFooter";
 import { FeaturedPublications } from "./FeaturedPublications";
 
 const COUNTDOWN_TARGET = new Date("2026-04-25T00:00:00+01:00");
+const ABOUT_PORTRAIT_IMAGES = [SITE_IMAGES.img4, SITE_IMAGES.gson8459, SITE_IMAGES.gson8456];
 
 export function LandingView() {
   useAnimateIn();
 
   const [countdownText, setCountdownText] = useState("");
+  const [aboutPortraitIndex, setAboutPortraitIndex] = useState(0);
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [comingSoonOffer, setComingSoonOffer] = useState("");
 
@@ -63,6 +65,13 @@ export function LandingView() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [comingSoonOpen]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setAboutPortraitIndex((prev) => (prev + 1) % ABOUT_PORTRAIT_IMAGES.length);
+    }, 800);
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <>
@@ -207,14 +216,19 @@ export function LandingView() {
               <div className="terracotta-rule" />
 
               {/* SITE_IMAGES.img4 — used twice: About on home and booking aside (booking page) */}
-              <div className="about-portrait about-portrait-frame">
-                <SiteImage
-                  src={SITE_IMAGES.img4}
-                  alt="Tobi Yusuf"
-                  ratio="4/3"
-                  sizes="(max-width: 900px) 100vw, min(520px, 50vw)"
-                  className="image-dim"
-                />
+              <div className="about-portrait about-portrait-frame about-portrait-slider">
+                {ABOUT_PORTRAIT_IMAGES.map((src, idx) => (
+                  <SiteImage
+                    key={src}
+                    src={src}
+                    alt="Tobi Yusuf"
+                    ratio="4/3"
+                    sizes="(max-width: 900px) 100vw, min(520px, 50vw)"
+                    className={`image-dim about-portrait-slide${
+                      idx === aboutPortraitIndex ? " is-active" : ""
+                    }`}
+                  />
+                ))}
               </div>
 
               <blockquote className="about-quote">

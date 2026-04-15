@@ -15,4 +15,6 @@ export const SITE_IMAGES = {
   img5: "/assets/images/5.jpg",
   img6: "/assets/images/6.jpg",
   gson8453: "/assets/images/GSON8453.JPG",
+  gson8456: "/assets/images/GSON8456.JPG",
+  gson8459: "/assets/images/GSON8459.JPG",
 } as const;
