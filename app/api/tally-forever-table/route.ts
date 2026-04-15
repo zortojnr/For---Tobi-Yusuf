@@ -19,15 +19,46 @@ function stringVal(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
 }
 
+function valueToText(v: unknown): string {
+  if (typeof v === "string") return v.trim();
+  if (typeof v === "number" || typeof v === "boolean") return String(v);
+  if (Array.isArray(v)) {
+    const parts = v.map((item) => valueToText(item)).filter(Boolean);
+    return parts.join(" ").trim();
+  }
+  if (v && typeof v === "object") {
+    const candidateKeys = ["email", "value", "text", "label", "name"];
+    for (const key of candidateKeys) {
+      const candidate = (v as Record<string, unknown>)[key];
+      const asText = valueToText(candidate);
+      if (asText) return asText;
+    }
+  }
+  return "";
+}
+
 /** Resolve submitter email and first name from Tally `data.fields`. */
 function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstName: string } | null {
   let email = "";
   let firstName = "";
+  const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 
   for (const f of fields) {
     if (f.type === "INPUT_EMAIL") {
-      const v = stringVal(f.value);
-      if (v.includes("@")) email = v;
+      const v = valueToText(f.value);
+      if (isEmail(v)) email = v;
+    }
+  }
+
+  if (!email) {
+    for (const f of fields) {
+      const lbl = labelNorm(f.label);
+      const v = valueToText(f.value);
+      if (!v) continue;
+      if (isEmail(v) || lbl.includes("email")) {
+        email = v;
+        break;
+      }
     }
   }
 
@@ -35,7 +66,7 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
 
   for (const f of fields) {
     const lbl = labelNorm(f.label);
-    const v = stringVal(f.value);
+    const v = valueToText(f.value);
     if (!v) continue;
     if (lbl === "first name" || lbl === "firstname") {
       firstName = v.split(/\s+/)[0] ?? v;
@@ -46,7 +77,7 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
   if (!firstName) {
     for (const f of fields) {
       const lbl = labelNorm(f.label);
-      const v = stringVal(f.value);
+      const v = valueToText(f.value);
       if (!v || v.includes("@")) continue;
       if (lbl === "name" || lbl === "full name") {
         firstName = v.split(/\s+/)[0] ?? v;
@@ -58,7 +89,7 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
   if (!firstName) {
     for (const f of fields) {
       if (f.type !== "INPUT_TEXT") continue;
-      const v = stringVal(f.value);
+      const v = valueToText(f.value);
       if (!v || v.includes("@")) continue;
       if (email && v === email) continue;
       firstName = v.split(/\s+/)[0] ?? v;
