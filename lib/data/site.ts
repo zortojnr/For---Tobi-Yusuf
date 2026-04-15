@@ -69,7 +69,7 @@ const DEFAULT_SUBSTACK_URL =
   "https://substack.com/@mrstobiyusuf?r=72pimk&utm_medium=ios&utm_source=stories&shareImageVariant=light";
 
 const DEFAULT_INSTAGRAM_URL =
-  "https://www.instagram.com/mrstobiyusuf?igsh=NXU5N3p0Z2RyY2U3&utm_source=qr";
+  "https://www.instagram.com/mrstobiyusuf";
 
 const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/in/tobi-yusuf-68813812b";
 

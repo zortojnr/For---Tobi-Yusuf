@@ -1,6 +1,11 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  INSTAGRAM_URL,
+  SCHEDULING_URL,
+  SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
+} from "@/lib/data/site";
 
 type TallyField = {
   key: string;
@@ -66,13 +71,12 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
 
 /** Tally signs `JSON.stringify(webhookPayload)` per https://tally.so/help/webhooks */
 function verifyTallySignature(
-  payload: unknown,
+  rawBody: string,
   receivedB64: string | null,
   secret: string,
 ): boolean {
   if (!receivedB64) return false;
-  const body = JSON.stringify(payload);
-  const expected = createHmac("sha256", secret).update(body, "utf8").digest("base64");
+  const expected = createHmac("sha256", secret).update(rawBody, "utf8").digest("base64");
   try {
     const a = Buffer.from(receivedB64, "utf8");
     const b = Buffer.from(expected, "utf8");
@@ -96,8 +100,16 @@ export async function POST(request: Request) {
 
   if (signingSecret) {
     const received = request.headers.get("tally-signature");
-    if (!verifyTallySignature(payload, received, signingSecret)) {
-      return NextResponse.json({ error: "Invalid or missing signature" }, { status: 401 });
+    if (!verifyTallySignature(rawBody, received, signingSecret)) {
+      return NextResponse.json(
+        {
+          error: "Invalid or missing signature",
+          code: "TALLY_SIGNATURE_INVALID",
+          hasSignatureHeader: Boolean(received),
+          hasSigningSecret: Boolean(signingSecret),
+        },
+        { status: 401 },
+      );
     }
   }
 
@@ -107,12 +119,28 @@ export async function POST(request: Request) {
 
   const fields = payload.data?.fields;
   if (!Array.isArray(fields)) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    return NextResponse.json(
+      {
+        error: "Invalid payload",
+        code: "TALLY_FIELDS_INVALID",
+        hasData: Boolean(payload.data),
+        fieldsType: typeof payload.data?.fields,
+      },
+      { status: 400 },
+    );
   }
 
   const extracted = extractEmailAndFirstName(fields);
   if (!extracted) {
-    return NextResponse.json({ error: "No email in submission" }, { status: 400 });
+    return NextResponse.json(
+      {
+        error: "No email in submission",
+        code: "TALLY_EMAIL_MISSING",
+        fieldTypes: fields.map((f) => f.type),
+        fieldLabels: fields.map((f) => f.label),
+      },
+      { status: 400 },
+    );
   }
 
   const { email, firstName } = extracted;
@@ -129,35 +157,35 @@ export async function POST(request: Request) {
   const text = [
     greeting,
     "",
-    "Thank you for joining the Intentional Space waitlist. It means a lot that this room resonated with you and I want you to know, you'll be the first to hear when the next date is announced.",
+    "Thank you for joining the Choosing Us waitlist. That decision - to put your name down for a community that's about honesty, not performance - already says something about the kind of marriage you're building.",
     "",
-    "Intentional Space is a small, intimate gathering, just 10 women in a room having the honest conversations about marriage, relationships, and identity that most spaces are too polished to hold. No advice. No performance. Just truth.",
+    "Choosing Us is a monthly community for couples and individuals who want ongoing, honest conversation about the real patterns inside marriage. Not a course. Not a programme with an end date. A room that stays open.",
     "",
-    "Places go quickly, so being on this list gives you first access before it's shared publicly.",
+    "What you'll get as a member:",
     "",
-    "While you wait, here are a few ways to stay in the conversation:",
+    "-> Monthly live conversation hosted by me - honest, guided, no scripts.",
+    "-> Weekly reflection prompts and discussion.",
+    "-> Access to past recordings and audio reflections.",
+    "-> A community of people who understand - because they're living it too.",
+    "-> Early access to Intentional Space, Forever Table, and new experiences.",
     "",
-    "→ Follow me on Instagram. I share marriage reflections, relatable moments, and behind-the-scenes of what I'm building.",
-    "@MrsTobiYusuf",
-    "https://www.instagram.com/mrstobiyusuf",
+    "Founding members will receive a special rate when the doors open. Because you're on this list, you'll hear before anyone else.",
     "",
-    "→ Read the Sunday reflections, every week I write honestly about patterns I see in marriages. Subscribe on Substack.",
-    "https://substack.com/@mrstobiyusuf",
+    "While you wait, here are some ways to stay close to the conversation:",
     "",
-    "→ Book a Marriage Reflection Call if you feel like you need a conversation sooner, this is a private 60-minute session for you and your partner. It's not therapy. It's one honest conversation with someone who understands. £295/couple.",
-    "https://therelatablewife.as.me/",
+    "-> Follow me on Instagram - daily honest moments about marriage and womanhood. @MrsTobiYusuf",
+    INSTAGRAM_URL,
     "",
-    "→ Listen to the Love Reset Audio a free 5-day audio experience to help you breathe, refocus, and reconnect.",
-    "https://www.tobiyusuf.com/",
+    "-> Read the Sunday reflections - weekly writing about the quiet patterns inside real marriages. Subscribe on Substack.",
+    SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
     "",
-    "→ Explore Forever & A Day, an intimate experience for couples who want to reconnect and remember why they chose each other.",
-    "https://tally.so/r/1Avedp",
+    "-> Book a Marriage Reflection Call - if you and your partner need a conversation now. 60 minutes. Private. Honest. £295/couple.",
+    SCHEDULING_URL,
     "",
-    "→ Explore Forever Table, an intimate dinner experience for couples having real conversations that matter.",
-    "https://tally.so/r/aQEM8Z",
+    "-> Listen to the Love Reset Audio - a free 5-day audio experience to help you reconnect.",
+    "https://lctobiyusuf.systeme.io/935600f7",
     "",
-    "",
-    `I'm glad you're here, ${firstName}. The room will be ready when you are.`,
+    `Choosing Us isn't just a community name, ${firstName || "love"}. It's a daily decision. And you've already started making it.`,
     "",
     "With warmth,",
     "Tobi",
@@ -168,7 +196,7 @@ export async function POST(request: Request) {
     from,
     to: email,
     replyTo: "tobi@tobiyusuf.com",
-    subject: "You're in. Here's what happens next.",
+    subject: "You chose to be here. That matters.",
     text,
   });
 

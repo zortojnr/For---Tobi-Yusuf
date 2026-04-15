@@ -21,7 +21,7 @@ const INTENT_TAG_NAMES: Record<ConvertKitIntent, string> = {
   "ct-collab": "CT Collaboration",
   "forever-day": "Forever & A Day",
   "forever-table": "Forever Table",
-  circle: "Real Marriages Circle",
+  circle: "Choosing Us Waitlist",
   speaking: "Speaking",
   general: "General Enquiry",
   newsletter: "Newsletter",

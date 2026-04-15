@@ -72,13 +72,12 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
 
 /** Tally signs `JSON.stringify(webhookPayload)` per https://tally.so/help/webhooks */
 function verifyTallySignature(
-  payload: unknown,
+  rawBody: string,
   receivedB64: string | null,
   secret: string,
 ): boolean {
   if (!receivedB64) return false;
-  const body = JSON.stringify(payload);
-  const expected = createHmac("sha256", secret).update(body, "utf8").digest("base64");
+  const expected = createHmac("sha256", secret).update(rawBody, "utf8").digest("base64");
   try {
     const a = Buffer.from(receivedB64, "utf8");
     const b = Buffer.from(expected, "utf8");
@@ -102,8 +101,16 @@ export async function POST(request: Request) {
 
   if (signingSecret) {
     const received = request.headers.get("tally-signature");
-    if (!verifyTallySignature(payload, received, signingSecret)) {
-      return NextResponse.json({ error: "Invalid or missing signature" }, { status: 401 });
+    if (!verifyTallySignature(rawBody, received, signingSecret)) {
+      return NextResponse.json(
+        {
+          error: "Invalid or missing signature",
+          code: "TALLY_SIGNATURE_INVALID",
+          hasSignatureHeader: Boolean(received),
+          hasSigningSecret: Boolean(signingSecret),
+        },
+        { status: 401 },
+      );
     }
   }
 
@@ -113,12 +120,28 @@ export async function POST(request: Request) {
 
   const fields = payload.data?.fields;
   if (!Array.isArray(fields)) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    return NextResponse.json(
+      {
+        error: "Invalid payload",
+        code: "TALLY_FIELDS_INVALID",
+        hasData: Boolean(payload.data),
+        fieldsType: typeof payload.data?.fields,
+      },
+      { status: 400 },
+    );
   }
 
   const extracted = extractEmailAndFirstName(fields);
   if (!extracted) {
-    return NextResponse.json({ error: "No email in submission" }, { status: 400 });
+    return NextResponse.json(
+      {
+        error: "No email in submission",
+        code: "TALLY_EMAIL_MISSING",
+        fieldTypes: fields.map((f) => f.type),
+        fieldLabels: fields.map((f) => f.label),
+      },
+      { status: 400 },
+    );
   }
 
   const { email, firstName } = extracted;
@@ -153,7 +176,7 @@ export async function POST(request: Request) {
     SCHEDULING_URL,
     "",
     "→ Listen to the Love Reset Audio: a free 5-day audio experience to help you both press pause and reconnect.",
-    "https://www.tobiyusuf.com/",
+    "https://lctobiyusuf.systeme.io/935600f7",
     "",
     "The next table is coming. I'll be in touch.",
     "",

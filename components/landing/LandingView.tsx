@@ -28,8 +28,8 @@ export function LandingView() {
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [comingSoonOffer, setComingSoonOffer] = useState("");
 
-  function isComingSoonOffer(title: string) {
-    return title === "Real Marriages Circle";
+  function isComingSoonOffer(_title: string) {
+    return false;
   }
 
   function openComingSoon(title: string) {
@@ -385,7 +385,7 @@ export function LandingView() {
                 desc: "One honest conversation that helps you see what's underneath the argument.",
                 price: PRICES.reflectionCall,
                 url: SCHEDULING_URL,
-                ctaLabel: "Join the Call",
+                ctaLabel: "Start the Conversation",
               },
               {
                 num: "02",
@@ -403,10 +403,10 @@ export function LandingView() {
               },
               {
                 num: "04",
-                title: "Real Marriages Circle",
-                desc: "Monthly community for couples who are tired of suffering in silence.",
+                title: "Choosing Us Community",
+                desc: "A monthly community for couples and individuals who are choosing to stay, choosing to grow, and choosing honesty over silence.",
                 price: `${PRICES.circle.monthly} | ${PRICES.circle.annual}`,
-                url: INTENTIONAL_SPACE_WAITLIST_TALLY_URL,
+                url: "https://tally.so/r/LZM1Bl",
               },
             ].map((o) => (
               <article key={o.num} className="offer-card animate-in">
