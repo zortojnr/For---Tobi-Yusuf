@@ -417,7 +417,7 @@ export function LandingView() {
                   <p className="offer-price">{o.price}</p>
                 </div>
                 <div className="offer-card-footer">
-                  {isComingSoonOffer(o.title) ? (
+                  {isComingSoonOffer() ? (
                     <button
                       type="button"
                       className="btn btn-secondary btn--sm offer-waitlist-cta"
