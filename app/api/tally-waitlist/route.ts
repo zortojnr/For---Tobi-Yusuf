@@ -25,7 +25,7 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
     }
   }
 
-  const labelNorm = (s: string) => s.trim().toLowerCase();
+  const labelNorm = (s: unknown) => (typeof s === "string" ? s.trim().toLowerCase() : "");
 
   for (const f of fields) {
     const lbl = labelNorm(f.label);
