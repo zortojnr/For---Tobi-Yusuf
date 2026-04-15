@@ -2221,26 +2221,6 @@ img {
   margin-bottom: 2rem;
 }
 
-.about-portrait-slider {
-  position: relative;
-}
-
-.about-portrait-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateX(10%);
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-  pointer-events: none;
-}
-
-.about-portrait-slide.is-active {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 /* —— Featured event: align CTA to bottom —— */
 .event-featured-inner-flex {
   display: flex;
