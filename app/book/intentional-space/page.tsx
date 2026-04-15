@@ -7,7 +7,8 @@ import { SiteImage } from "@/components/site/SiteImage";
 
 export const metadata = {
   title: "Book Intentional Space",
-  description: "Request a place at Intentional Space, London.",
+  description:
+    "Request your place at Intentional Space in London, an intimate gathering for honest conversations on marriage, relationships, and identity with Tobi Yusuf.",
 };
 
 export default function BookIntentionalSpacePage() {

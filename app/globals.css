@@ -2056,10 +2056,10 @@ img {
 
 .footer-logo-image {
   display: block;
-  height: 2.5rem;
-  width: auto;
-  max-width: min(240px, 70vw);
-  object-fit: contain;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .footer-tagline {

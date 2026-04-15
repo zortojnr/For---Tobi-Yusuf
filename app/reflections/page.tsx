@@ -3,7 +3,7 @@ import { ReflectionsPageClient } from "@/components/reflections/ReflectionsPageC
 export const metadata = {
   title: "Reflections",
   description:
-    "Sunday reflections on marriage, relationships, and identity, drawn from real conversations.",
+    "Read weekly reflections from Tobi Yusuf on marriage, emotional patterns, relationships, and identity—practical insight for couples and women building healthier connections.",
 };
 
 export default function ReflectionsPage() {

@@ -12,10 +12,10 @@ export function SiteFooter() {
         <div>
           <Link href="/" className="footer-brand-logo">
             <Image
-              src={SITE_IMAGES.siteLogo}
+              src={SITE_IMAGES.favicon}
               alt="Tobi Yusuf"
-              width={320}
-              height={96}
+              width={56}
+              height={56}
               className="footer-logo-image"
             />
           </Link>
