@@ -555,7 +555,7 @@ export function LandingView() {
               <p className="body-text" style={{ maxWidth: "520px", margin: "0 auto 1.5rem" }}>
                 A new audio series for couples and individuals who want thoughtful, grounded perspective, without the noise. Details, pricing, and purchase links will land here when the series launches.
               </p>
-              <a href="#contact" className="btn btn-secondary">
+              <a href="https://tally.so/r/44N4Y5" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 Notify Me When Available
               </a>
             </div>

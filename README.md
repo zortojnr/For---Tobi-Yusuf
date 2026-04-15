@@ -41,6 +41,10 @@ npm start
 - Contact email subject equals the selected dropdown option (`General enquiry`, `Forever & A Day`, etc.).
 - `POST /api/speaking` sends speaking enquiries to `tobi@tobiyusuf.com`.
 - Required env vars in `.env.local`: `MY_RESEND_API`, `RESEND_FROM`.
+- Tally webhooks:
+  - Inside The Mind notify form should POST to `https://www.tobiyusuf.com/api/tally-inside-mind`
+  - Choosing Us waitlist should POST to `https://www.tobiyusuf.com/api/tally-waitlist`
+  - Use the shared `TALLY_WEBHOOK_SIGNING_SECRET` for signed webhook verification.
 
 ### Intents → brief tags (configure in Kit)
 
