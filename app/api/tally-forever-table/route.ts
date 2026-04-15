@@ -15,10 +15,6 @@ type TallyField = {
   value: unknown;
 };
 
-function stringVal(v: unknown): string {
-  return typeof v === "string" ? v.trim() : "";
-}
-
 function valueToText(v: unknown): string {
   if (typeof v === "string") return v.trim();
   if (typeof v === "number" || typeof v === "boolean") return String(v);
@@ -42,6 +38,7 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
   let email = "";
   let firstName = "";
   const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+  const labelNorm = (s: unknown) => (typeof s === "string" ? s.trim().toLowerCase() : "");
 
   for (const f of fields) {
     if (f.type === "INPUT_EMAIL") {
@@ -61,8 +58,6 @@ function extractEmailAndFirstName(fields: TallyField[]): { email: string; firstN
       }
     }
   }
-
-  const labelNorm = (s: unknown) => (typeof s === "string" ? s.trim().toLowerCase() : "");
 
   for (const f of fields) {
     const lbl = labelNorm(f.label);

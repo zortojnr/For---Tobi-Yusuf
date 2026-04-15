@@ -28,7 +28,7 @@ export function LandingView() {
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [comingSoonOffer, setComingSoonOffer] = useState("");
 
-  function isComingSoonOffer(_title: string) {
+  function isComingSoonOffer() {
     return false;
   }
 
