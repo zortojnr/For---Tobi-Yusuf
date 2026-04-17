@@ -2510,8 +2510,8 @@ img {
   transform: scale(1.025);
   background-color: #23161d;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right bottom;
+  background-size: auto 96%;
+  background-position: 64% bottom;
 }
 
 .speaking-hero-slide.is-active {
@@ -3038,7 +3038,7 @@ img {
   }
 
   .speaking-hero-slide {
-    background-position: right bottom;
+    background-position: 62% bottom;
   }
 
   .speaking-hero-slider-nav {
