@@ -47,17 +47,17 @@ const HERO_SLIDES: {
     image: "/assets/images/GSON3031.jpg",
     title: "Invite Tobi to speak",
     subtitle:
-      "Keynotes, panels, and curated conversations for brands, communities, and teams who care about relationships done well.",
-    note: "A short note on Tobi: practical, warm, and clear speaking that helps people move from theory to\nreal relational change.",
-    ctaLabel: "Enquiry CTA",
+      "From the Bedroom to the Boardroom: the relationship patterns shaping private life often show up in leadership, teamwork, and culture.",
+    note: "For rooms that care about performance and people, this talk reveals the hidden workplace cost of unresolved relational stress.",
+    ctaLabel: "Enquiry",
     ctaHref: "#speaking-enquiry",
   },
   {
     image: "/assets/images/GSON3037.jpg",
     title: "About Tobi",
     subtitle:
-      "Speaker, mentor, and cultural commentator helping women and couples build relational intelligence with faith, depth, and clarity.",
-    note: "Honest, culturally intelligent, and audience-first delivery designed for meaningful conversations in modern rooms.",
+      "Cultural Intelligence in Practice: move beyond statements into real-world cultural competence that works when complexity shows up.",
+    note: "Built for organisations, events, and institutions navigating diverse teams, audiences, and environments with clarity and confidence.",
     ctaLabel: "Connect with me",
     ctaHref: INSTAGRAM_URL,
   },
@@ -65,8 +65,8 @@ const HERO_SLIDES: {
     image: "/assets/images/GSON3097.jpg",
     title: "Goals and Aim",
     subtitle:
-      "Building a global conversation around emotional maturity, healthy love, and relationships that are intentional, not accidental.",
-    note: "The aim: equip this generation with practical wisdom to love wisely, communicate clearly, and lead relationally.",
+      "Relational Intelligence for the Next Generation: teach communication, emotional maturity, and healthy relationship habits before crisis.",
+    note: "A practical, honest session for students and young professionals on love, conflict, partnership, and what no one explains early enough.",
     ctaLabel: "Read articles",
     ctaHref: SUBSTACK_SUBSCRIBE_URL,
   },

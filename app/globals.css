@@ -2984,7 +2984,7 @@ img {
   }
 
   .speaking-hero-slide {
-    background-position: center 60%;
+    background-position: right bottom;
   }
 
   .speaking-hero-slider-nav {
@@ -3043,6 +3043,10 @@ img {
 
   #mainNav.scrolled {
     padding: 0.75rem max(1rem, env(safe-area-inset-left)) 0.75rem max(1rem, env(safe-area-inset-right));
+  }
+
+  .speaking-hero-slide {
+    background-position: center 60%;
   }
 
   .nav-logo {
