@@ -797,12 +797,23 @@ img {
 }
 
 .familiar-shell {
-  max-width: min(38rem, 100%);
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
+.familiar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+}
+
+.familiar-content-col {
+  min-width: 0;
+}
+
 .familiar-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 2.75rem;
 }
 
@@ -811,16 +822,16 @@ img {
 }
 
 .familiar-rule {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   margin-top: 0;
   margin-bottom: 0;
   width: 56px;
 }
 
 .familiar-scenarios {
-  padding: 2rem 0 2rem 1.25rem;
-  border-left: 2px solid rgba(196, 149, 127, 0.45);
+  padding: 0;
+  border-left: none;
   margin-bottom: 0.5rem;
 }
 
@@ -846,12 +857,12 @@ img {
   line-height: 1.35;
   color: var(--anchor);
   margin: 2.5rem 0 2rem;
-  text-align: center;
+  text-align: left;
 }
 
 .familiar-outro {
-  max-width: 36rem;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
 }
 
 .familiar-outro-text {
@@ -871,9 +882,48 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 2.75rem;
   padding-top: 0.5rem;
+}
+
+.familiar-media-col {
+  position: relative;
+  min-height: clamp(24rem, 48vw, 36rem);
+}
+
+.familiar-slider-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(196, 149, 127, 0.08);
+}
+
+.familiar-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.familiar-slide.is-active {
+  opacity: 1;
+}
+
+.familiar-slide-image {
+  object-fit: cover;
+}
+
+@media (max-width: 960px) {
+  .familiar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .familiar-media-col {
+    min-height: clamp(20rem, 72vw, 28rem);
+    margin-top: 0.5rem;
+  }
 }
 
 /* —— The Work (pillars) —— */

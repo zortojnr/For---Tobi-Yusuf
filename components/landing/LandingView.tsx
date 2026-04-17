@@ -20,6 +20,11 @@ import { SiteFooter } from "./SiteFooter";
 import { FeaturedPublications } from "./FeaturedPublications";
 
 const COUNTDOWN_TARGET = new Date("2026-04-25T00:00:00+01:00");
+const FAMILIAR_SLIDES = [
+  { primary: "/assets/images/GSON2579.jpg", fallback: "/assets/images/1.jpg" },
+  { primary: "/assets/images/GSON2657.jpg", fallback: "/assets/images/2.jpg" },
+  { primary: "/assets/images/GSON2671.jpg", fallback: "/assets/images/3.jpg" },
+];
 
 export function LandingView() {
   useAnimateIn();
@@ -27,6 +32,8 @@ export function LandingView() {
   const [countdownText, setCountdownText] = useState("");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [comingSoonOffer, setComingSoonOffer] = useState("");
+  const [activeFamiliarSlide, setActiveFamiliarSlide] = useState(0);
+  const [failedFamiliarSlides, setFailedFamiliarSlides] = useState<number[]>([]);
 
   function isComingSoonOffer() {
     return false;
@@ -63,6 +70,13 @@ export function LandingView() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [comingSoonOpen]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveFamiliarSlide((current) => (current + 1) % FAMILIAR_SLIDES.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <>
@@ -150,52 +164,80 @@ export function LandingView() {
 
         <section className="familiar-section" aria-labelledby="familiar-heading">
           <div className="familiar-shell section--narrow">
-            <header className="familiar-header animate-in">
-              <p className="section-label familiar-kicker" id="familiar-heading">
-                If this feels familiar
-              </p>
-              <div className="terracotta-rule familiar-rule" />
-            </header>
-            <div className="familiar-scenarios animate-in">
-              <p className="familiar-line">
-                You love your spouse, but conversations often turn into misunderstandings.
-              </p>
-              <p className="familiar-line">
-                You find yourself repeating the same concerns, yet nothing seems to change.
-              </p>
-              <p className="familiar-line">
-                Sometimes you wonder if you are asking for too much, or if you have simply
-                stopped saying certain things altogether.
-              </p>
-              <p className="familiar-line">
-                You may still care deeply about your marriage, but the emotional connection
-                feels different from how it once was.
-              </p>
-            </div>
-            <p className="familiar-emphasis animate-in">
-              If any of this feels familiar, you are not alone.
-            </p>
-            <div className="familiar-outro animate-in">
-              <p className="familiar-outro-text">
-                My work creates space to understand the patterns behind these moments, and
-                to begin more intentional conversations about them.
-              </p>
-              <p className="familiar-outro-text">
-                You can begin by exploring reflections, joining a conversation, or
-                attending one of the experiences designed to create space for honest
-                dialogue.
-              </p>
-            </div>
-            <div className="familiar-cta-row animate-in">
-              <Link href="/reflections" className="btn btn-secondary">
-                Read Reflections
-              </Link>
-              <a href="#experiences" className="btn btn-secondary">
-                Explore Experiences
-              </a>
-              <Link href="/speaking" className="btn btn-secondary">
-                Book Tobi to Speak
-              </Link>
+            <div className="familiar-layout">
+              <div className="familiar-content-col">
+                <header className="familiar-header animate-in">
+                  <p className="section-label familiar-kicker" id="familiar-heading">
+                    If this feels familiar
+                  </p>
+                  <div className="terracotta-rule familiar-rule" />
+                </header>
+                <div className="familiar-scenarios animate-in">
+                  <p className="familiar-line">
+                    You love your spouse, but conversations often turn into misunderstandings.
+                  </p>
+                  <p className="familiar-line">
+                    You find yourself repeating the same concerns, yet nothing seems to change.
+                  </p>
+                  <p className="familiar-line">
+                    Sometimes you wonder if you are asking for too much, or if you have simply
+                    stopped saying certain things altogether.
+                  </p>
+                  <p className="familiar-line">
+                    You may still care deeply about your marriage, but the emotional connection
+                    feels different from how it once was.
+                  </p>
+                </div>
+                <p className="familiar-emphasis animate-in">
+                  If any of this feels familiar, you are not alone.
+                </p>
+                <div className="familiar-outro animate-in">
+                  <p className="familiar-outro-text">
+                    My work creates space to understand the patterns behind these moments, and
+                    to begin more intentional conversations about them.
+                  </p>
+                  <p className="familiar-outro-text">
+                    You can begin by exploring reflections, joining a conversation, or
+                    attending one of the experiences designed to create space for honest
+                    dialogue.
+                  </p>
+                </div>
+                <div className="familiar-cta-row animate-in">
+                  <Link href="/reflections" className="btn btn-secondary">
+                    Read Reflections
+                  </Link>
+                  <a href="#experiences" className="btn btn-secondary">
+                    Explore Experiences
+                  </a>
+                  <Link href="/speaking" className="btn btn-secondary">
+                    Book Tobi to Speak
+                  </Link>
+                </div>
+              </div>
+              <div className="familiar-media-col animate-in" aria-label="Conversation highlights">
+                <div className="familiar-slider-frame">
+                  {FAMILIAR_SLIDES.map((slide, index) => (
+                    <div
+                      key={slide.primary}
+                      className={`familiar-slide ${index === activeFamiliarSlide ? "is-active" : ""}`}
+                      aria-hidden={index !== activeFamiliarSlide}
+                    >
+                      <Image
+                        src={failedFamiliarSlides.includes(index) ? slide.fallback : slide.primary}
+                        alt=""
+                        fill
+                        sizes="(max-width: 960px) 100vw, 42vw"
+                        className="familiar-slide-image"
+                        onError={() => {
+                          setFailedFamiliarSlides((current) =>
+                            current.includes(index) ? current : [...current, index],
+                          );
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
