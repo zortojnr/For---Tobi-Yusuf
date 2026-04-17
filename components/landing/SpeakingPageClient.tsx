@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useMemo, useState, type TouchEvent } from "react";
 import { SiteImage } from "@/components/site/SiteImage";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteNav } from "@/components/landing/SiteNav";
@@ -7,6 +8,7 @@ import { SiteFooter } from "@/components/landing/SiteFooter";
 import { useAnimateIn } from "@/components/landing/useAnimateIn";
 import { SpeakingForm } from "@/components/landing/SpeakingForm";
 import { ConversationsClosingSection } from "@/components/landing/ConversationsClosingSection";
+import { INSTAGRAM_URL, SUBSTACK_SUBSCRIBE_URL } from "@/lib/data/site";
 
 const TOPICS: { index: string; title: string; body: string; audience: string }[] = [
   {
@@ -30,39 +32,151 @@ const TOPICS: { index: string; title: string; body: string; audience: string }[]
   },
 ];
 
+const HERO_AUTOPLAY_MS = 6200;
+const HERO_SWIPE_THRESHOLD = 56;
+
+const HERO_SLIDES: {
+  image: string;
+  title: string;
+  subtitle: string;
+  note: string;
+  ctaLabel: string;
+  ctaHref: string;
+}[] = [
+  {
+    image: "/assets/images/GSON3031.jpg",
+    title: "Invite Tobi to speak",
+    subtitle:
+      "Keynotes, panels, and curated conversations for brands, communities, and teams who care about relationships done well.",
+    note: "A short note on Tobi: practical, warm, and clear speaking that helps people move from theory to\nreal relational change.",
+    ctaLabel: "Enquiry CTA",
+    ctaHref: "#speaking-enquiry",
+  },
+  {
+    image: "/assets/images/GSON3037.jpg",
+    title: "About Tobi",
+    subtitle:
+      "Speaker, mentor, and cultural commentator helping women and couples build relational intelligence with faith, depth, and clarity.",
+    note: "Honest, culturally intelligent, and audience-first delivery designed for meaningful conversations in modern rooms.",
+    ctaLabel: "Connect with me",
+    ctaHref: INSTAGRAM_URL,
+  },
+  {
+    image: "/assets/images/GSON3097.jpg",
+    title: "Goals and Aim",
+    subtitle:
+      "Building a global conversation around emotional maturity, healthy love, and relationships that are intentional, not accidental.",
+    note: "The aim: equip this generation with practical wisdom to love wisely, communicate clearly, and lead relationally.",
+    ctaLabel: "Read articles",
+    ctaHref: SUBSTACK_SUBSCRIBE_URL,
+  },
+];
+
 export function SpeakingPageClient() {
   useAnimateIn();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+  const active = HERO_SLIDES[activeSlide];
+  const isExternalCta = useMemo(() => /^https?:\/\//.test(active.ctaHref), [active.ctaHref]);
+  const isReadArticlesSlide = active.ctaLabel === "Read articles";
+
+  const nextSlide = useCallback(() => {
+    setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  }, []);
+
+  useEffect(() => {
+    if (isHovering) return;
+    const timer = window.setInterval(nextSlide, HERO_AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [isHovering, nextSlide]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") nextSlide();
+      if (event.key === "ArrowLeft") prevSlide();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [nextSlide, prevSlide]);
+
+  const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+    setTouchEndX(null);
+    setTouchStartX(event.targetTouches[0]?.clientX ?? null);
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLElement>) => {
+    setTouchEndX(event.targetTouches[0]?.clientX ?? null);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const distance = touchStartX - touchEndX;
+    if (distance > HERO_SWIPE_THRESHOLD) nextSlide();
+    if (distance < -HERO_SWIPE_THRESHOLD) prevSlide();
+  };
 
   return (
     <>
       <SiteNav />
       <main className="speaking-page-body">
-        <section className="speaking-page-hero">
-          <div className="speaking-page-hero-image">
-            <div
-              className="speaking-page-hero-bg"
-              style={{ backgroundImage: `url(${SITE_IMAGES.siteLogo})` }}
-              aria-hidden
-            />
-            <div className="speaking-page-hero-scrim" />
+        <section
+          className="speaking-hero-slider"
+          aria-label="Speaking hero slideshow"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="speaking-hero-slider-media" aria-hidden>
+            {HERO_SLIDES.map((slide, index) => (
+              <div
+                key={slide.image}
+                className={`speaking-hero-slide ${index === activeSlide ? "is-active" : ""}`}
+                style={{ backgroundImage: `url(${slide.image})` }}
+              />
+            ))}
+            <div className="speaking-hero-slider-scrim" />
           </div>
-          <div className="speaking-page-hero-copy section--narrow speaking-page-hero-copy-inner">
-            <p className="reflections-hero-brand">Tobi Yusuf</p>
-            <p className="section-label" style={{ color: "var(--signature)" }}>
-              Speaking
-            </p>
-            <div className="terracotta-rule" />
-            <h1 className="display-md" style={{ color: "var(--anchor)" }}>
-              Invite Tobi to speak
-            </h1>
-            <p className="reflections-intro">
-              Keynotes, panels, and curated conversations for brands, communities, and teams who
-              care about relationships done well.
-            </p>
+
+          <div className="speaking-hero-slider-inner section--narrow">
+            <p className="speaking-hero-slider-kicker">Speaking</p>
+            <h1 className="speaking-hero-slider-title">{active.title}</h1>
+            <p className="speaking-hero-slider-subtitle">{active.subtitle}</p>
+            <p className="speaking-hero-slider-note">{active.note}</p>
+            <a
+              className={isReadArticlesSlide ? "speaking-hero-cta-btn--substack-sharp" : "speaking-hero-cta-btn"}
+              href={active.ctaHref}
+              target={isExternalCta ? "_blank" : undefined}
+              rel={isExternalCta ? "noreferrer" : undefined}
+            >
+              {active.ctaLabel}
+            </a>
+
+            <div className="speaking-hero-slider-nav" aria-label="Hero slide controls">
+              <button type="button" className="speaking-hero-nav-btn" onClick={prevSlide} aria-label="Previous slide">
+                <span aria-hidden>←</span>
+              </button>
+              <button type="button" className="speaking-hero-nav-btn" onClick={nextSlide} aria-label="Next slide">
+                <span aria-hidden>→</span>
+              </button>
+            </div>
+
+            <div className="speaking-hero-slider-progress" aria-hidden>
+              <div key={activeSlide} className="speaking-hero-slider-progress-bar" />
+            </div>
           </div>
         </section>
 
         <section
+          id="speaking-enquiry"
           className="section form-section speaking-section"
           aria-label="Speaking topics and enquiry form"
         >
