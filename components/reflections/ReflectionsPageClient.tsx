@@ -11,6 +11,7 @@ import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteNav } from "@/components/landing/SiteNav";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { useAnimateIn } from "@/components/landing/useAnimateIn";
+import { HeroSection } from "@/components/reflections/HeroSection";
 
 export function ReflectionsPageClient() {
   useAnimateIn();
@@ -19,34 +20,7 @@ export function ReflectionsPageClient() {
     <>
       <SiteNav />
       <main>
-        <section className="reflections-page-hero">
-          <div className="reflections-page-hero-image">
-            <div
-              className="reflections-page-hero-bg"
-              style={{ backgroundImage: `url(${SITE_IMAGES.siteLogo})` }}
-              aria-hidden
-            />
-            <div className="reflections-page-hero-scrim" />
-          </div>
-          <div className="reflections-page-hero-copy section--narrow reflections-page-hero-copy-inner">
-            <p className="reflections-hero-brand">Tobi Yusuf</p>
-            <p className="section-label" style={{ color: "var(--signature)" }}>
-              Reflections
-            </p>
-            <div className="terracotta-rule" />
-            <h1 className="display-md" style={{ color: "var(--anchor)" }}>
-              Reflections
-            </h1>
-            <p className="reflections-intro">
-              Over the years, I&apos;ve had many conversations with couples, women, and friends
-              navigating different seasons of marriage. These reflections are observations and lessons
-              drawn from real conversations and lived experiences.
-            </p>
-            <div className="reflections-subscribe-only">
-              <SubstackNativeSubscribe />
-            </div>
-          </div>
-        </section>
+        <HeroSection />
 
         <section className="section reflections-section">
           <div className="section--narrow">
