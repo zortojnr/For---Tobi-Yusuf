@@ -17,6 +17,7 @@ export function LoveResetSlideIn() {
   const [entered, setEntered] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const openedRef = useRef(false);
+  const scrollTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -31,12 +32,14 @@ export function LoveResetSlideIn() {
     if (!mounted) return;
     if (shouldSuppressLoveResetSlide()) return;
 
-    let timeoutId: ReturnType<typeof window.setTimeout> | undefined;
     let disarmed = false;
     const disarm = () => {
       if (disarmed) return;
       disarmed = true;
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      if (scrollTimerRef.current !== null) {
+        window.clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = null;
+      }
       window.removeEventListener("scroll", onScroll);
     };
 
@@ -67,7 +70,7 @@ export function LoveResetSlideIn() {
       }
     }
 
-    timeoutId = window.setTimeout(tryOpen, TIMER_MS);
+    scrollTimerRef.current = window.setTimeout(tryOpen, TIMER_MS);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
