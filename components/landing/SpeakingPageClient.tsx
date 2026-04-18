@@ -166,6 +166,7 @@ export function SpeakingPageClient() {
                   priority={index === 0}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="speaking-hero-slide-img"
+                  style={{ objectFit: "cover", objectPosition: "center center" }}
                 />
               </div>
             ))}

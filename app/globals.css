@@ -3672,8 +3672,33 @@ img {
 }
 
 @media (max-width: 640px) {
+  /* Full-viewport hero; media uses inset:0 only (pct heights fight min-height parents) */
+  .speaking-hero-slider {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
   .speaking-hero-slider-media {
-    inset: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .speaking-hero-slide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
   }
 
   /* Anchor-tinted wash over slides; inner panel uses gradient so image peeks through (no blur) */
@@ -3697,9 +3722,10 @@ img {
   }
 
   .speaking-hero-slider-inner {
+    flex: 1 1 auto;
     width: 100%;
     margin-right: 0;
-    min-height: auto;
+    min-height: 0;
     background: linear-gradient(
       180deg,
       rgba(250, 247, 244, 0.96) 0%,
@@ -3711,6 +3737,10 @@ img {
   }
 
   .speaking-hero-slide-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center center;
   }
@@ -3758,10 +3788,6 @@ img {
     padding: 0.75rem max(1rem, env(safe-area-inset-left)) 0.75rem max(1rem, env(safe-area-inset-right));
   }
 
-  .speaking-hero-slide-img {
-    object-position: center 60%;
-  }
-
   .nav-logo {
     font-size: 1.2rem;
   }
@@ -3776,10 +3802,6 @@ img {
     padding: 6.5rem 1rem 4rem;
     overflow-x: hidden;
     overflow-y: visible;
-  }
-
-  .speaking-hero-slider {
-    min-height: clamp(460px, 84vh, 620px);
   }
 
   .speaking-hero-slider-inner {
