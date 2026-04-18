@@ -738,8 +738,11 @@ img {
   animation: press-marquee-scroll 30s linear infinite;
 }
 
-.press-marquee:hover .press-marquee-track {
-  animation-play-state: paused;
+/* Pause only on real hover — touch UAs can leave :hover stuck after tap and freeze the track */
+@media (hover: hover) {
+  .press-marquee:hover .press-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 .press-item {
@@ -3328,6 +3331,19 @@ img {
     opacity: 1 !important;
     transform: none !important;
   }
+
+  .hero-anim-1,
+  .hero-anim-2,
+  .hero-anim-2b,
+  .hero-anim-3 {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Logo strip: global * { animation: none } would stop it; use a slower loop instead of removing motion entirely */
+  .press-marquee-track {
+    animation: press-marquee-scroll 50s linear infinite !important;
+  }
 }
 
 /* —— Responsive —— */
@@ -3713,6 +3729,8 @@ img {
   .hero {
     min-height: min(100dvh, 100vh);
     padding: 6.5rem 1rem 4rem;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .speaking-hero-slider {
@@ -3750,11 +3768,16 @@ img {
   }
 
   .hero-headline {
-    margin-bottom: 0.75rem;
+    font-size: clamp(2.5rem, 12vw + 1rem, 4.5rem);
+    margin-bottom: 0.65rem;
   }
 
   .hero-positioning {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-sub {
+    margin-bottom: 2rem;
   }
 
   .hero-ctas {
