@@ -1,6 +1,6 @@
 /**
- * Gallery assets under /public/assets/images — each path is used exactly twice across the site.
- * Second use is documented in component comments for easy audits.
+ * Gallery assets under /public/assets/images.
+ * Many paths are intentionally reused in two places; see per-key comments where relevant.
  */
 export const SITE_IMAGES = {
   /** Brand mark: SiteFooter; Speaking / Reflections hero backgrounds */
@@ -13,6 +13,7 @@ export const SITE_IMAGES = {
   img3: "/assets/images/3.jpg",
   img4: "/assets/images/4.jpg",
   img5: "/assets/images/5.jpg",
+  /** Home hero background — LandingView */
   img6: "/assets/images/6.jpg",
   gson8453: "/assets/images/GSON8453.JPG",
 } as const;

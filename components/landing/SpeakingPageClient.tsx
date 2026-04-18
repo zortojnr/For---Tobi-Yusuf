@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, type TouchEvent } from "react";
+import Image from "next/image";
 import { SiteImage } from "@/components/site/SiteImage";
 import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteNav } from "@/components/landing/SiteNav";
@@ -53,11 +54,11 @@ const HERO_SLIDES: {
     ctaHref: "#speaking-enquiry",
   },
   {
-    image: "/assets/images/GSON3037.jpg",
+    image: "/assets/images/GSON3081.jpg",
     title: "About Tobi",
     subtitle:
-      "Cultural Intelligence in Practice: move beyond statements into real-world cultural competence that works when complexity shows up.",
-    note: "Built for organisations, events, and institutions navigating diverse teams, audiences, and environments with clarity and confidence.",
+      "Tobi Yusuf is a relational and cultural intelligence advisor and speaker. She helps individuals, couples, and organisations communicate with clarity and care when identity, culture, and conflict are in the room.",
+    note: "Her keynotes and facilitated conversations bridge lived experience with practical insight—so teams and audiences move from well-meaning statements toward competence that still holds when nuance, disagreement, or difference shows up.",
     ctaLabel: "Connect with me",
     ctaHref: INSTAGRAM_URL,
   },
@@ -140,13 +141,21 @@ export function SpeakingPageClient() {
               <div
                 key={slide.image}
                 className={`speaking-hero-slide ${index === activeSlide ? "is-active" : ""}`}
-                style={{ backgroundImage: `url(${slide.image})` }}
-              />
+              >
+                <Image
+                  src={slide.image}
+                  alt=""
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="speaking-hero-slide-img"
+                />
+              </div>
             ))}
             <div className="speaking-hero-slider-scrim" />
           </div>
 
-          <div className="speaking-hero-slider-inner section--narrow">
+          <div className="speaking-hero-slider-inner">
             <p className="speaking-hero-slider-kicker">Speaking</p>
             <h1 className="speaking-hero-slider-title">{active.title}</h1>
             <p className="speaking-hero-slider-subtitle">{active.subtitle}</p>
@@ -160,18 +169,18 @@ export function SpeakingPageClient() {
               {active.ctaLabel}
             </a>
 
-            <div className="speaking-hero-slider-nav" aria-label="Hero slide controls">
-              <button type="button" className="speaking-hero-nav-btn" onClick={prevSlide} aria-label="Previous slide">
-                <span aria-hidden>←</span>
-              </button>
-              <button type="button" className="speaking-hero-nav-btn" onClick={nextSlide} aria-label="Next slide">
-                <span aria-hidden>→</span>
-              </button>
-            </div>
-
             <div className="speaking-hero-slider-progress" aria-hidden>
               <div key={activeSlide} className="speaking-hero-slider-progress-bar" />
             </div>
+          </div>
+
+          <div className="speaking-hero-slider-nav" aria-label="Hero slide controls">
+            <button type="button" className="speaking-hero-nav-btn" onClick={prevSlide} aria-label="Previous slide">
+              <span aria-hidden>←</span>
+            </button>
+            <button type="button" className="speaking-hero-nav-btn" onClick={nextSlide} aria-label="Next slide">
+              <span aria-hidden>→</span>
+            </button>
           </div>
         </section>
 
@@ -194,10 +203,10 @@ export function SpeakingPageClient() {
             </p>
           </header>
           <div className="speaking-split">
-            <div className="speaking-split-copy animate-in">
+            <div className="speaking-split-copy">
               <div className="speaking-topics">
                 {TOPICS.map((t) => (
-                  <article key={t.index} className="speaking-topic-card">
+                  <article key={t.index} className="speaking-topic-card animate-in">
                     <span className="speaking-topic-index" aria-hidden>
                       {t.index}
                     </span>
@@ -220,10 +229,20 @@ export function SpeakingPageClient() {
               />
             </div>
           </div>
-          <div className="speaking-form-center animate-in">
-            <div className="speaking-enquiry-panel">
+          <div className="speaking-enquiry-split animate-in">
+            <div className="speaking-enquiry-panel speaking-enquiry-panel--split">
               <p className="speaking-enquiry-label">Speaking enquiry</p>
               <SpeakingForm />
+            </div>
+            <div className="speaking-enquiry-visual">
+              <Image
+                src="/assets/images/yes(1).jpeg"
+                alt=""
+                width={1066}
+                height={1600}
+                sizes="(max-width: 900px) 100vw, min(520px, 46vw)"
+                className="speaking-enquiry-photo"
+              />
             </div>
           </div>
         </section>

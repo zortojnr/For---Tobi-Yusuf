@@ -18,8 +18,8 @@ import { useAnimateIn } from "./useAnimateIn";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
 import { FeaturedPublications } from "./FeaturedPublications";
+import { LoveResetSubscribeForm } from "./LoveResetSubscribeForm";
 
-const COUNTDOWN_TARGET = new Date("2026-04-25T00:00:00+01:00");
 const FAMILIAR_SLIDES = [
   { primary: "/assets/images/GSON2579.jpg", fallback: "/assets/images/1.jpg" },
   { primary: "/assets/images/GSON2657.jpg", fallback: "/assets/images/2.jpg" },
@@ -29,7 +29,6 @@ const FAMILIAR_SLIDES = [
 export function LandingView() {
   useAnimateIn();
 
-  const [countdownText, setCountdownText] = useState("");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [comingSoonOffer, setComingSoonOffer] = useState("");
   const [activeFamiliarSlide, setActiveFamiliarSlide] = useState(0);
@@ -43,24 +42,6 @@ export function LandingView() {
     setComingSoonOffer(title);
     setComingSoonOpen(true);
   }
-
-  useEffect(() => {
-    const updateCountdown = () => {
-      const diff = COUNTDOWN_TARGET.getTime() - Date.now();
-      if (diff <= 0) {
-        setCountdownText("Event today!");
-        return;
-      }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      setCountdownText(`${d}d ${h}h ${m}m`);
-    };
-
-    updateCountdown();
-    const id = setInterval(updateCountdown, 60000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     if (!comingSoonOpen) return;
@@ -128,18 +109,14 @@ export function LandingView() {
 
         <div className="urgent-banner">
           <p className="urgent-banner-inner">
-            Intentional Space · 25th April 2026, London · Only 10 places available ·{" "}
-            <span className="countdown-pill" id="countdown">
-              {countdownText || "…"}
-            </span>{" "}
-            {"· "}
+            The next Intentional Space is coming July 2026.{" "}
             <a
               className="book-link"
-              href={SCHEDULING_URL}
+              href={INTENTIONAL_SPACE_WAITLIST_TALLY_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Book Your Place →
+              Join the waitlist to hear first.
             </a>
           </p>
         </div>
@@ -363,9 +340,9 @@ export function LandingView() {
           <div className="event-featured animate-in" id="intentional-space">
             <div className="event-featured-inner event-featured-inner-flex" style={{ maxWidth: "100%" }}>
               <div className="badge-row" style={{ marginBottom: "1rem" }}>
-                <span className="badge badge-open">Booking Open</span>
+                <span className="badge badge-open">Waitlist Open</span>
                 <span className="section-label section-label--on-dark-muted" style={{ letterSpacing: "0.2em" }}>
-                  Most time sensitive · 25 April 2026
+                  Most time sensitive · 25 &amp; 31 July 2026
                 </span>
               </div>
 
@@ -382,7 +359,7 @@ export function LandingView() {
 
               <div className="event-meta-row">
                 <div>
-                  <strong>Date</strong> Friday 25th April 2026
+                  <strong>Date</strong> 25th July 2026 (in person) and 31st July 2026 (online)
                 </div>
                 <div>
                   <strong>Location</strong> London (venue to be confirmed)
@@ -402,7 +379,7 @@ export function LandingView() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Book Your Place →
+                Join The Waitlist →
               </a>
 
               <div className="event-featured-footer" />
@@ -605,16 +582,30 @@ export function LandingView() {
         </section>
 
         <section id="contact" className="section form-section contact-section" style={{ paddingTop: 0 }}>
-          <div className="section--narrow">
-            <p className="section-label">Contact</p>
-            <div className="terracotta-rule" />
-            <h2 className="display-md" style={{ color: "var(--anchor)" }}>
-              Get in touch
-            </h2>
-            <p className="body-text" style={{ maxWidth: "560px", marginBottom: "1.5rem" }}>
-              Whether it’s a question, an idea, or the beginning of something I’d love to hear from you.
-            </p>
-            <ContactForm />
+          <div className="contact-split section--narrow">
+            <div className="contact-split-copy animate-in">
+              <p className="section-label">Contact</p>
+              <div className="terracotta-rule" />
+              <h2 className="display-md contact-split-heading" style={{ color: "var(--anchor)" }}>
+                Get in touch
+              </h2>
+              <p className="body-text contact-split-lead">
+                Whether it&apos;s a question, an idea, or the beginning of something—I&apos;d love to hear
+                from you.
+              </p>
+              <ContactForm />
+            </div>
+            <div className="contact-split-visual animate-in" aria-hidden>
+              <div className="contact-split-photo">
+                <Image
+                  src="/assets/images/GSON2710.jpg"
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1100px) 45vw, 520px"
+                  className="contact-split-photo-img"
+                />
+              </div>
+            </div>
           </div>
         </section>
       </main>
@@ -689,9 +680,7 @@ function LoveResetSection() {
         <p className="capture-body">
           The Love Reset Audio is a gentle 5 day audio experience. No cost, no fluff. It is designed to help you breathe, refocus, and return to yourself (and your marriage) with a little more clarity.
         </p>
-        <a href="https://lctobiyusuf.systeme.io/935600f7" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-          Sign Up for Free Resource
-        </a>
+        <LoveResetSubscribeForm variant="section" idPrefix="lr-section" />
       </div>
     </section>
   );
@@ -735,23 +724,10 @@ function ContactForm() {
   }
 
   return (
-    <form className="form-panel animate-in" onSubmit={onSubmit}>
+    <form className="form-panel" onSubmit={onSubmit}>
       <div className="form-field">
         <label htmlFor="ct-enquiry">You&apos;re writing about</label>
-        <select
-          id="ct-enquiry"
-          value={enquiry}
-          onChange={(e) => setEnquiry(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "0.85rem 1rem",
-            border: "1px solid rgba(61, 31, 43, 0.15)",
-            borderRadius: 0,
-            fontFamily: "var(--font-body)",
-            background: "var(--background)",
-            color: "var(--anchor)",
-          }}
-        >
+        <select id="ct-enquiry" value={enquiry} onChange={(e) => setEnquiry(e.target.value)}>
           <option value="forever-day">Forever & A Day Experience</option>
           <option value="reflection-call">Marriage Reflection Call</option>
           <option value="intentional-space">Intentional Space</option>

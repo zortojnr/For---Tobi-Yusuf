@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost, Playfair_Display } from "next/font/google";
 import { getSiteUrl, getSocialSameAs } from "@/lib/data/site";
 import { SITE_IMAGES } from "@/lib/data/site-images";
+import { LoveResetSlideIn } from "@/components/landing/LoveResetSlideIn";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -104,6 +105,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <LoveResetSlideIn />
       </body>
     </html>
   );

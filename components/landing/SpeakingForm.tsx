@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { SPEAKING_EVENT_TYPES, SPEAKING_PREFERRED_TOPICS } from "@/lib/data/speaking-enquiry";
+
+const SUCCESS_MSG =
+  "Thank you for reaching out. I'll review your enquiry and be in touch within 48 hours. In the meantime, feel free to explore the reflections or upcoming experiences.";
 
 export function SpeakingForm() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [preferredTopic, setPreferredTopic] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
@@ -21,6 +30,11 @@ export function SpeakingForm() {
         body: JSON.stringify({
           email,
           firstName,
+          organisation: organisation.trim(),
+          eventType,
+          preferredTopic,
+          eventDate: eventDate.trim(),
+          location: location.trim(),
           message: trimmed,
         }),
       });
@@ -31,9 +45,14 @@ export function SpeakingForm() {
         return;
       }
       setStatus("ok");
-      setMsg("Thank you. We will be in touch.");
+      setMsg(SUCCESS_MSG);
       setEmail("");
       setFirstName("");
+      setOrganisation("");
+      setEventType("");
+      setPreferredTopic("");
+      setEventDate("");
+      setLocation("");
       setMessage("");
     } catch {
       setStatus("err");
@@ -42,8 +61,7 @@ export function SpeakingForm() {
   }
 
   return (
-    <form className="form-panel animate-in" onSubmit={onSubmit}>
-      <p className="form-category-label" style={{ fontSize: "0.9rem", marginBottom: "1.5rem", color: "var(--anchor)", fontWeight: "600" }}>Speaking Enquiry</p>
+    <form className="form-panel" onSubmit={onSubmit}>
       <div className="form-grid-2">
         <div className="form-field">
           <label htmlFor="sp-first">First name</label>
@@ -66,16 +84,64 @@ export function SpeakingForm() {
         </div>
       </div>
       <div className="form-field">
-        <label htmlFor="sp-msg">Event details (optional)</label>
-        <textarea
-          id="sp-msg"
-          rows={4}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+        <label htmlFor="sp-org">Organisation / Company</label>
+        <input
+          id="sp-org"
+          value={organisation}
+          onChange={(e) => setOrganisation(e.target.value)}
+          autoComplete="organization"
         />
       </div>
+      <div className="form-grid-2">
+        <div className="form-field">
+          <label htmlFor="sp-event-type">Event type</label>
+          <select
+            id="sp-event-type"
+            value={eventType}
+            onChange={(e) => setEventType(e.target.value)}
+            required
+          >
+            <option value="">Select event type</option>
+            {SPEAKING_EVENT_TYPES.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-field">
+          <label htmlFor="sp-topic">Preferred topic</label>
+          <select
+            id="sp-topic"
+            value={preferredTopic}
+            onChange={(e) => setPreferredTopic(e.target.value)}
+            required
+          >
+            <option value="">Select topic</option>
+            {SPEAKING_PREFERRED_TOPICS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="form-grid-2">
+        <div className="form-field">
+          <label htmlFor="sp-date">Event date</label>
+          <input id="sp-date" type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label htmlFor="sp-location">Location</label>
+          <input id="sp-location" value={location} onChange={(e) => setLocation(e.target.value)} />
+        </div>
+      </div>
+      <div className="form-field">
+        <label htmlFor="sp-msg">Tell me more about your event and audience</label>
+        <textarea id="sp-msg" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
+      </div>
       <button type="submit" className="btn btn-secondary" disabled={status === "loading"}>
-        {status === "loading" ? "Sending…" : "Submit speaking enquiry"}
+        {status === "loading" ? "Sending…" : "Send enquiry"}
       </button>
       {msg ? (
         <p className={`form-msg ${status === "ok" ? "form-msg--ok" : "form-msg--err"}`}>{msg}</p>

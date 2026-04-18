@@ -62,7 +62,7 @@ export function HeroSection() {
           className="pointer-events-none absolute inset-y-0 left-0 w-[clamp(360px,45vw,680px)]"
         >
           <Image
-            src="/assets/images/GSON2809.jpg"
+            src="/assets/images/GSON2462.jpg"
             alt="Tobi Yusuf portrait"
             fill
             sizes="(max-width: 1200px) 45vw, 680px"
@@ -144,7 +144,7 @@ export function HeroSection() {
         >
           <div className="relative h-full w-full overflow-hidden rounded-b-[140px] rounded-t-[18px] border border-[var(--soft)]/25">
             <Image
-              src="/assets/images/GSON2809.jpg"
+              src="/assets/images/GSON2462.jpg"
               alt="Tobi Yusuf portrait"
               fill
               sizes="380px"

@@ -1,6 +1,6 @@
 ---
 pageTitle: Book Intentional Space
-eventDate: Friday 25th April 2026
+eventDate: 25th July 2026 (in person) and 31st July 2026 (online)
 eventLocation: London (venue to be confirmed)
 fields:
   - id: first_name

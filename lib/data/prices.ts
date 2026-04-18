@@ -6,5 +6,5 @@ export const PRICES = {
   foreverInADay: { group: "£497", private: "£997" },
   foreverTable: "£200 to £250 per couple",
   circle: { monthly: "£27/month", annual: "£247/year" },
-  intentionalSpace: "TBC. See the booking page.",
+  intentionalSpace: "TBC",
 } as const;

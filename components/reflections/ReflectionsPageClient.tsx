@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { reflections } from "@/lib/data/reflections";
 import {
   SUBSTACK_PUBLICATION_SUBSCRIBE_URL,
   substackPostUrl,
 } from "@/lib/data/site";
-import { SITE_IMAGES } from "@/lib/data/site-images";
 import { SiteNav } from "@/components/landing/SiteNav";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { useAnimateIn } from "@/components/landing/useAnimateIn";
@@ -71,19 +69,6 @@ export function ReflectionsPageClient() {
             </div>
           </div>
         </section>
-
-        {/* SITE_IMAGES.img6 — use #2: reflections footer band (use #1: home hero bg) */}
-        <div className="reflections-page-footer-band" aria-hidden>
-          <div className="reflections-page-footer-band-media">
-            <Image
-              src={SITE_IMAGES.img6}
-              alt=""
-              fill
-              sizes="100vw"
-              className="reflections-page-footer-band-img"
-            />
-          </div>
-        </div>
       </main>
       <SiteFooter />
     </>
