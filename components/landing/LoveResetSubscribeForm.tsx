@@ -99,7 +99,9 @@ export function LoveResetSubscribeForm({ variant, idPrefix, onSuccess, className
       >
         {status === "loading" ? "Sending…" : "Send Me the Audio"}
       </button>
-      <p className="love-reset-form-trust">Your details are safe. Unsubscribe anytime.</p>
+      <p className="love-reset-form-trust">
+        We only use your email to send this free audio. Questions? Reply to the email you receive.
+      </p>
       {msg ? (
         <p className={`form-msg ${status === "err" ? "form-msg--err" : "form-msg--ok"}`}>{msg}</p>
       ) : null}

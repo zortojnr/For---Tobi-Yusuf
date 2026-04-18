@@ -1,6 +1,6 @@
 # Tobi Yusuf — Premium landing (Next.js)
 
-Luxury editorial single-page site: marriage, relationships, and experiences. Built with **Next.js App Router**, brand tokens in [`app/globals.css`](app/globals.css), **server-side ConvertKit** via [`app/api/subscribe/route.ts`](app/api/subscribe/route.ts), and **Resend** for direct contact/speaking notifications.
+Luxury editorial single-page site: marriage, relationships, and experiences. Built with **Next.js App Router**, brand tokens in [`app/globals.css`](app/globals.css), **server-side ConvertKit** via [`app/api/subscribe/route.ts`](app/api/subscribe/route.ts) (all subscribe intents except Love Reset), and **Resend** for contact, speaking notifications, and **Love Reset** (transactional email with the audio link).
 
 ## Run locally
 
@@ -32,14 +32,16 @@ npm start
 
 - The browser **never** receives `CONVERTKIT_API_KEY`.
 - `POST /api/subscribe` with JSON: `{ "intent": "...", "email": "...", "firstName": "..." }` and optional `fields` for custom fields (used by the booking page).
-- Map each `intent` to a **form ID** in `.env.local` (or set `CONVERTKIT_DEFAULT_FORM_ID` for a single test form).
+- **`love-reset` is handled by Resend**, not ConvertKit: the subscriber receives a branded email with `LOVE_RESET_AUDIO_URL` (see below). You do **not** need `CONVERTKIT_FORM_LOVE_RESET` for that flow.
+- For all **other** intents, map each to a **form ID** in `.env.local` (or set `CONVERTKIT_DEFAULT_FORM_ID` for a single test form).
 - Optional: set `CONVERTKIT_TAG_ID_*` env vars to also call the [tag subscribe](https://developers.convertkit.com/#tag-a-subscriber) endpoint.
 
-## Resend (contact + speaking enquiries)
+## Resend (contact + speaking + Love Reset)
 
 - `POST /api/contact` sends the contact form to `tobi@tobiyusuf.com` (via `CONTACT_NOTIFICATION_EMAIL`).
 - Contact email subject equals the selected dropdown option (`General enquiry`, `Forever & A Day`, etc.).
 - `POST /api/speaking` sends speaking enquiries to `tobi@tobiyusuf.com`.
+- **`POST /api/subscribe`** with `intent: "love-reset"` sends a transactional email **to the subscriber** with the Love Reset link (`LOVE_RESET_AUDIO_URL` in `.env.local`; see [`.env.example`](.env.example)). Optional: `LOVE_RESET_EMAIL_SUBJECT`, comma-separated `LOVE_RESET_BCC` for a copy to your inbox.
 - Required env vars in `.env.local`: `MY_RESEND_API`, `RESEND_FROM`.
 - Tally webhooks:
   - Inside The Mind notify form should POST to `https://www.tobiyusuf.com/api/tally-inside-mind`
@@ -50,7 +52,7 @@ npm start
 
 | intent | Tag (from brief) |
 |--------|-------------------|
-| `love-reset` | Love Reset Download |
+| `love-reset` | *(Resend email to subscriber — not ConvertKit)* |
 | `intentional-space` | Intentional Space |
 | `ct-collab` | CT Collaboration |
 | `forever-day` | Forever & A Day |

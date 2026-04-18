@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 import type { ConvertKitIntent } from "@/lib/convertkit-intents";
+import {
+  buildLoveResetEmailContent,
+  getLoveResetAudioUrl,
+  getLoveResetBccList,
+} from "@/lib/love-reset-email";
 
 const API_KEY = process.env.CONVERTKIT_API_KEY;
 
@@ -128,14 +134,6 @@ async function subscribeToTag(
 }
 
 export async function POST(request: Request) {
-  const apiKey = API_KEY?.trim();
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "ConvertKit is not configured (CONVERTKIT_API_KEY)." },
-      { status: 503 },
-    );
-  }
-
   let json: {
     intent?: string;
     email?: string;
@@ -164,6 +162,62 @@ export async function POST(request: Request) {
   const validIntents = Object.keys(INTENT_TO_FORM_ENV) as ConvertKitIntent[];
   if (!intent || !validIntents.includes(intent)) {
     return NextResponse.json({ error: "Invalid intent" }, { status: 400 });
+  }
+
+  if (intent === "love-reset") {
+    const resendKey = process.env.MY_RESEND_API?.trim();
+    if (!resendKey) {
+      return NextResponse.json(
+        { error: "Email is not configured (MY_RESEND_API)." },
+        { status: 503 },
+      );
+    }
+    const from = process.env.RESEND_FROM?.trim();
+    if (!from) {
+      return NextResponse.json(
+        { error: "Email is not configured (RESEND_FROM)." },
+        { status: 503 },
+      );
+    }
+
+    const audioUrl = getLoveResetAudioUrl();
+    const { subject, html, text } = buildLoveResetEmailContent({
+      firstName,
+      audioUrl,
+    });
+    const bcc = getLoveResetBccList();
+    const resend = new Resend(resendKey);
+    const { data, error } = await resend.emails.send({
+      from,
+      to: email,
+      ...(bcc && bcc.length > 0 ? { bcc } : {}),
+      subject,
+      html,
+      text,
+    });
+
+    if (error) {
+      return NextResponse.json(
+        {
+          error: "Failed to send email",
+          detail:
+            typeof error === "object" && error && "message" in error
+              ? String((error as { message: unknown }).message)
+              : error,
+        },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ success: true, id: data?.id });
+  }
+
+  const apiKey = API_KEY?.trim();
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "ConvertKit is not configured (CONVERTKIT_API_KEY)." },
+      { status: 503 },
+    );
   }
 
   const extra = sanitizeFields(json.fields);
