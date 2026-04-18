@@ -201,11 +201,7 @@ export function SpeakingPageClient() {
           </div>
         </section>
 
-        <section
-          id="speaking-enquiry"
-          className="section form-section speaking-section"
-          aria-label="Speaking topics and enquiry form"
-        >
+        <section className="section form-section speaking-section" aria-label="Speaking topics and enquiry form">
           <header className="section--narrow speaking-page-masthead animate-in">
             <p className="section-label">Talks &amp; programmes</p>
             <div className="terracotta-rule terracotta-rule--center speaking-page-masthead-rule" />
@@ -246,7 +242,7 @@ export function SpeakingPageClient() {
               />
             </div>
           </div>
-          <div className="speaking-enquiry-split animate-in">
+          <div id="speaking-enquiry" className="speaking-enquiry-split animate-in">
             <div className="speaking-enquiry-panel speaking-enquiry-panel--split">
               <p className="speaking-enquiry-label">Speaking enquiry</p>
               <SpeakingForm />
