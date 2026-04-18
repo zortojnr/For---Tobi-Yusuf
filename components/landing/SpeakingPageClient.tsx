@@ -9,7 +9,7 @@ import { SiteFooter } from "@/components/landing/SiteFooter";
 import { useAnimateIn } from "@/components/landing/useAnimateIn";
 import { SpeakingForm } from "@/components/landing/SpeakingForm";
 import { ConversationsClosingSection } from "@/components/landing/ConversationsClosingSection";
-import { INSTAGRAM_URL, SUBSTACK_SUBSCRIBE_URL } from "@/lib/data/site";
+import { INSTAGRAM_URL } from "@/lib/data/site";
 
 const TOPICS: { index: string; title: string; body: string; audience: string }[] = [
   {
@@ -46,30 +46,48 @@ const HERO_SLIDES: {
 }[] = [
   {
     image: "/assets/images/GSON3031.jpg",
-    title: "Invite Tobi to speak",
+    title: "Invite Tobi Into the Conversation",
     subtitle:
-      "From the Bedroom to the Boardroom: the relationship patterns shaping private life often show up in leadership, teamwork, and culture.",
-    note: "For rooms that care about performance and people, this talk reveals the hidden workplace cost of unresolved relational stress.",
-    ctaLabel: "Enquiry",
+      "I speak at conferences, corporate events, faith-based gatherings, universities, and leadership programmes. My talks sit at the intersection of relational intelligence, cultural understanding, and the honest conversations most rooms are too polished to have.",
+    note: "",
+    ctaLabel: "Send a Speaking Enquiry",
+    ctaHref: "#speaking-enquiry",
+  },
+  {
+    image: "/assets/images/GSON8453.JPG",
+    title: "From the Bedroom to the Boardroom",
+    subtitle:
+      "The patterns that shape our most personal relationships don’t stay at home, they follow us into every room we lead in, collaborate in, and build in. This talk explores the hidden cost of unresolved relational stress on workplace performance, and why organisations that care about their people should care about the whole person.",
+    note: "",
+    ctaLabel: "Send a Speaking Enquiry",
+    ctaHref: "#speaking-enquiry",
+  },
+  {
+    image: "/assets/images/GSON3097.jpg",
+    title: "Cultural Intelligence in Practice",
+    subtitle:
+      "Most organisations have a diversity statement. Very few have the cultural competence to back it up. This talk moves beyond good intentions into the practical, operational understanding of how different cultures communicate, celebrate, and do business, rooted in real-world experience training venues, teams, and organisations through Luxury Meets Culture.",
+    note: "",
+    ctaLabel: "Send a Speaking Enquiry",
+    ctaHref: "#speaking-enquiry",
+  },
+  {
+    image: "/assets/images/GSON2809.jpg",
+    title: "Relational Intelligence for the Next Generation",
+    subtitle:
+      "Nobody teaches you about communication patterns, emotional maturity, or how to choose a life partner wisely, until you’re already in crisis. This is a practical, honest session about love, conflict, partnership, and what no one explains early enough.",
+    note: "",
+    ctaLabel: "Send a Speaking Enquiry",
     ctaHref: "#speaking-enquiry",
   },
   {
     image: "/assets/images/GSON3081.jpg",
     title: "About Tobi",
     subtitle:
-      "Tobi Yusuf is a relational and cultural intelligence advisor and speaker. She helps individuals, couples, and organisations communicate with clarity and care when identity, culture, and conflict are in the room.",
-    note: "Her keynotes and facilitated conversations bridge lived experience with practical insight—so teams and audiences move from well-meaning statements toward competence that still holds when nuance, disagreement, or difference shows up.",
-    ctaLabel: "Connect with me",
+      "I’m a wife of 14 years, a mother of three daughters, and the founder of RIAH and Luxury Meets Culture. I don’t speak from theory, I speak from a marriage I’m still building, an industry I’m still challenging, and rooms I’ve sat in with real couples navigating real patterns. My talks bridge lived experience with practical insight, so audiences leave not just inspired but genuinely changed in how they see their relationships and their work.",
+    note: "",
+    ctaLabel: "Connect With Me",
     ctaHref: INSTAGRAM_URL,
-  },
-  {
-    image: "/assets/images/GSON3097.jpg",
-    title: "Goals and Aim",
-    subtitle:
-      "Relational Intelligence for the Next Generation: teach communication, emotional maturity, and healthy relationship habits before crisis.",
-    note: "A practical, honest session for students and young professionals on love, conflict, partnership, and what no one explains early enough.",
-    ctaLabel: "Read articles",
-    ctaHref: SUBSTACK_SUBSCRIBE_URL,
   },
 ];
 
@@ -81,7 +99,6 @@ export function SpeakingPageClient() {
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
   const active = HERO_SLIDES[activeSlide];
   const isExternalCta = useMemo(() => /^https?:\/\//.test(active.ctaHref), [active.ctaHref]);
-  const isReadArticlesSlide = active.ctaLabel === "Read articles";
 
   const nextSlide = useCallback(() => {
     setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
@@ -159,9 +176,9 @@ export function SpeakingPageClient() {
             <p className="speaking-hero-slider-kicker">Speaking</p>
             <h1 className="speaking-hero-slider-title">{active.title}</h1>
             <p className="speaking-hero-slider-subtitle">{active.subtitle}</p>
-            <p className="speaking-hero-slider-note">{active.note}</p>
+            {active.note ? <p className="speaking-hero-slider-note">{active.note}</p> : null}
             <a
-              className={isReadArticlesSlide ? "speaking-hero-cta-btn--substack-sharp" : "speaking-hero-cta-btn"}
+              className="speaking-hero-cta-btn"
               href={active.ctaHref}
               target={isExternalCta ? "_blank" : undefined}
               rel={isExternalCta ? "noreferrer" : undefined}

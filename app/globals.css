@@ -3654,13 +3654,36 @@ img {
     inset: 0;
   }
 
+  /* Anchor-tinted wash over slides; inner panel uses gradient so image peeks through (no blur) */
+  .speaking-hero-slider-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(61, 31, 43, 0.12) 0%,
+      rgba(61, 31, 43, 0.2) 48%,
+      rgba(61, 31, 43, 0.28) 100%
+    );
+  }
+
+  /* Lighter section veil so scrim + ::before do not stack too heavy */
+  .speaking-hero-slider::before {
+    background: linear-gradient(
+      180deg,
+      rgba(61, 31, 43, 0.02) 0%,
+      rgba(61, 31, 43, 0.012) 52%,
+      rgba(196, 149, 127, 0.035) 100%
+    );
+  }
+
   .speaking-hero-slider-inner {
     width: 100%;
     margin-right: 0;
-    min-height: inherit;
-    background: rgba(250, 247, 244, 0.78);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    min-height: auto;
+    background: linear-gradient(
+      180deg,
+      rgba(250, 247, 244, 0.96) 0%,
+      rgba(250, 247, 244, 0.78) 55%,
+      rgba(250, 247, 244, 0.68) 100%
+    );
     border-bottom: 1px solid rgba(61, 31, 43, 0.08);
     box-shadow: 0 12px 40px rgba(61, 31, 43, 0.06);
   }
