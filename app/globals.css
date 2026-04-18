@@ -3537,6 +3537,23 @@ img {
   }
 }
 
+/* Speaking hero (split layout): align copy + progress with nav logo column */
+@media (min-width: 641px) {
+  .speaking-hero-slider-inner {
+    padding-left: max(
+      env(safe-area-inset-left, 0px),
+      calc(2rem + max(0px, calc((100vw - 4rem - var(--max-width)) / 2)))
+    );
+  }
+
+  .speaking-hero-slider-progress {
+    left: max(
+      env(safe-area-inset-left, 0px),
+      calc(2rem + max(0px, calc((100vw - 4rem - var(--max-width)) / 2)))
+    );
+  }
+}
+
 /* —— Small viewports: readability (legibility without losing editorial tone) —— */
 @media (max-width: 768px) {
   :root {
