@@ -422,7 +422,7 @@ export function LandingView() {
               },
               {
                 num: "04",
-                title: "óye Community",
+                title: "Òye Community",
                 desc: "A monthly community for couples and individuals who are choosing to stay, choosing to grow, and choosing honesty over silence.",
                 price: `${PRICES.circle.monthly} | ${PRICES.circle.annual}`,
                 url: "https://tally.so/r/LZM1Bl",

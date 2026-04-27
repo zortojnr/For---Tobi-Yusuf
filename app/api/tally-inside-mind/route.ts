@@ -207,7 +207,7 @@ export async function POST(request: Request) {
     "-> Book a Marriage Reflection Call - if you need a conversation now, not an audio. 60 minutes with me. Private. Honest. £295/couple.",
     SCHEDULING_URL,
     "",
-    "-> Join the Choosing Us waitlist - my monthly community for people who are done pretending.",
+    "-> Join the Òye Community waitlist - my monthly community for people who are done pretending.",
     "https://tally.so/r/LZM1Bl",
     "",
     `The series is almost ready, ${firstName || "love"}. And I think when you hear it, you'll feel something shift.`,
