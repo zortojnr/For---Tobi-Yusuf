@@ -245,6 +245,21 @@ img {
 
 .start-offer-btn {
   margin-top: auto;
+  background: rgba(61, 31, 43, 0.04);
+  color: var(--anchor);
+  border-color: rgba(61, 31, 43, 0.5);
+  transition:
+    background-color 350ms var(--ease-luxury),
+    color 350ms var(--ease-luxury),
+    border-color 350ms var(--ease-luxury),
+    transform 350ms var(--ease-luxury);
+}
+
+.start-offer-btn:hover {
+  background: rgba(196, 149, 127, 0.18);
+  border-color: rgba(196, 149, 127, 0.8);
+  color: var(--anchor);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 900px) {
