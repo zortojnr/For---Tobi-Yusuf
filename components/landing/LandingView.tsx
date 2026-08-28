@@ -141,7 +141,10 @@ export function LandingView() {
             </p>
 
             <div className="hero-ctas hero-anim-4">
-              <a href="#experiences" className="btn btn-terracotta btn--sm">
+              <a href="/start" className="btn btn-terracotta btn--sm">
+                START
+              </a>
+              <a href="#experiences" className="btn btn-ghost-light btn--sm">
                 Explore Experiences
               </a>
               <a href="#about" className="btn btn-ghost-light btn--sm">
