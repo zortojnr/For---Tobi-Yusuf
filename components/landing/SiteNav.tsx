@@ -35,7 +35,10 @@ export function SiteNav() {
 
   const path = (pathname ?? "").replace(/\/$/, "") || "/";
   const solidNav =
-    path === "/reflections" || path.startsWith("/book") || path.startsWith("/speaking");
+    path === "/reflections" ||
+    path === "/start" ||
+    path.startsWith("/book") ||
+    path.startsWith("/speaking");
   const prefix = pathname === "/" ? "" : "/";
 
   useEffect(() => {
