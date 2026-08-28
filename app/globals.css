@@ -2829,10 +2829,28 @@ img {
 }
 
 .product-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-top: 1px solid rgba(61, 31, 43, 0.1);
   border-bottom: 1px solid rgba(61, 31, 43, 0.1);
   padding: 3rem 2rem;
   text-align: center;
+  min-height: 100%;
+}
+
+.product-block-copy {
+  width: 100%;
+  max-width: 420px;
+  margin: 1.5rem auto 2rem;
+  flex: 1;
+}
+
+.product-block-cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
