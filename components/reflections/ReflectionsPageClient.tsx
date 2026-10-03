@@ -14,8 +14,22 @@ type SubstackPost = {
   link: string;
 };
 
-const RSS2JSON_URL =
-  "https://api.rss2json.com/v1/api.json?rss_url=https://mrstobiyusuf.substack.com/feed";
+async function fetchSubstackPosts(): Promise<SubstackPost[]> {
+  const res = await fetch("/api/reflections", { cache: "no-store" });
+  if (!res.ok) throw new Error("Feed fetch failed");
+
+  const json = await res.json();
+  const items = Array.isArray(json.posts) ? json.posts : [];
+
+  return items.map((item: { title: string; description: string; link: string }) => {
+    const plain = (item.description ?? "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const excerpt = plain.length > 120 ? plain.slice(0, 120).trimEnd() + "…" : plain;
+    return { title: item.title, excerpt, link: item.link };
+  });
+}
 
 function useSubstackFeed() {
   const [posts, setPosts] = useState<SubstackPost[]>([]);
@@ -27,20 +41,7 @@ function useSubstackFeed() {
 
     async function load() {
       try {
-        const res = await fetch(RSS2JSON_URL);
-        if (!res.ok) throw new Error("Feed fetch failed");
-        const json = await res.json();
-        console.log("[useSubstackFeed] raw response:", json);
-        if (json.status !== "ok") throw new Error("Feed error");
-
-        const items = (json.items as Array<{ title: string; description: string; link: string }>).map(
-          (item) => {
-            const plain = item.description.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-            const excerpt = plain.length > 120 ? plain.slice(0, 120).trimEnd() + "…" : plain;
-            return { title: item.title, excerpt, link: item.link };
-          }
-        );
-        console.log("[useSubstackFeed] mapped posts:", items);
+        const items = await fetchSubstackPosts();
 
         if (!cancelled) {
           setPosts(items);
