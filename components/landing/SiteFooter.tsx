@@ -80,11 +80,16 @@ export function SiteFooter() {
         </p>
         <p className="footer-copy">&copy; {new Date().getFullYear()} Tobi Yusuf. All rights reserved.</p>
         <p className="footer-copy footer-credit">
-          Website &lsquo;Built by &nbsp;
-          <Link href="https://www.zortojnr.site" target="_blank" rel="noreferrer">
+          Website built by
+          <Link
+            href="https://www.zortojnr.site"
+            target="_blank"
+            rel="noreferrer"
+            className="footer-credit-link"
+          >
             zortojnr
           </Link>
-          &rsquo;
+          .
         </p>
         <p className="footer-faith">
           &ldquo;Commit your work to the Lord, and your plans will be established.&rdquo;{" "}

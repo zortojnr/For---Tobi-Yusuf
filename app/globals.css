@@ -3558,6 +3558,29 @@ img {
   color: rgba(250, 247, 244, 0.55);
 }
 
+.footer-credit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  line-height: 1.7;
+}
+
+.footer-credit-link {
+  color: var(--signature);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+  font-weight: 500;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-credit-link:hover,
+.footer-credit-link:focus-visible {
+  color: #f6d9c8;
+  opacity: 1;
+}
+
 .footer-faith {
   font-family: var(--font-display);
   font-size: 0.82rem;
