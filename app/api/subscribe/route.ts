@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import type { ConvertKitIntent } from "@/lib/convertkit-intents";
+import { CONTACT_NOTIFICATION_EMAIL } from "@/lib/data/site";
 import {
   buildLoveResetEmailContent,
   getLoveResetAudioUrl,
@@ -164,6 +165,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid intent" }, { status: 400 });
   }
 
+  const bookingResendKey =
+    intent === "intentional-space" ? process.env.MY_RESEND_API?.trim() : undefined;
+  const bookingFrom =
+    intent === "intentional-space" ? process.env.RESEND_FROM?.trim() : undefined;
+  if (intent === "intentional-space" && (!bookingResendKey || !bookingFrom)) {
+    return NextResponse.json(
+      { error: "Booking email is not configured (MY_RESEND_API and RESEND_FROM)." },
+      { status: 503 },
+    );
+  }
+
   if (intent === "love-reset") {
     const resendKey = process.env.MY_RESEND_API?.trim();
     if (!resendKey) {
@@ -265,6 +277,50 @@ export async function POST(request: Request) {
         { status: 502 },
       );
     }
+  }
+
+  if (intent === "intentional-space" && bookingResendKey && bookingFrom) {
+    const fieldLabels: Record<string, string> = {
+      last_name: "Last name",
+      phone: "Phone number",
+      city: "City / area",
+      how_heard: "How they heard about Intentional Space",
+      dietary: "Dietary requirements or allergies",
+      accessibility: "Accessibility needs",
+      anything_else: "Note",
+    };
+    const details = Object.entries(extra ?? {}).map(
+      ([key, value]) => `${fieldLabels[key] ?? key}: ${value}`,
+    );
+    const resend = new Resend(bookingResendKey);
+    const { data, error } = await resend.emails.send({
+      from: bookingFrom,
+      to: CONTACT_NOTIFICATION_EMAIL,
+      replyTo: email,
+      subject: "Intentional Space booking request",
+      text: [
+        "New Intentional Space booking request.",
+        "",
+        `Name: ${firstName}`,
+        `Email: ${email}`,
+        ...details,
+      ].join("\n"),
+    });
+
+    if (error) {
+      return NextResponse.json(
+        {
+          error: "Booking saved, but the notification email could not be sent.",
+          detail:
+            typeof error === "object" && error && "message" in error
+              ? String((error as { message: unknown }).message)
+              : error,
+        },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ success: true, notificationId: data?.id });
   }
 
   return NextResponse.json({ success: true });

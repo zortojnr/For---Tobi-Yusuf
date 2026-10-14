@@ -34,6 +34,7 @@ export async function POST(request: Request) {
     firstName?: string;
     email?: string;
     enquiry?: string;
+    message?: string;
   };
   try {
     json = await request.json();
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
     typeof json.firstName === "string" ? json.firstName.trim() : "";
   const enquiryRaw =
     typeof json.enquiry === "string" ? json.enquiry.trim() : "forever-day";
+  const message = typeof json.message === "string" ? json.message.trim() : "";
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 });
@@ -59,6 +61,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid enquiry type" }, { status: 400 });
   }
 
+  if (!message) {
+    return NextResponse.json({ error: "Message required" }, { status: 400 });
+  }
+
+  if (message.length > 5000) {
+    return NextResponse.json({ error: "Message is too long" }, { status: 400 });
+  }
+
   const enquiryLabel = ENQUIRY_LABELS[enquiryRaw];
   const subject = enquiryLabel;
   const text = [
@@ -67,6 +77,9 @@ export async function POST(request: Request) {
     `Enquiry: ${enquiryLabel}`,
     `Name: ${firstName}`,
     `Email: ${email}`,
+    ``,
+    `Message:`,
+    message,
   ].join("\n");
 
   const resend = new Resend(apiKey);
@@ -75,6 +88,7 @@ export async function POST(request: Request) {
     to: CONTACT_NOTIFICATION_EMAIL,
     subject,
     text,
+    replyTo: email,
   });
 
   if (error) {

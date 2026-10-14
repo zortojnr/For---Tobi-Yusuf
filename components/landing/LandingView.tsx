@@ -677,7 +677,8 @@ function LoveResetSection() {
 function ContactForm() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [enquiry, setEnquiry] = useState("forever-day");
+  const [enquiry, setEnquiry] = useState("");
+  const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
 
@@ -693,6 +694,7 @@ function ContactForm() {
           enquiry,
           email,
           firstName,
+          message: message.trim(),
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
@@ -705,6 +707,7 @@ function ContactForm() {
       setMsg("Thank you. We will be in touch.");
       setEmail("");
       setFirstName("");
+      setMessage("");
     } catch {
       setStatus("err");
       setMsg("Network error.");
@@ -715,7 +718,15 @@ function ContactForm() {
     <form className="form-panel" onSubmit={onSubmit}>
       <div className="form-field">
         <label htmlFor="ct-enquiry">You&apos;re writing about</label>
-        <select id="ct-enquiry" value={enquiry} onChange={(e) => setEnquiry(e.target.value)}>
+        <select
+          id="ct-enquiry"
+          value={enquiry}
+          onChange={(e) => setEnquiry(e.target.value)}
+          required
+        >
+          <option value="" disabled>
+            Choose a topic
+          </option>
           <option value="forever-day">Forever & A Day Experience</option>
           <option value="reflection-call">Marriage Reflection Call</option>
           <option value="intentional-space">Intentional Space</option>
@@ -747,6 +758,19 @@ function ContactForm() {
             required
           />
         </div>
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="ct-message">Your message</label>
+        <textarea
+          id="ct-message"
+          name="message"
+          rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          maxLength={5000}
+          required
+        />
       </div>
 
       <button type="submit" className="btn btn-secondary" disabled={status === "loading"}>
